@@ -1,30 +1,21 @@
 <?php
 namespace TypiCMS\Modules\Places\Providers;
 
-use Lang;
-use View;
 use Config;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-
-// Model
+use Illuminate\Support\ServiceProvider;
+use Lang;
 use TypiCMS\Modules\Places\Models\Place;
 use TypiCMS\Modules\Places\Models\PlaceTranslation;
-
-// Repo
-use TypiCMS\Modules\Places\Repositories\EloquentPlace;
-
-// Cache
 use TypiCMS\Modules\Places\Repositories\CacheDecorator;
-use TypiCMS\Services\Cache\LaravelCache;
-
-// Form
+use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 use TypiCMS\Modules\Places\Services\Form\PlaceForm;
 use TypiCMS\Modules\Places\Services\Form\PlaceFormLaravelValidator;
-
-// Observers
-use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Observers\FileObserver;
+use TypiCMS\Observers\SlugObserver;
+use TypiCMS\Services\Cache\LaravelCache;
+use View;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -35,9 +26,19 @@ class ModuleProvider extends ServiceProvider
         require __DIR__ . '/../routes.php';
 
         // Add dirs
-        View::addLocation(__DIR__ . '/../Views');
-        Lang::addNamespace('places', __DIR__ . '/../lang');
-        Config::addNamespace('places', __DIR__ . '/../config');
+        View::addNamespace('places', __DIR__ . '/../views/');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'places');
+        $this->publishes([
+            __DIR__ . '/../config/' => config_path('typicms/places'),
+        ], 'config');
+        $this->publishes([
+            __DIR__ . '/../migrations/' => base_path('/database/migrations'),
+        ], 'migrations');
+
+        AliasLoader::getInstance()->alias(
+            'Places',
+            'TypiCMS\Modules\Places\Facades\Facade'
+        );
 
         // Observers
         PlaceTranslation::observe(new SlugObserver);
@@ -69,10 +70,6 @@ class ModuleProvider extends ServiceProvider
                 new PlaceFormLaravelValidator($app['validator']),
                 $app->make('TypiCMS\Modules\Places\Repositories\PlaceInterface')
             );
-        });
-
-        $app->before(function ($request, $response) {
-            require __DIR__ . '/../breadcrumbs.php';
         });
 
     }

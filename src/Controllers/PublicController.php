@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\Places\Controllers;
 
-use Str;
+use Illuminate\Support\Str;
 use View;
 use Request;
 use Response;

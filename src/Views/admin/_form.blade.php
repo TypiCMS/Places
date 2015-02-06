@@ -1,5 +1,5 @@
 @section('js')
-    <script src="{{ asset('//tinymce.cachefly.net/4.1/tinymce.min.js') }}"></script>
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script src="{{ asset('js/admin/form.js') }}"></script>
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language=fr') }}"></script>
     <script src="{{ asset('js/admin/gmaps.js') }}"></script>
