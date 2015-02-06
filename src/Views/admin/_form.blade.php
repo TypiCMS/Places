@@ -50,7 +50,7 @@
                                 <button class="btn btn-default btn-slug @if($errors->has($lang.'.slug'))btn-danger @endif" type="button">@lang('validation.attributes.generate')</button>
                             </span>
                         </div>
-                        {{ $errors->first($lang.'.slug', '<p class="help-block">:message</p>') }}
+                        {!! $errors->first($lang.'.slug', '<p class="help-block">:message</p>') !!}
                     </div>
                 </div>
                 <div class="checkbox">
@@ -82,12 +82,12 @@
             <div class="col-sm-6 form-group @if($errors->has('email'))has-error @endif">
                 {{ Form::label('email', trans('validation.attributes.email'), array('class' => 'control-label')) }}
                 {{ Form::text('email', null, array('class' => 'form-control')) }}
-                {{ $errors->first('email', '<p class="help-block">:message</p>') }}
+                {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
             </div>
             <div class="col-sm-6 form-group @if($errors->has('website'))has-error @endif">
                 {{ Form::label('website', trans('validation.attributes.website'), array('class' => 'control-label')) }}
                 {{ Form::text('website', null, array('class' => 'form-control')) }}
-                {{ $errors->first('website', '<p class="help-block">:message</p>') }}
+                {!! $errors->first('website', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
 

@@ -35,7 +35,7 @@ class PublicController extends BasePublicController
         //     return Response::json($places, 200);
         // }
 
-        return view('places.public.index')
+        return view('places::public.index')
             ->withPlaces($places);
     }
 
@@ -49,8 +49,8 @@ class PublicController extends BasePublicController
 
         $models = $this->repository->getAll();
 
-        return view('places.public.results')
-            ->with('models', $models);
+        return view('places::public.results')
+            ->with(compact('models'));
     }
 
     /**
@@ -66,7 +66,7 @@ class PublicController extends BasePublicController
 
         $this->title['parent'] = $model->title;
 
-        return view('places.public.show')
-            ->with('model', $model);
+        return view('places::public.show')
+            ->with(compact('model'));
     }
 }
