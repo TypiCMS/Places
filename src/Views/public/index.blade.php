@@ -1,3 +1,5 @@
+@extends('core::public.master')
+
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language='.Config::get('app.locale')) }}"></script>
     <script src="{{ asset('js/public/gmaps.js') }}"></script>
@@ -5,7 +7,7 @@
 
 @section('main')
 
-    <h2>{{ Str::title(trans_choice('places::global.places', 2)) }}</h2>
+    <h2>{{ Illuminate\Support\Str::title(trans_choice('places::global.places', 2)) }}</h2>
 
     <div class="row">
 

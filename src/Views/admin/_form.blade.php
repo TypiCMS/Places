@@ -12,7 +12,7 @@
 
 @include('core::admin._buttons-form')
 
-{{ Form::hidden('id') }}
+{!! BootForm::hidden('id') !!}
 
 @include('core::admin._image-fieldset', ['field' => 'image'])
 
@@ -38,30 +38,13 @@
 
             <div class="tab-pane fade @if($locale == $lang)in active @endif" id="content-{{ $lang }}">
                 <div class="row">
-                    <div class="col-md-6 form-group">
-                        {{ Form::label($lang.'[title]', trans('validation.attributes.title')) }}
-                        {{ Form::text($lang.'[title]', $model->translate($lang)->title, array('class' => 'form-control')) }}
+                    <div class="col-md-6">
+                        {!! BootForm::text(trans('validation.attributes.title'), $lang.'[title]') !!}
                     </div>
-                    <div class="col-md-6 form-group @if($errors->has($lang.'.slug'))has-error @endif">
-                        {{ Form::label($lang.'[slug]', trans('validation.attributes.slug'), array('class' => 'control-label')) }}
-                        <div class="input-group">
-                            {{ Form::text($lang.'[slug]', $model->translate($lang)->slug, array('class' => 'form-control')) }}
-                            <span class="input-group-btn">
-                                <button class="btn btn-default btn-slug @if($errors->has($lang.'.slug'))btn-danger @endif" type="button">@lang('validation.attributes.generate')</button>
-                            </span>
-                        </div>
-                        {!! $errors->first($lang.'.slug', '<p class="help-block">:message</p>') !!}
-                    </div>
+                    @include('core::form._slug')
                 </div>
-                <div class="checkbox">
-                    <label>
-                        {{ Form::checkbox($lang.'[status]', 1, $model->translate($lang)->status) }} @lang('validation.attributes.online')
-                    </label>
-                </div>
-                <div class="form-group">
-                    {{ Form::label($lang.'[body]', trans('validation.attributes.body')) }}
-                    {{ Form::textarea($lang.'[body]', $model->translate($lang)->body, array('class' => 'editor form-control')) }}
-                </div>
+                {!! BootForm::checkbox(trans('validation.attributes.online'), $lang.'[status]') !!}
+                {!! BootForm::textarea(trans('validation.attributes.body'), $lang.'[body]')->addClass('editor') !!}
             </div>
 
         @endforeach
@@ -73,43 +56,32 @@
     {{-- Info tab --}}
     <div class="tab-pane fade in" id="tab-info">
 
-        <div class="form-group">
-            {{ Form::label('address', trans('validation.attributes.address'), array('class' => 'control-label')) }}
-            {{ Form::text('address', null, array('class' => 'form-control')) }}
-        </div>
+        {!! BootForm::text(trans('validation.attributes.address'), 'address') !!}
 
         <div class="row">
-            <div class="col-sm-6 form-group @if($errors->has('email'))has-error @endif">
-                {{ Form::label('email', trans('validation.attributes.email'), array('class' => 'control-label')) }}
-                {{ Form::text('email', null, array('class' => 'form-control')) }}
-                {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
+            <div class="col-sm-6">
+                {!! BootForm::email(trans('validation.attributes.email'), 'email') !!}
             </div>
-            <div class="col-sm-6 form-group @if($errors->has('website'))has-error @endif">
-                {{ Form::label('website', trans('validation.attributes.website'), array('class' => 'control-label')) }}
-                {{ Form::text('website', null, array('class' => 'form-control')) }}
-                {!! $errors->first('website', '<p class="help-block">:message</p>') !!}
+            <div class="col-sm-6">
+                {!! BootForm::text(trans('validation.attributes.website'), 'website') !!}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-6 form-group">
-                {{ Form::label('phone', trans('validation.attributes.phone'), array('class' => 'control-label')) }}
-                {{ Form::text('phone', null, array('class' => 'form-control')) }}
+            <div class="col-sm-6">
+                {!! BootForm::text(trans('validation.attributes.phone'), 'phone') !!}
             </div>
-            <div class="col-sm-6 form-group">
-                {{ Form::label('fax', trans('validation.attributes.fax'), array('class' => 'control-label')) }}
-                {{ Form::text('fax', null, array('class' => 'form-control')) }}
+            <div class="col-sm-6">
+                {!! BootForm::text(trans('validation.attributes.fax'), 'fax') !!}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-6 form-group">
-                {{ Form::label('latitude', trans('validation.attributes.latitude'), array('class' => 'control-label')) }}
-                {{ Form::text('latitude', null, array('class' => 'form-control')) }}
+            <div class="col-sm-6">
+                {!! BootForm::text(trans('validation.attributes.latitude'), 'latitude') !!}
             </div>
-            <div class="col-sm-6 form-group">
-                {{ Form::label('longitude', trans('validation.attributes.longitude'), array('class' => 'control-label')) }}
-                {{ Form::text('longitude', null, array('class' => 'form-control')) }}
+            <div class="col-sm-6">
+                {!! BootForm::text(trans('validation.attributes.longitude'), 'longitude') !!}
             </div>
         </div>
 

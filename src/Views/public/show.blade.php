@@ -1,3 +1,5 @@
+@extends('core::public.master')
+
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language='.Config::get('app.locale')) }}"></script>
     <script src="{{ asset('js/public/gmaps.js') }}"></script>
