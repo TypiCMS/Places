@@ -1,5 +1,5 @@
 <?php
-namespace TypiCMS\Modules\Places\Controllers;
+namespace TypiCMS\Modules\Places\Http\Controllers;
 
 use Illuminate\Support\Str;
 use View;
@@ -7,7 +7,7 @@ use Request;
 use Response;
 use TypiCMS;
 use TypiCMS\Modules\Places\Repositories\PlaceInterface;
-use TypiCMS\Controllers\BasePublicController;
+use TypiCMS\Http\Controllers\BasePublicController;
 
 class PublicController extends BasePublicController
 {

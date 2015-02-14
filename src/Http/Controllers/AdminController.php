@@ -1,9 +1,9 @@
 <?php
-namespace TypiCMS\Modules\Places\Controllers;
+namespace TypiCMS\Modules\Places\Http\Controllers;
 
 use TypiCMS\Modules\Places\Repositories\PlaceInterface;
 use TypiCMS\Modules\Places\Services\Form\PlaceForm;
-use TypiCMS\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\AdminSimpleController;
 
 class AdminController extends AdminSimpleController
 {
