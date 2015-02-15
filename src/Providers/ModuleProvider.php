@@ -10,8 +10,6 @@ use TypiCMS\Modules\Places\Models\Place;
 use TypiCMS\Modules\Places\Models\PlaceTranslation;
 use TypiCMS\Modules\Places\Repositories\CacheDecorator;
 use TypiCMS\Modules\Places\Repositories\EloquentPlace;
-use TypiCMS\Modules\Places\Services\Form\PlaceForm;
-use TypiCMS\Modules\Places\Services\Form\PlaceFormLaravelValidator;
 use TypiCMS\Observers\FileObserver;
 use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Services\Cache\LaravelCache;
@@ -65,13 +63,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], 'places', 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        $app->bind('TypiCMS\Modules\Places\Services\Form\PlaceForm', function (Application $app) {
-            return new PlaceForm(
-                new PlaceFormLaravelValidator($app['validator']),
-                $app->make('TypiCMS\Modules\Places\Repositories\PlaceInterface')
-            );
         });
 
     }
