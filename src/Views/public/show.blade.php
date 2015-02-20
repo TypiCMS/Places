@@ -1,5 +1,10 @@
 @extends('core::public.master')
 
+@section('title', $model->title . ' – ' . trans('news::global.name') . ' – ' . $websiteTitle)
+@section('ogTitle', $model->title)
+@section('description', $model->summary)
+@section('image', $model->present()->thumbAbsoluteSrc())
+
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language='.Config::get('app.locale')) }}"></script>
     <script src="{{ asset('js/public/gmaps.js') }}"></script>
@@ -34,6 +39,8 @@
                     {{ nl2br($model->info) }}
                 @endif
             </p>
+            <p class="summary">{{ nl2br($model->summary) }}</p>
+            <div class="body">{!! $model->body !!}</div>
         </div>
         <div class="col-sm-8">
             @if($model->latitude && $model->longitude)

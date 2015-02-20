@@ -1,6 +1,6 @@
 <?php
 return array(
-    'name' => 'places',
+    'name' => 'Places',
     'places' => 'place|places',
     'New'  => 'New place',
     'Edit' => 'Edit place',

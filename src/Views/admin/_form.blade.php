@@ -37,13 +37,9 @@
         @foreach ($locales as $lang)
 
             <div class="tab-pane fade @if($locale == $lang)in active @endif" id="content-{{ $lang }}">
-                <div class="row">
-                    <div class="col-md-6">
-                        {!! BootForm::text(trans('validation.attributes.title'), $lang.'[title]') !!}
-                    </div>
-                    @include('core::form._slug')
-                </div>
+                @include('core::form._title-and-slug')
                 {!! BootForm::checkbox(trans('validation.attributes.online'), $lang.'[status]') !!}
+                {!! BootForm::textarea(trans('validation.attributes.summary'), $lang.'[summary]')->rows(4) !!}
                 {!! BootForm::textarea(trans('validation.attributes.body'), $lang.'[body]')->addClass('editor') !!}
             </div>
 

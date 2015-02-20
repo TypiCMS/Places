@@ -27,6 +27,7 @@ class Place extends Base
         // Translatable columns
         'title',
         'slug',
+        'summary',
         'body',
         'status',
     );
@@ -39,6 +40,7 @@ class Place extends Base
     public $translatedAttributes = array(
         'title',
         'slug',
+        'summary',
         'body',
         'status',
     );
