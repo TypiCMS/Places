@@ -15,7 +15,6 @@ class PublicController extends BasePublicController
     public function __construct(PlaceInterface $place)
     {
         parent::__construct($place);
-        $this->title['parent'] = Str::title(trans_choice('places::global.places', 2));
     }
 
     /**
@@ -27,13 +26,7 @@ class PublicController extends BasePublicController
     {
         TypiCMS::setModel($this->repository->getModel());
 
-        $this->title['child'] = '';
-
         $places = $this->repository->getAll();
-
-        // if (Request::wantsJson()) {
-        //     return Response::json($places, 200);
-        // }
 
         return view('places::public.index')
             ->withPlaces($places);
@@ -63,8 +56,6 @@ class PublicController extends BasePublicController
         $model = $this->repository->bySlug($slug);
 
         TypiCMS::setModel($model);
-
-        $this->title['parent'] = $model->title;
 
         return view('places::public.show')
             ->with(compact('model'));
