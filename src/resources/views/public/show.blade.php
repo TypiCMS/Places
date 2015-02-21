@@ -4,6 +4,7 @@
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbAbsoluteSrc())
+@section('bodyClass', 'body-place body-place-' . $model->id)
 
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language='.Config::get('app.locale')) }}"></script>

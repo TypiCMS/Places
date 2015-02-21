@@ -2,6 +2,7 @@
 
 @section('title', trans('places::global.name') . ' – ' . $websiteTitle)
 @section('ogTitle', trans('places::global.name'))
+@section('bodyClass', 'body-places')
 
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language='.Config::get('app.locale')) }}"></script>
