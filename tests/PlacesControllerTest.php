@@ -3,15 +3,11 @@ use TypiCMS\Modules\Places\Models\Place;
 
 class PlacesControllerTest extends TestCase
 {
-    public function tearDown()
-    {
-        Mockery::close();
-    }
 
     public function testAdminIndex()
     {
-        $this->get('admin/places');
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $response = $this->call('GET', 'admin/places');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testStoreFails()
