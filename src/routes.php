@@ -8,7 +8,7 @@ Route::bind('places', function ($value) {
 if (! App::runningInConsole()) {
     Route::group(
         array(
-            'before'    => 'visitor.publicAccess',
+            'before'    => 'visitorHasPublicAccess',
             'namespace' => 'TypiCMS\Modules\Places\Http\Controllers',
         ),
         function () {
