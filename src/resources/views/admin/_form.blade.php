@@ -1,5 +1,5 @@
 @section('js')
-    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="{{ asset('components/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/admin/form.js') }}"></script>
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language=fr') }}"></script>
     <script src="{{ asset('js/admin/gmaps.js') }}"></script>
@@ -40,7 +40,7 @@
                 @include('core::form._title-and-slug')
                 {!! BootForm::checkbox(trans('validation.attributes.online'), $lang.'[status]') !!}
                 {!! BootForm::textarea(trans('validation.attributes.summary'), $lang.'[summary]')->rows(4) !!}
-                {!! BootForm::textarea(trans('validation.attributes.body'), $lang.'[body]')->addClass('editor') !!}
+                {!! BootForm::textarea(trans('validation.attributes.body'), $lang.'[body]')->addClass('ckeditor') !!}
             </div>
 
         @endforeach
