@@ -45,6 +45,8 @@ class Place extends Base
         'status',
     );
 
+    protected $appends = ['status', 'title', 'thumb'];
+
     /**
      * Columns that are file.
      *
