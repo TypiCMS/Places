@@ -40,8 +40,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
             ->take($limit);
 
         if (! $all) {
-            // take only translated items that are online
-            $query->whereHasOnlineTranslation();
+            $query->online();
         }
         $query->order();
         $models = $query->get();
@@ -49,8 +48,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
         // Build query to get totalItems
         $queryTotal = $this->model;
         if (! $all) {
-            // take only translated items that are online
-            $queryTotal->whereHasOnlineTranslation();
+            $queryTotal->online();
         }
 
         // Put items and totalItems in stdClass
@@ -67,7 +65,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
      * @param  array    $with Eager load related models
      * @return Collection Object with $items
      */
-    public function getAll(array $with = array(), $all = false)
+    public function all(array $with = array(), $all = false)
     {
         // get search string
         $string = Input::get('string');
@@ -78,8 +76,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
             ->where('locale', App::getLocale());
         
         if (! $all) {
-            // take only translated items that are online
-            $query->whereHasOnlineTranslation();
+            $query->online();
         }
 
         $string && $query->where('title', 'LIKE', '%'.$string.'%');

@@ -48,7 +48,7 @@ class CacheDecorator extends CacheAbstractDecorator implements PlaceInterface
      * @param  array    $with Eager load related models
      * @return Collection
      */
-    public function getAll(array $with = array('translations'), $all = false)
+    public function all(array $with = array('translations'), $all = false)
     {
         $cacheKey = md5(App::getLocale() . 'all' . $all . implode('.', $with) . implode('.', Input::all()));
 
@@ -56,7 +56,7 @@ class CacheDecorator extends CacheAbstractDecorator implements PlaceInterface
             return $this->cache->get($cacheKey);
         }
 
-        $models = $this->repo->getAll(array('translations'), $all);
+        $models = $this->repo->all(array('translations'), $all);
 
         // Store in cache for next request
         $this->cache->put($cacheKey, $models);

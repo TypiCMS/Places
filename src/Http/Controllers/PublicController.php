@@ -26,7 +26,7 @@ class PublicController extends BasePublicController
     {
         TypiCMS::setModel($this->repository->getModel());
 
-        $places = $this->repository->getAll();
+        $places = $this->repository->all();
 
         return view('places::public.index')
             ->withPlaces($places);
@@ -40,7 +40,7 @@ class PublicController extends BasePublicController
     public function search()
     {
 
-        $models = $this->repository->getAll();
+        $models = $this->repository->all();
 
         return view('places::public.results')
             ->with(compact('models'));
