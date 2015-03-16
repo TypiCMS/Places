@@ -65,7 +65,7 @@ class ModuleProvider extends ServiceProvider
 
         $app->bind('TypiCMS\Modules\Places\Repositories\PlaceInterface', function (Application $app) {
             $repository = new EloquentPlace(new Place);
-            if (! Config::get('app.cache')) {
+            if (! config('typicms.cache')) {
                 return $repository;
             }
             $laravelCache = new LaravelCache($app['cache'], 'places', 10);
