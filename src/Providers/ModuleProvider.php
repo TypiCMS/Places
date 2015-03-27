@@ -37,6 +37,9 @@ class ModuleProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../tests' => base_path('tests'),
         ], 'tests');
+        $this->publishes([
+            __DIR__ . '/../../resources/assets' => public_path(),
+        ], 'scripts');
 
         AliasLoader::getInstance()->alias(
             'Places',
