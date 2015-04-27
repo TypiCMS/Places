@@ -1,8 +1,7 @@
-@extends('core::public.master')
+@extends('pages::public.master')
+<?php $page = TypiCMS::getPageLinkedToModule('places') ?>
 
-@section('title', trans('places::global.name') . ' – ' . $websiteTitle)
-@section('ogTitle', trans('places::global.name'))
-@section('bodyClass', 'body-places')
+@section('bodyClass', 'body-places body-places-index body-page body-page-' . $page->id)
 
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language='.config('app.locale')) }}"></script>
@@ -11,7 +10,9 @@
 
 @section('main')
 
-    <h1>@lang('places::global.name')</h1>
+    {!! $page->body !!}
+
+    @include('galleries::public._galleries', ['model' => $page])
 
     <div class="row">
 
