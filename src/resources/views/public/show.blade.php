@@ -1,10 +1,11 @@
 @extends('core::public.master')
+<?php $page = TypiCMS::getPageLinkedToModule('places') ?>
 
 @section('title', $model->title . ' – ' . trans('news::global.name') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbAbsoluteSrc())
-@section('bodyClass', 'body-place body-place-' . $model->id)
+@section('bodyClass', 'body-places body-place-' . $model->id . ' body-page body-page-' . $page->id)
 
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?sensor=false&amp;language='.config('app.locale')) }}"></script>

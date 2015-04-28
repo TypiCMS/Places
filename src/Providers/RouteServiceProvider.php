@@ -1,9 +1,9 @@
 <?php
 namespace TypiCMS\Modules\Places\Providers;
 
-use Config;
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
+use TypiCMS\Facades\TypiCMS;
 
 class RouteServiceProvider extends ServiceProvider {
 
@@ -42,12 +42,13 @@ class RouteServiceProvider extends ServiceProvider {
             /**
              * Front office routes
              */
-            $routes = $this->app->make('TypiCMS.routes');
-            foreach (Config::get('translatable.locales') as $lang) {
-                if (isset($routes['places'][$lang])) {
-                    $uri = $routes['places'][$lang];
-                    $router->get($uri, array('as' => $lang.'.places', 'uses' => 'PublicController@index'));
-                    $router->get($uri.'/{slug}', array('as' => $lang.'.places.slug', 'uses' => 'PublicController@show'));
+            if ($page = TypiCMS::getPageLinkedToModule('places')) {
+                foreach (config('translatable.locales') as $lang) {
+                    $options = $page->private ? ['middleware' => 'auth'] : [] ;
+                    if ($uri = $page->uri($lang)) {
+                        $router->get($uri, $options + ['as' => $lang.'.places', 'uses' => 'PublicController@index']);
+                        $router->get($uri.'/{slug}', $options + ['as' => $lang.'.places.slug', 'uses' => 'PublicController@show']);
+                    }
                 }
             }
 
