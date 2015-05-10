@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\Places\Models;
 
-use TypiCMS\Models\BaseTranslation;
+use TypiCMS\Modules\Core\Models\BaseTranslation;
 
 class PlaceTranslation extends BaseTranslation
 {

@@ -7,7 +7,7 @@ use Request;
 use Response;
 use TypiCMS;
 use TypiCMS\Modules\Places\Repositories\PlaceInterface;
-use TypiCMS\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 
 class PublicController extends BasePublicController
 {

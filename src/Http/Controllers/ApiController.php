@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
-use TypiCMS\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Places\Repositories\PlaceInterface as Repository;
 
 class ApiController extends BaseApiController

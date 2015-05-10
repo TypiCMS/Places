@@ -10,9 +10,9 @@ use TypiCMS\Modules\Places\Models\Place;
 use TypiCMS\Modules\Places\Models\PlaceTranslation;
 use TypiCMS\Modules\Places\Repositories\CacheDecorator;
 use TypiCMS\Modules\Places\Repositories\EloquentPlace;
-use TypiCMS\Observers\FileObserver;
-use TypiCMS\Observers\SlugObserver;
-use TypiCMS\Services\Cache\LaravelCache;
+use TypiCMS\Modules\Core\Observers\FileObserver;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use View;
 
 class ModuleProvider extends ServiceProvider

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Input;
 use stdClass;
-use TypiCMS\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
 class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
 {
@@ -74,7 +74,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
             ->select('places.*', 'status', 'title')
             ->join('place_translations', 'place_translations.place_id', '=', 'places.id')
             ->where('locale', App::getLocale());
-        
+
         if (! $all) {
             $query->online();
         }
