@@ -1,12 +1,11 @@
 <?php
 namespace TypiCMS\Modules\Places\Repositories;
 
-use App;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Input;
-use stdClass;
+use Illuminate\Support\Facades\Input;
 use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use stdClass;
 
 class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
 {
@@ -35,7 +34,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
         $query = $this->make($with)
             ->select('places.*', 'status', 'title')
             ->join('place_translations', 'place_translations.place_id', '=', 'places.id')
-            ->where('locale', App::getLocale())
+            ->where('locale', config('app.locale'))
             ->skip($limit * ($page - 1))
             ->take($limit);
 
@@ -73,7 +72,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
         $query = $this->make($with)
             ->select('places.*', 'status', 'title')
             ->join('place_translations', 'place_translations.place_id', '=', 'places.id')
-            ->where('locale', App::getLocale());
+            ->where('locale', config('app.locale'));
 
         if (! $all) {
             $query->online();

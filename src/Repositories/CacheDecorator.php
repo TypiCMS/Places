@@ -1,9 +1,8 @@
 <?php
 namespace TypiCMS\Modules\Places\Repositories;
 
-use App;
 use Illuminate\Database\Eloquent\Collection;
-use Input;
+use Illuminate\Support\Facades\Input;
 use TypiCMS\Modules\Core\Repositories\CacheAbstractDecorator;
 use TypiCMS\Modules\Core\Services\Cache\CacheInterface;
 
@@ -27,7 +26,7 @@ class CacheDecorator extends CacheAbstractDecorator implements PlaceInterface
      */
     public function byPage($page = 1, $limit = 10, array $with = array('translations'), $all = false)
     {
-        $cacheKey = md5(App::getLocale().'byPage.'.$page.$limit.$all.implode('.', Input::except('page')));
+        $cacheKey = md5(config('app.locale').'byPage.'.$page.$limit.$all.implode('.', Input::except('page')));
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
@@ -50,7 +49,7 @@ class CacheDecorator extends CacheAbstractDecorator implements PlaceInterface
      */
     public function all(array $with = array('translations'), $all = false)
     {
-        $cacheKey = md5(App::getLocale() . 'all' . $all . implode('.', $with) . implode('.', Input::all()));
+        $cacheKey = md5(config('app.locale') . 'all' . $all . implode('.', $with) . implode('.', Input::all()));
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
