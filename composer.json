@@ -1,6 +1,7 @@
 {
     "name": "typicms/places",
     "description": "",
+    "license": "MIT",
     "authors": [
         {
             "name": "Samuel De Backer",
