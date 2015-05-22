@@ -1,8 +1,8 @@
 <div ng-app="typicms" ng-cloak ng-controller="ListController">
 
     <h1>
-        <a href="{{ route('admin.' . $module . '.create') }}" class="btn-add"><i class="fa fa-plus-circle"></i><span class="sr-only" translate>New</span></a>
-        <span translate translate-n="models.length" translate-plural="@{{ models.length }} places">@{{ models.length }} place</span>
+        <a href="{{ route('admin.' . $module . '.create') }}" class="btn-add"><i class="fa fa-plus-circle"></i><span class="sr-only">New</span></a>
+        <span>@{{ models.length }} @choice('places::global.places', 2)</span>
     </h1>
 
     <div class="btn-toolbar" role="toolbar" ng-include="'/views/partials/btnLocales.html'"></div>
@@ -14,22 +14,22 @@
                 <tr>
                     <th class="delete"></th>
                     <th class="edit"></th>
-                    <th st-sort="status" class="status st-sort" translate>Status</th>
-                    <th st-sort="image" class="image st-sort" translate>Image</th>
-                    <th st-sort="title" st-sort-default="true" class="title st-sort" translate>Title</th>
-                    <th st-sort="address" class="address st-sort" translate>Address</th>
-                    <th st-sort="website" class="website st-sort" translate>Website</th>
+                    <th st-sort="status" class="status st-sort">Status</th>
+                    <th st-sort="image" class="image st-sort">Image</th>
+                    <th st-sort="title" st-sort-default="true" class="title st-sort">Title</th>
+                    <th st-sort="address" class="address st-sort">Address</th>
+                    <th st-sort="website" class="website st-sort">Website</th>
                 </tr>
                 <tr>
                     <td colspan="4"></td>
                     <td>
-                        <input st-search="title" class="form-control input-sm" placeholder="@{{ 'Search' | translate }}…" type="text">
+                        <input st-search="title" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
                     </td>
                     <td>
-                        <input st-search="address" class="form-control input-sm" placeholder="@{{ 'Search' | translate }}…" type="text">
+                        <input st-search="address" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
                     </td>
                     <td>
-                        <input st-search="website" class="form-control input-sm" placeholder="@{{ 'Search' | translate }}…" type="text">
+                        <input st-search="website" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
                     </td>
                 </tr>
             </thead>
