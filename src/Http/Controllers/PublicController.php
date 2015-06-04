@@ -1,13 +1,9 @@
 <?php
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
-use Illuminate\Support\Str;
-use View;
-use Request;
-use Response;
 use TypiCMS;
-use TypiCMS\Modules\Places\Repositories\PlaceInterface;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\Places\Repositories\PlaceInterface;
 
 class PublicController extends BasePublicController
 {
@@ -20,7 +16,7 @@ class PublicController extends BasePublicController
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function index()
     {
@@ -32,7 +28,7 @@ class PublicController extends BasePublicController
     /**
      * Search models.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function search()
     {
@@ -44,7 +40,7 @@ class PublicController extends BasePublicController
     /**
      * Show place.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function show($slug)
     {
