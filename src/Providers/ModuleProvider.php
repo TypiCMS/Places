@@ -4,13 +4,14 @@ namespace TypiCMS\Modules\Places\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use TypiCMS\Modules\Core\Facades\TypiCMS;
+use TypiCMS\Modules\Core\Observers\FileObserver;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Places\Models\Place;
 use TypiCMS\Modules\Places\Models\PlaceTranslation;
 use TypiCMS\Modules\Places\Repositories\CacheDecorator;
 use TypiCMS\Modules\Places\Repositories\EloquentPlace;
-use TypiCMS\Modules\Core\Observers\FileObserver;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 
 class ModuleProvider extends ServiceProvider
 {
