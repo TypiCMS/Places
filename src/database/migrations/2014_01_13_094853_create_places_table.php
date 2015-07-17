@@ -30,7 +30,7 @@ class CreatePlacesTable extends Migration
         Schema::create('place_translations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->integer('place_id')->unsigned();
 
             $table->string('locale')->index();
