@@ -40,7 +40,7 @@
                 @endif
             </p>
             <p class="summary">{{ nl2br($model->summary) }}</p>
-            <div class="body">{!! $model->body !!}</div>
+            <div class="body">{!! $model->present()->body !!}</div>
         </div>
         <div class="col-sm-8">
             @if($model->latitude && $model->longitude)
