@@ -64,6 +64,13 @@ class ModuleProvider extends ServiceProvider
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Places\Composers\SidebarViewComposer');
 
+        /**
+         * Add the page in the view.
+         */
+        $app->view->composer('places::public.*', function ($view) {
+            $view->page = TypiCMS::getPageLinkedToModule('places');
+        });
+
         $app->bind('TypiCMS\Modules\Places\Repositories\PlaceInterface', function (Application $app) {
             $repository = new EloquentPlace(new Place);
             if (! config('typicms.cache')) {
@@ -72,13 +79,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], 'places', 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        /**
-         * Return the page linked to this module (for @inject in views)
-         */
-        $app->singleton('typicms.places.page', function (Application $app) {
-            return TypiCMS::getPageLinkedToModule('places');
         });
 
     }
