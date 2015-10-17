@@ -38,7 +38,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
             ->skip($limit * ($page - 1))
             ->take($limit);
 
-        if (! $all) {
+        if (!$all) {
             $query->online();
         }
         $query->order();
@@ -46,7 +46,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
 
         // Build query to get totalItems
         $queryTotal = $this->model;
-        if (! $all) {
+        if (!$all) {
             $queryTotal->online();
         }
 
@@ -74,7 +74,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
             ->join('place_translations', 'place_translations.place_id', '=', 'places.id')
             ->where('locale', config('app.locale'));
 
-        if (! $all) {
+        if (!$all) {
             $query->online();
         }
 
