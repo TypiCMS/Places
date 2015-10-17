@@ -1,35 +1,36 @@
 <?php
+
 namespace TypiCMS\Modules\Places\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Input;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 use stdClass;
+use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
 class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
 {
-
     public function __construct(Model $model)
     {
         $this->model = $model;
     }
 
     /**
-     * Get paginated models
+     * Get paginated models.
      *
-     * @param  int      $page  Number of models per page
-     * @param  int      $limit Results per page
-     * @param  boolean  $all   Show published or all
+     * @param int  $page  Number of models per page
+     * @param int  $limit Results per page
+     * @param bool $all   Show published or all
+     *
      * @return stdClass Object with $items && $totalItems for pagination
      */
-    public function byPage($page = 1, $limit = 10, array $with = array(), $all = false)
+    public function byPage($page = 1, $limit = 10, array $with = [], $all = false)
     {
-        $result = new stdClass;
+        $result = new stdClass();
         $result->page = $page;
         $result->limit = $limit;
         $result->totalItems = 0;
-        $result->items = array();
+        $result->items = [];
 
         $query = $this->make($with)
             ->select('places.*', 'status', 'title')
@@ -58,13 +59,14 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
     }
 
     /**
-     * Get all models
+     * Get all models.
      *
-     * @param  boolean  $all  Show published or all
-     * @param  array    $with Eager load related models
+     * @param bool  $all  Show published or all
+     * @param array $with Eager load related models
+     *
      * @return Collection Object with $items
      */
-    public function all(array $with = array(), $all = false)
+    public function all(array $with = [], $all = false)
     {
         // get search string
         $string = Input::get('string');
