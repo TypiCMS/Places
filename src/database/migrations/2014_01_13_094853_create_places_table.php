@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePlacesTable extends Migration
 {
@@ -12,7 +12,6 @@ class CreatePlacesTable extends Migration
      */
     public function up()
     {
-
         Schema::create('places', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -45,11 +44,10 @@ class CreatePlacesTable extends Migration
 
             $table->timestamps();
 
-            $table->unique(array('place_id', 'locale'));
+            $table->unique(['place_id', 'locale']);
             $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
 
         });
-
     }
 
     /**
@@ -62,5 +60,4 @@ class CreatePlacesTable extends Migration
         Schema::drop('place_translations');
         Schema::drop('places');
     }
-
 }

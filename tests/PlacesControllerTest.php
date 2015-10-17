@@ -1,9 +1,9 @@
 <?php
+
 use TypiCMS\Modules\Places\Models\Place;
 
 class PlacesControllerTest extends TestCase
 {
-
     public function testAdminIndex()
     {
         $response = $this->call('GET', 'admin/places');
@@ -20,22 +20,21 @@ class PlacesControllerTest extends TestCase
 
     public function testStoreSuccess()
     {
-        $object = new Place;
+        $object = new Place();
         $object->id = 1;
         Place::shouldReceive('create')->once()->andReturn($object);
-        $input = array('fr.title' => 'test', 'fr.slug' => 'test', 'fr.body' => '', 'status' => 0);
+        $input = ['fr.title' => 'test', 'fr.slug' => 'test', 'fr.body' => '', 'status' => 0];
         $this->call('POST', 'admin/places', $input);
-        $this->assertRedirectedToRoute('admin.places.edit', array('id' => 1));
+        $this->assertRedirectedToRoute('admin.places.edit', ['id' => 1]);
     }
 
     public function testStoreSuccessWithRedirectToList()
     {
-        $object = new Place;
+        $object = new Place();
         $object->id = 1;
         Place::shouldReceive('create')->once()->andReturn($object);
-        $input = array('fr.title' => 'test', 'fr.slug' => 'test', 'fr.body' => '', 'status' => 0, 'exit' => true);
+        $input = ['fr.title' => 'test', 'fr.slug' => 'test', 'fr.body' => '', 'status' => 0, 'exit' => true];
         $this->call('POST', 'admin/places', $input);
         $this->assertRedirectedToRoute('admin.places.index');
     }
-
 }

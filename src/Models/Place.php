@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\Places\Models;
 
 use Dimsav\Translatable\Translatable;
@@ -8,14 +9,13 @@ use TypiCMS\Modules\History\Traits\Historable;
 
 class Place extends Base
 {
-
     use Historable;
     use Translatable;
     use PresentableTrait;
 
     protected $presenter = 'TypiCMS\Modules\Places\Presenters\ModulePresenter';
 
-    protected $fillable = array(
+    protected $fillable = [
         'address',
         'email',
         'phone',
@@ -30,20 +30,20 @@ class Place extends Base
         'summary',
         'body',
         'status',
-    );
+    ];
 
     /**
      * Translatable model configs.
      *
      * @var array
      */
-    public $translatedAttributes = array(
+    public $translatedAttributes = [
         'title',
         'slug',
         'summary',
         'body',
         'status',
-    );
+    ];
 
     protected $appends = ['status', 'title', 'thumb'];
 
@@ -52,7 +52,7 @@ class Place extends Base
      *
      * @var array
      */
-    public $attachments = array(
+    public $attachments = [
         'image',
-    );
+    ];
 }
