@@ -9,8 +9,8 @@ class FormRequest extends AbstractFormRequest
     public function rules()
     {
         $rules = [
-            'email'   => 'email',
-            'website' => 'url',
+            'email'   => 'email|max:255',
+            'website' => 'url|max:255',
             'image'   => 'image|max:2000',
         ];
         foreach (config('translatable.locales') as $locale) {
