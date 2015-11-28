@@ -23,7 +23,7 @@ class ModuleProvider extends ServiceProvider
         );
 
         $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['places' => ['linkable_to_page', 'linkable_to_slide']], $modules));
+        $this->app['config']->set('typicms.modules', array_merge(['places' => ['linkable_to_page']], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'places');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'places');
