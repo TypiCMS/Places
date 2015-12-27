@@ -5,8 +5,8 @@ namespace TypiCMS\Modules\Places\Repositories;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 use stdClass;
+use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
 class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
 {
