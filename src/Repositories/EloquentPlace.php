@@ -4,9 +4,9 @@ namespace TypiCMS\Modules\Places\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Input;
-use stdClass;
+use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use stdClass;
 
 class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
 {
@@ -69,7 +69,7 @@ class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
     public function all(array $with = [], $all = false)
     {
         // get search string
-        $string = Input::get('string');
+        $string = Request::input('string');
 
         $query = $this->make($with)
             ->select('places.*', 'status', 'title')
