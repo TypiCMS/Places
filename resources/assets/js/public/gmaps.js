@@ -80,20 +80,20 @@ if (jQuery('#map').length) {
     });
 
     // Search Postcode
-    $('#search-cp button').click(function () {
+    $('#search-nearest button').click(function () {
         'use strict';
 
-        var cp = $('#search-cp input').val(),
+        var address = $('#search-nearest input').val(),
             geocoder;
 
-        if (!cp.length) {
+        if (!address.length) {
             return false;
         }
 
         geocoder = new google.maps.Geocoder();
         geocoder.geocode(
             {
-                address: cp + ' Belgique'
+                address: address
             },
             function (results_array) {
                 var p = results_array[0].geometry.location,
