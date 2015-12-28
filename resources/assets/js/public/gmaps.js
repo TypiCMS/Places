@@ -45,15 +45,7 @@ if (jQuery('#map').length) {
         infoWindow.close();
     });
 
-
-    var apiUrl = '/api/places',
-        placeId = $('#place').data('id');
-    if (placeId) {
-        apiUrl = apiUrl + '/' + placeId;
-    }
-    apiUrl = apiUrl + '?locale=' + $('html').attr('lang');
-
-    jQuery.getJSON(apiUrl + location.search, function (data) {
+    jQuery.getJSON(location.search, function (data) {
         'use strict';
         var i = 0,
             coords = [];
