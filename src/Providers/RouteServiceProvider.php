@@ -18,20 +18,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'TypiCMS\Modules\Places\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-
-        $router->model('places', 'TypiCMS\Modules\Places\Models\Place');
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
@@ -58,12 +44,18 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->resource('admin/places', 'AdminController');
+            $router->get('admin/places', ['as' => 'admin.places.index', 'uses' => 'AdminController@index']);
+            $router->get('admin/places/create', ['as' => 'admin.places.create', 'uses' => 'AdminController@create']);
+            $router->get('admin/places/{place}/edit', ['as' => 'admin.places.edit', 'uses' => 'AdminController@edit']);
+            $router->post('admin/places', ['as' => 'admin.places.store', 'uses' => 'AdminController@store']);
+            $router->put('admin/places/{place}', ['as' => 'admin.places.update', 'uses' => 'AdminController@update']);
 
             /*
              * API routes
              */
-            $router->resource('api/places', 'ApiController');
+            $router->get('api/places', ['as' => 'api.places.index', 'uses' => 'ApiController@index']);
+            $router->put('api/places/{place}', ['as' => 'api.places.update', 'uses' => 'ApiController@update']);
+            $router->delete('api/places/{place}', ['as' => 'api.places.destroy', 'uses' => 'ApiController@destroy']);
         });
     }
 }
