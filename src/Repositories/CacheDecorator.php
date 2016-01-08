@@ -27,7 +27,7 @@ class CacheDecorator extends CacheAbstractDecorator implements PlaceInterface
      */
     public function byPage($page = 1, $limit = 10, array $with = ['translations'], $all = false)
     {
-        $cacheKey = md5(config('app.locale').'byPage.'.$page.$limit.$all.implode('.', Request::except('page')));
+        $cacheKey = md5(config('app.locale').'byPage.'.$page.$limit.$all.serialize(Request::except('page')));
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
@@ -51,7 +51,7 @@ class CacheDecorator extends CacheAbstractDecorator implements PlaceInterface
      */
     public function all(array $with = ['translations'], $all = false)
     {
-        $cacheKey = md5(config('app.locale').'all'.$all.implode('.', $with).implode('.', Request::all()));
+        $cacheKey = md5(config('app.locale').'all'.$all.serialize($with).serialize(Request::all()));
 
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey);
