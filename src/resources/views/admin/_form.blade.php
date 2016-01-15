@@ -25,23 +25,11 @@
     {{-- Main tab --}}
     <div class="tab-pane fade in active" id="tab-main">
 
-        @include('core::admin._tabs-lang-form', ['target' => 'content'])
-
-        <div class="tab-content">
-
-        @foreach ($locales as $lang)
-
-            <div class="tab-pane fade @if($locale == $lang)in active @endif" id="content-{{ $lang }}">
-                @include('core::form._title-and-slug')
-                <input type="hidden" name="{{ $lang }}[status]" value="0">
-                {!! BootForm::checkbox(trans('validation.attributes.online'), $lang.'[status]') !!}
-                {!! BootForm::textarea(trans('validation.attributes.summary'), $lang.'[summary]')->rows(4) !!}
-                {!! BootForm::textarea(trans('validation.attributes.body'), $lang.'[body]')->addClass('ckeditor') !!}
-            </div>
-
-        @endforeach
-
-        </div>
+        @include('core::form._title-and-slug')
+        {!! TranslatableBootForm::hidden('status')->value(0) !!}
+        {!! TranslatableBootForm::checkbox(trans('validation.attributes.online'), 'status') !!}
+        {!! TranslatableBootForm::textarea(trans('validation.attributes.summary'), 'summary')->rows(4) !!}
+        {!! TranslatableBootForm::textarea(trans('validation.attributes.body'), 'body')->addClass('ckeditor') !!}
 
     </div>
 
