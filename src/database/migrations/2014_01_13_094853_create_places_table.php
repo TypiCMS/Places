@@ -28,25 +28,18 @@ class CreatePlacesTable extends Migration
 
         Schema::create('place_translations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
             $table->increments('id');
             $table->integer('place_id')->unsigned();
-
             $table->string('locale')->index();
-
             $table->boolean('status')->default(0);
-
             $table->string('title');
             $table->string('slug')->nullable();
-
             $table->text('summary');
             $table->text('body');
-
             $table->timestamps();
-
             $table->unique(['place_id', 'locale']);
+            $table->unique(['locale', 'slug']);
             $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
-
         });
     }
 
