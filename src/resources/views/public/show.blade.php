@@ -9,7 +9,7 @@
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?language='.config('app.locale')) }}"></script>
     <script src="{{ asset('js/public/gmaps.js') }}"></script>
-@stop
+@endsection
 
 @section('main')
 
@@ -48,4 +48,4 @@
         </div>
     </div>
 
-@stop
+@endsection
