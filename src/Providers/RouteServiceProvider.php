@@ -45,17 +45,17 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->get('admin/places', 'AdminController@index')->name('admin::index-places');
-            $router->get('admin/places/create', 'AdminController@create')->name('admin::create-places');
-            $router->get('admin/places/{place}/edit', 'AdminController@edit')->name('admin::edit-places');
-            $router->post('admin/places', 'AdminController@store')->name('admin::store-places');
-            $router->put('admin/places/{place}', 'AdminController@update')->name('admin::update-places');
+            $router->get('admin/places/create', 'AdminController@create')->name('admin::create-place');
+            $router->get('admin/places/{place}/edit', 'AdminController@edit')->name('admin::edit-place');
+            $router->post('admin/places', 'AdminController@store')->name('admin::store-place');
+            $router->put('admin/places/{place}', 'AdminController@update')->name('admin::update-place');
 
             /*
              * API routes
              */
             $router->get('api/places', 'ApiController@index')->name('api::index-places');
-            $router->put('api/places/{place}', 'ApiController@update')->name('api::update-places');
-            $router->delete('api/places/{place}', 'ApiController@destroy')->name('api::destroy-places');
+            $router->put('api/places/{place}', 'ApiController@update')->name('api::update-place');
+            $router->delete('api/places/{place}', 'ApiController@destroy')->name('api::destroy-place');
         });
     }
 }
