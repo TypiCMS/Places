@@ -1,10 +1,10 @@
 @extends('core::public.master')
 
-@section('title', $model->title . ' – ' . trans('places::global.name') . ' – ' . $websiteTitle)
+@section('title', $model->title.' – '.trans('places::global.name').' – '.$websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbUrl())
-@section('bodyClass', 'body-places body-place-' . $model->id . ' body-page body-page-' . $page->id)
+@section('bodyClass', 'body-places body-place-'.$model->id.' body-page body-page-'.$page->id)
 
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?language='.config('app.locale')) }}"></script>

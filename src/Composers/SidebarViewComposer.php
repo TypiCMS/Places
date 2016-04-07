@@ -3,11 +3,11 @@
 namespace TypiCMS\Modules\Places\Composers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Sidebar\SidebarGroup;
 use Maatwebsite\Sidebar\SidebarItem;
-use TypiCMS\Modules\Core\Composers\BaseSidebarViewComposer;
 
-class SidebarViewComposer extends BaseSidebarViewComposer
+class SidebarViewComposer
 {
     public function compose(View $view)
     {
@@ -15,10 +15,10 @@ class SidebarViewComposer extends BaseSidebarViewComposer
             $group->addItem(trans('places::global.name'), function (SidebarItem $item) {
                 $item->icon = config('typicms.places.sidebar.icon', 'icon fa fa-fw fa-map-marker');
                 $item->weight = config('typicms.places.sidebar.weight');
-                $item->route('admin.places.index');
-                $item->append('admin.places.create');
+                $item->route('admin::index-places');
+                $item->append('admin::create-places');
                 $item->authorize(
-                    $this->auth->hasAccess('places.index')
+                    Gate::allows('index-places')
                 );
             });
         });

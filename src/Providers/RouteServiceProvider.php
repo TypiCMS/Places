@@ -44,18 +44,18 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/places', ['as' => 'admin.places.index', 'uses' => 'AdminController@index']);
-            $router->get('admin/places/create', ['as' => 'admin.places.create', 'uses' => 'AdminController@create']);
-            $router->get('admin/places/{place}/edit', ['as' => 'admin.places.edit', 'uses' => 'AdminController@edit']);
-            $router->post('admin/places', ['as' => 'admin.places.store', 'uses' => 'AdminController@store']);
-            $router->put('admin/places/{place}', ['as' => 'admin.places.update', 'uses' => 'AdminController@update']);
+            $router->get('admin/places', 'AdminController@index')->name('admin::index-places');
+            $router->get('admin/places/create', 'AdminController@create')->name('admin::create-places');
+            $router->get('admin/places/{place}/edit', 'AdminController@edit')->name('admin::edit-places');
+            $router->post('admin/places', 'AdminController@store')->name('admin::store-places');
+            $router->put('admin/places/{place}', 'AdminController@update')->name('admin::update-places');
 
             /*
              * API routes
              */
-            $router->get('api/places', ['as' => 'api.places.index', 'uses' => 'ApiController@index']);
-            $router->put('api/places/{place}', ['as' => 'api.places.update', 'uses' => 'ApiController@update']);
-            $router->delete('api/places/{place}', ['as' => 'api.places.destroy', 'uses' => 'ApiController@destroy']);
+            $router->get('api/places', 'ApiController@index')->name('api::index-places');
+            $router->put('api/places/{place}', 'ApiController@update')->name('api::update-places');
+            $router->delete('api/places/{place}', 'ApiController@destroy')->name('api::destroy-places');
         });
     }
 }
