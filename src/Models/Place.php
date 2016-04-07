@@ -48,6 +48,36 @@ class Place extends Base
     protected $appends = ['status', 'title', 'thumb'];
 
     /**
+     * Append status attribute from translation table.
+     *
+     * @return string
+     */
+    public function getStatusAttribute($value)
+    {
+        return $this->status;
+    }
+
+    /**
+     * Append title attribute from translation table.
+     *
+     * @return string title
+     */
+    public function getTitleAttribute($value)
+    {
+        return $this->title;
+    }
+
+    /**
+     * Append thumb attribute.
+     *
+     * @return string
+     */
+    public function getThumbAttribute($value)
+    {
+        return $this->present()->thumbSrc(null, 22);
+    }
+
+    /**
      * Columns that are file.
      *
      * @var array
