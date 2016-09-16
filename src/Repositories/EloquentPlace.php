@@ -4,8 +4,8 @@ namespace TypiCMS\Modules\Places\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Request;
-use TypiCMS\Modules\Places\Models\Place;
 use stdClass;
+use TypiCMS\Modules\Places\Models\Place;
 
 class EloquentPlace extends EloquentRepository
 {
