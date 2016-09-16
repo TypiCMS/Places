@@ -4,11 +4,11 @@ namespace TypiCMS\Modules\Places\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Places\Repositories\PlaceInterface;
+use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(PlaceInterface $place)
+    public function __construct(EloquentPlace $place)
     {
         parent::__construct($place);
     }

@@ -5,7 +5,7 @@ namespace TypiCMS\Modules\Places\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Places\Models\Place;
-use TypiCMS\Modules\Places\Repositories\PlaceInterface as Repository;
+use TypiCMS\Modules\Places\Repositories\EloquentPlace as Repository;
 
 class ApiController extends BaseApiController
 {

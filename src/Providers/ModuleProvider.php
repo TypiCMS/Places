@@ -8,9 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Places\Models\Place;
-use TypiCMS\Modules\Places\Repositories\CacheDecorator;
 use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 
 class ModuleProvider extends ServiceProvider
@@ -68,14 +66,6 @@ class ModuleProvider extends ServiceProvider
             $view->page = TypiCMS::getPageLinkedToModule('places');
         });
 
-        $app->bind('TypiCMS\Modules\Places\Repositories\PlaceInterface', function (Application $app) {
-            $repository = new EloquentPlace(new Place());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], 'places', 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('Places', EloquentPlace::class);
     }
 }

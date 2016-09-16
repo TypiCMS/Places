@@ -15,7 +15,7 @@ class Place extends Base
 
     protected $presenter = 'TypiCMS\Modules\Places\Presenters\ModulePresenter';
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'exit'];
 
     public $translatable = [
         'title',

@@ -3,17 +3,15 @@
 namespace TypiCMS\Modules\Places\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
+use TypiCMS\Modules\Places\Models\Place;
 use stdClass;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
-class EloquentPlace extends RepositoriesAbstract implements PlaceInterface
+class EloquentPlace extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'places';
+
+    protected $model = Place::class;
 
     /**
      * Get paginated models.

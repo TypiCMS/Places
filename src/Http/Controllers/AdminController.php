@@ -5,11 +5,11 @@ namespace TypiCMS\Modules\Places\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Places\Http\Requests\FormRequest;
 use TypiCMS\Modules\Places\Models\Place;
-use TypiCMS\Modules\Places\Repositories\PlaceInterface;
+use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(PlaceInterface $place)
+    public function __construct(EloquentPlace $place)
     {
         parent::__construct($place);
     }
