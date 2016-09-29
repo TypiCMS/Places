@@ -43,7 +43,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
                 $router->get('places', 'AdminController@index')->name('admin::index-places');
                 $router->get('places/create', 'AdminController@create')->name('admin::create-place');
                 $router->get('places/{place}/edit', 'AdminController@edit')->name('admin::edit-place');
@@ -54,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * API routes
              */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
                 $router->get('places', 'ApiController@index')->name('api::index-places');
                 $router->put('places/{place}', 'ApiController@update')->name('api::update-place');
                 $router->delete('places/{place}', 'ApiController@destroy')->name('api::destroy-place');
