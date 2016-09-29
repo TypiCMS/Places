@@ -4,7 +4,7 @@ namespace TypiCMS\Modules\Places\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Request;
-use TypiCMS\Modules\Core\EloquentRepository;
+use TypiCMS\Modules\Core\Repositories\EloquentRepository;
 use TypiCMS\Modules\Places\Models\Place;
 use stdClass;
 

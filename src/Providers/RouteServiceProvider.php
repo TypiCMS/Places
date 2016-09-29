@@ -43,18 +43,22 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/places', 'AdminController@index')->name('admin::index-places');
-            $router->get('admin/places/create', 'AdminController@create')->name('admin::create-place');
-            $router->get('admin/places/{place}/edit', 'AdminController@edit')->name('admin::edit-place');
-            $router->post('admin/places', 'AdminController@store')->name('admin::store-place');
-            $router->put('admin/places/{place}', 'AdminController@update')->name('admin::update-place');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+                $router->get('places', 'AdminController@index')->name('admin::index-places');
+                $router->get('places/create', 'AdminController@create')->name('admin::create-place');
+                $router->get('places/{place}/edit', 'AdminController@edit')->name('admin::edit-place');
+                $router->post('places', 'AdminController@store')->name('admin::store-place');
+                $router->put('places/{place}', 'AdminController@update')->name('admin::update-place');
+            });
 
             /*
              * API routes
              */
-            $router->get('api/places', 'ApiController@index')->name('api::index-places');
-            $router->put('api/places/{place}', 'ApiController@update')->name('api::update-place');
-            $router->delete('api/places/{place}', 'ApiController@destroy')->name('api::destroy-place');
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+                $router->get('places', 'ApiController@index')->name('api::index-places');
+                $router->put('places/{place}', 'ApiController@update')->name('api::update-place');
+                $router->delete('places/{place}', 'ApiController@destroy')->name('api::destroy-place');
+            });
         });
     }
 }
