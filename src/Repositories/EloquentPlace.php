@@ -31,7 +31,7 @@ class EloquentPlace extends EloquentRepository
         $result->totalItems = 0;
         $result->items = [];
 
-        $query = $this->make($with)
+        $query = $this->with($with)
             ->select('places.*', 'status', 'title')
             ->join('place_translations', 'place_translations.place_id', '=', 'places.id')
             ->where('locale', config('app.locale'))
@@ -45,7 +45,7 @@ class EloquentPlace extends EloquentRepository
         $models = $query->get();
 
         // Build query to get totalItems
-        $queryTotal = $this->model;
+        $queryTotal = $this->createModel();
         if (!$all) {
             $queryTotal->online();
         }
@@ -70,7 +70,7 @@ class EloquentPlace extends EloquentRepository
         // get search string
         $string = Request::input('string');
 
-        $query = $this->make($with)
+        $query = $this->with($with)
             ->select('places.*', 'status', 'title')
             ->join('place_translations', 'place_translations.place_id', '=', 'places.id')
             ->where('locale', config('app.locale'));
