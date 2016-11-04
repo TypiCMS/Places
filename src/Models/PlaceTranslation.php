@@ -6,6 +6,14 @@ use TypiCMS\Modules\Core\Models\BaseTranslation;
 
 class PlaceTranslation extends BaseTranslation
 {
+    protected $fillable = [
+        'title',
+        'slug',
+        'summary',
+        'body',
+        'status',
+    ];
+
     /**
      * get the parent model.
      */

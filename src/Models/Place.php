@@ -24,12 +24,6 @@ class Place extends Base
         'image',
         'latitude',
         'longitude',
-        // Translatable columns
-        'title',
-        'slug',
-        'summary',
-        'body',
-        'status',
     ];
 
     /**
@@ -52,9 +46,9 @@ class Place extends Base
      *
      * @return string
      */
-    public function getStatusAttribute()
+    public function getStatusAttribute($value)
     {
-        return $this->status;
+        return $value;
     }
 
     /**
@@ -62,9 +56,9 @@ class Place extends Base
      *
      * @return string title
      */
-    public function getTitleAttribute()
+    public function getTitleAttribute($value)
     {
-        return $this->title;
+        return $value;
     }
 
     /**
