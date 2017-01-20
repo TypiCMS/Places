@@ -26,41 +26,41 @@
 
         @include('core::form._title-and-slug')
         {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(__('validation.attributes.online'), 'status') !!}
-        {!! TranslatableBootForm::textarea(__('validation.attributes.summary'), 'summary')->rows(4) !!}
-        {!! TranslatableBootForm::textarea(__('validation.attributes.body'), 'body')->addClass('ckeditor') !!}
+        {!! TranslatableBootForm::checkbox(__('Online'), 'status') !!}
+        {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
+        {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
 
     </div>
 
     {{-- Info tab --}}
     <div class="tab-pane fade in" id="tab-info">
 
-        {!! BootForm::text(__('validation.attributes.address'), 'address') !!}
+        {!! BootForm::text(__('Address'), 'address') !!}
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::email(__('validation.attributes.email'), 'email') !!}
+                {!! BootForm::email(__('Email'), 'email') !!}
             </div>
             <div class="col-sm-6">
-                {!! BootForm::text(__('validation.attributes.website'), 'website') !!}
+                {!! BootForm::text(__('Website'), 'website') !!}
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::text(__('validation.attributes.phone'), 'phone') !!}
+                {!! BootForm::text(__('Phone'), 'phone') !!}
             </div>
             <div class="col-sm-6">
-                {!! BootForm::text(__('validation.attributes.fax'), 'fax') !!}
+                {!! BootForm::text(__('Fax'), 'fax') !!}
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::text(__('validation.attributes.latitude'), 'latitude') !!}
+                {!! BootForm::text(__('Latitude'), 'latitude') !!}
             </div>
             <div class="col-sm-6">
-                {!! BootForm::text(__('validation.attributes.longitude'), 'longitude') !!}
+                {!! BootForm::text(__('Longitude'), 'longitude') !!}
             </div>
         </div>
 
