@@ -47,7 +47,7 @@
             <form id="search-nearest" class="hides" method="get" role="form">
                 <label for="address" class="sr-only">@lang('places::global.address')</label>
                 <div class="input-group input-group-lg">
-                    <input class="form-control" id="address" type="text" placeholder="{{ trans('places::global.Address') }}" name="address" value="">
+                    <input class="form-control" id="address" type="text" placeholder="{{ __('places::global.Address') }}" name="address" value="">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-sm btn-primary">@lang('places::global.Search')</button>
                     </span>
