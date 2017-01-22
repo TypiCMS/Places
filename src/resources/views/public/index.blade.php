@@ -7,7 +7,7 @@
     <script src="{{ asset('js/public/gmaps.js') }}"></script>
 @endsection
 
-@section('main')
+@section('content')
 
     {!! $page->present()->body !!}
 

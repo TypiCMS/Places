@@ -2,7 +2,7 @@
 
 @section('title', __('places::global.New'))
 
-@section('main')
+@section('content')
 
     @include('core::admin._button-back', ['module' => 'places'])
     <h1>
