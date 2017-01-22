@@ -12,10 +12,10 @@
 
 <ul class="nav nav-tabs">
     <li class="active">
-        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">@lang('global.Content')</a>
+        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">@lang('Content')</a>
     </li>
     <li>
-        <a href="#tab-info" data-target="#tab-info" data-toggle="tab">@lang('global.Info')</a>
+        <a href="#tab-info" data-target="#tab-info" data-toggle="tab">@lang('Info')</a>
     </li>
 </ul>
 
@@ -26,7 +26,7 @@
 
         @include('core::form._title-and-slug')
         {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(__('Online'), 'status') !!}
+        {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
         {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
         {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
 

@@ -39,7 +39,7 @@ class EloquentPlace extends EloquentRepository
             ->take($limit);
 
         if (!$all) {
-            $query->online();
+            $query->published();
         }
         $query->order();
         $models = $query->get();
@@ -47,7 +47,7 @@ class EloquentPlace extends EloquentRepository
         // Build query to get totalItems
         $queryTotal = $this->createModel();
         if (!$all) {
-            $queryTotal->online();
+            $queryTotal->published();
         }
 
         // Put items and totalItems in stdClass
@@ -76,7 +76,7 @@ class EloquentPlace extends EloquentRepository
             ->where('locale', config('app.locale'));
 
         if (!$all) {
-            $query->online();
+            $query->published();
         }
 
         $string && $query->where('title', 'LIKE', '%'.$string.'%');
