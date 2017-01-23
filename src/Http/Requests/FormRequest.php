@@ -9,11 +9,11 @@ class FormRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'email' => 'email|max:255',
-            'website' => 'url|max:255',
+            'email' => 'nullable|email|max:255',
+            'website' => 'nullable|url|max:255',
             'image' => 'image|max:2000',
-            'title.*' => 'max:255',
-            'slug.*' => 'alpha_dash|max:255',
+            'title.*' => 'nullable|max:255',
+            'slug.*' => 'nullable|alpha_dash|max:255',
         ];
     }
 }
