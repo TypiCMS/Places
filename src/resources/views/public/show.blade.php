@@ -13,39 +13,33 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-sm-4">
-            <h3>{{ $model->title }}</h3>
-
-            {!! $model->present()->thumb(540, 400) !!}
-
-            <p id="place" data-id="{{ $model->id }}">
-                @if ($model->address)
-                    {{ $model->address }}<br>
-                @endif
-                @if ($model->phone)
-                    {{ $model->phone }}<br>
-                @endif
-                @if ($model->email)
-                    <a href="mailto:{{ $model->email }}">{{ $model->email }}</a><br>
-                @endif
-                @if ($model->website)
-                    <a href="{{ $model->website }}">{{ $model->website }}</a><br>
-                @endif
-            </p>
-            <p>
-                @if ($model->info)
-                    {{ nl2br($model->info) }}
-                @endif
-            </p>
-            <p class="summary">{{ nl2br($model->summary) }}</p>
-            <div class="body">{!! $model->present()->body !!}</div>
-        </div>
-        <div class="col-sm-8">
-            @if($model->latitude && $model->longitude)
-                <div id="map" class="map map-fancybox"></div>
+    <div class="place">
+        <h1 class="place-title">{{ $model->title }}</h1>
+        @if($model->latitude && $model->longitude)
+            <div class="place-map" id="map"></div>
+        @endif
+        {!! $model->present()->thumb(540, 400) !!}
+        <p class="place-contact" id="place" data-id="{{ $model->id }}">
+            @if ($model->address)
+                {{ $model->address }}<br>
             @endif
-        </div>
+            @if ($model->phone)
+                {{ $model->phone }}<br>
+            @endif
+            @if ($model->email)
+                <a href="mailto:{{ $model->email }}">{{ $model->email }}</a><br>
+            @endif
+            @if ($model->website)
+                <a href="{{ $model->website }}">{{ $model->website }}</a><br>
+            @endif
+        </p>
+        <p class="place-info">
+            @if ($model->info)
+                {{ nl2br($model->info) }}
+            @endif
+        </p>
+        <p class="place-summary">{{ nl2br($model->summary) }}</p>
+        <div class="place-body">{!! $model->present()->body !!}</div>
     </div>
 
 @endsection
