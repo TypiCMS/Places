@@ -21,11 +21,11 @@
                 <tr>
                     <th class="delete"></th>
                     <th class="edit"></th>
-                    <th st-sort="status" class="status st-sort">Status</th>
-                    <th st-sort="image" class="image st-sort">Image</th>
-                    <th st-sort="title" st-sort-default="true" class="title st-sort">Title</th>
-                    <th st-sort="address" class="address st-sort">Address</th>
-                    <th st-sort="website" class="website st-sort">Website</th>
+                    <th st-sort="status" class="status st-sort">@lang('Status')</th>
+                    <th st-sort="image" class="image st-sort">@lang('Image')</th>
+                    <th st-sort="title" st-sort-default="true" class="title st-sort">@lang('Title')</th>
+                    <th st-sort="address" class="address st-sort">@lang('Address')</th>
+                    <th st-sort="website" class="website st-sort">@lang('Website')</th>
                 </tr>
                 <tr>
                     <td colspan="4"></td>
