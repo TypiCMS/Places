@@ -51,7 +51,7 @@
                     <td>
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
-                    <td>@{{ model.title }}</td>
+                    <td>@{{ model.title | translated }}</td>
                     <td>@{{ model.address }}</td>
                     <td>@{{ model.website }}</td>
                 </tr>
