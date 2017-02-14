@@ -8,7 +8,7 @@
 
 @section('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?language='.config('app.locale')) }}"></script>
-    <script src="{{ asset('js/public/gmaps.js') }}"></script>
+    <script src="{{ asset('js/public.gmaps.js') }}"></script>
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
     <div class="place">
         <h1 class="place-title">{{ $model->title }}</h1>
         @if($model->latitude && $model->longitude)
-            <div class="place-map" id="map"></div>
+            <div class="place-map" id="map" style="height: 500px"></div>
         @endif
         {!! $model->present()->thumb(540, 400) !!}
         <p class="place-contact" id="place" data-id="{{ $model->id }}">
