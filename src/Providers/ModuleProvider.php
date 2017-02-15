@@ -34,7 +34,7 @@ class ModuleProvider extends ServiceProvider
         ], 'migrations');
         $this->publishes([
             __DIR__.'/../resources/assets' => public_path(),
-        ], 'scripts');
+        ], 'assets');
 
         AliasLoader::getInstance()->alias('Places', Places::class);
 
