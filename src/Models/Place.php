@@ -25,11 +25,22 @@ class Place extends Base
         'status',
     ];
 
-    protected $appends = ['thumb'];
+    protected $appends = ['thumb', 'title_translated'];
 
     public $attachments = [
         'image',
     ];
+
+    /**
+     * Append title_translated attribute.
+     *
+     * @return string
+     */
+    public function getTitleTranslatedAttribute()
+    {
+        $locale = config('app.locale');
+        return $this->translate('title', config('typicms.content_locale', $locale));
+    }
 
     /**
      * Append thumb attribute.
