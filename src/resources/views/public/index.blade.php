@@ -21,7 +21,7 @@
             <form method="get" role="form">
                 <label for="string" class="sr-only">@lang('places::global.Search')</label>
                 <div class="input-group input-group-lg">
-                    <input id="string" type="text" name="string" value="{{ Request::input('string') }}" class="form-control input-sm">
+                    <input id="string" type="text" name="string" value="{{ request('string') }}" class="form-control input-sm">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-sm btn-primary">@lang('places::global.Search')</button>
                     </span>
@@ -30,8 +30,8 @@
 
             <h3>
             {{ $models->count() }} @choice('places::global.places', $models->count())
-            @if(Request::input('string')) @lang('for')
-                “{{ Request::input('string') }}”
+            @if(request('string')) @lang('for')
+                “{{ request('string') }}”
             @endif
             </h3>
 

@@ -3,7 +3,6 @@
 namespace TypiCMS\Modules\Places\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Request;
 use stdClass;
 use TypiCMS\Modules\Core\Repositories\EloquentRepository;
 use TypiCMS\Modules\Places\Models\Place;
@@ -68,7 +67,7 @@ class EloquentPlace extends EloquentRepository
     public function all(array $with = [], $all = false)
     {
         // get search string
-        $string = Request::input('string');
+        $string = request('string');
 
         $query = $this->with($with)
             ->select('places.*', 'status', 'title')
