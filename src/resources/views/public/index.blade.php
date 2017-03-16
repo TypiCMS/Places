@@ -3,7 +3,7 @@
 @section('bodyClass', 'body-places body-places-index body-page body-page-'.$page->id)
 
 @section('js')
-    <script src="{{ asset('//maps.googleapis.com/maps/api/js?key='.getenv(GMAPS_API_KEY).'&language='.config('app.locale')) }}"></script>
+    <script src="{{ asset('//maps.googleapis.com/maps/api/js?key='.getenv('GMAPS_API_KEY').'&language='.config('app.locale')) }}"></script>
     <script src="{{ asset('js/public.gmaps.js') }}"></script>
 @endsection
 
