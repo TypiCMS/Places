@@ -20,7 +20,7 @@ class CreatePlacesTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('website')->nullable();
-            $table->string('image')->nullable();
+            $table->integer('image_id')->unsigned()->nullable();
             $table->string('latitude', 30)->nullable();
             $table->string('longitude', 30)->nullable();
             $table->json('status');

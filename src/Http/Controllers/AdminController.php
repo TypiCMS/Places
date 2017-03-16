@@ -35,6 +35,7 @@ class AdminController extends BaseAdminController
     public function create()
     {
         $model = $this->repository->createModel();
+        app('JavaScript')->put('model', $model);
 
         return view('places::admin.create')
             ->with(compact('model'));
@@ -49,6 +50,8 @@ class AdminController extends BaseAdminController
      */
     public function edit(Place $place)
     {
+        app('JavaScript')->put('model', $place);
+
         return view('places::admin.edit')
             ->with(['model' => $place]);
     }

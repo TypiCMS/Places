@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\Places\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
-use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Places\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Places\Facades\Places;
@@ -40,7 +39,6 @@ class ModuleProvider extends ServiceProvider
 
         // Observers
         Place::observe(new SlugObserver());
-        Place::observe(new FileObserver());
     }
 
     public function register()
