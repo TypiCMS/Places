@@ -44,13 +44,13 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
-                $router->get('places', 'AdminController@index')->name('admin::index-places');
-                $router->get('places/create', 'AdminController@create')->name('admin::create-place');
-                $router->get('places/{place}/edit', 'AdminController@edit')->name('admin::edit-place');
-                $router->post('places', 'AdminController@store')->name('admin::store-place');
-                $router->put('places/{place}', 'AdminController@update')->name('admin::update-place');
-                $router->patch('places/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-place-ajax');
-                $router->delete('places/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-place');
+                $router->get('places', 'AdminController@index')->name('admin::index-places')->middleware('can:see-all-places');
+                $router->get('places/create', 'AdminController@create')->name('admin::create-place')->middleware('can:create-place');
+                $router->get('places/{place}/edit', 'AdminController@edit')->name('admin::edit-place')->middleware('can:update-place');
+                $router->post('places', 'AdminController@store')->name('admin::store-place')->middleware('can:create-place');
+                $router->put('places/{place}', 'AdminController@update')->name('admin::update-place')->middleware('can:update-place');
+                $router->patch('places/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-place-ajax')->middleware('can:update-place');
+                $router->delete('places/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-place')->middleware('can:delete-place');
             });
         });
     }
