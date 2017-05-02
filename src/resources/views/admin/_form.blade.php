@@ -9,7 +9,7 @@
 
 {!! BootForm::hidden('id') !!}
 
-@include('core::admin._image-fieldset', ['field' => 'image'])
+@include('files::admin._files-selector')
 
 <ul class="nav nav-tabs">
     <li class="active">

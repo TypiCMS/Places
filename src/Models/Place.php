@@ -27,7 +27,7 @@ class Place extends Base
         'status',
     ];
 
-    protected $appends = ['thumb', 'title_translated', 'status_translated'];
+    protected $appends = ['image', 'thumb', 'title_translated', 'status_translated'];
 
     /**
      * Append title_translated attribute.
@@ -54,6 +54,16 @@ class Place extends Base
     }
 
     /**
+     * Append image attribute.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return $this->files->first();
+    }
+
+    /**
      * Append thumb attribute.
      *
      * @return string
@@ -64,12 +74,13 @@ class Place extends Base
     }
 
     /**
-     * This model belongs to one image.
+     * A news can have many files.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function image()
+    public function files()
     {
-        return $this->belongsTo(File::class, 'image_id');
+        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
+            ->orderBy('model_has_files.position');
     }
 }
