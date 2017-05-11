@@ -11,7 +11,7 @@
 
     {!! $page->present()->body !!}
 
-    @include('galleries::public._galleries', ['model' => $page])
+    @include('files::public._files', ['model' => $page])
 
     <div class="row">
 
