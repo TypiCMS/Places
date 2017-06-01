@@ -17,20 +17,20 @@
 
         <div class="col-sm-4">
 
-            <h2>@lang('places::global.Filter')</h2>
+            <h2>@lang('Filter')</h2>
             <form method="get" role="form">
-                <label for="string" class="sr-only">@lang('places::global.Search')</label>
+                <label for="string" class="sr-only">@lang('Search')</label>
                 <div class="input-group input-group-lg">
                     <input id="string" type="text" name="string" value="{{ request('string') }}" class="form-control input-sm">
                     <span class="input-group-btn">
-                        <button type="submit" class="btn btn-sm btn-primary">@lang('places::global.Search')</button>
+                        <button type="submit" class="btn btn-sm btn-primary">@lang('Search')</button>
                     </span>
                 </div>
             </form>
 
             <h3>
-            {{ $models->count() }} @choice('places::global.places', $models->count())
-            @if(request('string')) @lang('for')
+            {{ $models->count() }} @lang('Places')
+            @if (request('string')) @lang('for')
                 “{{ request('string') }}”
             @endif
             </h3>
@@ -43,13 +43,13 @@
 
         <div class="col-sm-8">
 
-            <h2>@lang('places::global.Find nearest')</h2>
+            <h2>@lang('Find nearest')</h2>
             <form id="search-nearest" class="hides" method="get" role="form">
-                <label for="address" class="sr-only">@lang('places::global.address')</label>
+                <label for="address" class="sr-only">@lang('address')</label>
                 <div class="input-group input-group-lg">
-                    <input class="form-control" id="address" type="text" placeholder="{{ __('places::global.Address') }}" name="address" value="">
+                    <input class="form-control" id="address" type="text" placeholder="{{ __('Address') }}" name="address" value="">
                     <span class="input-group-btn">
-                        <button type="submit" class="btn btn-sm btn-primary">@lang('places::global.Search')</button>
+                        <button type="submit" class="btn btn-sm btn-primary">@lang('Search')</button>
                     </span>
                 </div>
             </form>

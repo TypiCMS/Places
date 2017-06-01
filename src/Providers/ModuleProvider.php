@@ -26,7 +26,6 @@ class ModuleProvider extends ServiceProvider
         $this->app['config']->set('typicms.modules', array_merge(['places' => ['linkable_to_page']], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'places');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'places');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([

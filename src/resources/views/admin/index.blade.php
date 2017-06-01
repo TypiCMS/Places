@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', __('places::global.name'))
+@section('title', __('Places'))
 
 @section('content')
 
@@ -8,7 +8,7 @@
 
     @include('core::admin._button-create', ['module' => 'places'])
 
-    <h1>@lang('places::global.name')</h1>
+    <h1>@lang('Places')</h1>
 
     <div class="btn-toolbar">
         @include('core::admin._button-select')
@@ -32,13 +32,13 @@
                 <tr>
                     <td colspan="4"></td>
                     <td>
-                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="address" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="address" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="website" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="website" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                 </tr>
             </thead>

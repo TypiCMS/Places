@@ -1,6 +1,6 @@
 @extends('core::public.master')
 
-@section('title', $model->title.' – '.__('places::global.name').' – '.$websiteTitle)
+@section('title', $model->title.' – '.__('Places').' – '.$websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbUrl())
@@ -15,7 +15,7 @@
 
     <div class="place">
         <h1 class="place-title">{{ $model->title }}</h1>
-        @if($model->latitude && $model->longitude)
+        @if ($model->latitude && $model->longitude)
             <div class="place-map" id="map" style="height: 500px"></div>
         @endif
         {!! $model->present()->thumb(540, 400) !!}
