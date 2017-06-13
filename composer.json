@@ -16,13 +16,6 @@
             "TypiCMS\\Modules\\Places\\": "src/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "TypiCMS\\Modules\\Places\\Providers\\ModuleProvider"
-            ]
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
