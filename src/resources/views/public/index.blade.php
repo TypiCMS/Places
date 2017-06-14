@@ -35,9 +35,7 @@
             @endif
             </h3>
 
-            @if ($models->count())
-            @include('places::public._list', ['items' => $models])
-            @endif
+            @includeWhen($models->count() > 0, 'places::public._list', ['items' => $models])
 
         </div>
 
