@@ -6,10 +6,10 @@
 @section('image', $model->present()->thumbUrl())
 @section('bodyClass', 'body-places body-place-'.$model->id.' body-page body-page-'.$page->id)
 
-@section('js')
+@push('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?key='.getenv('GMAPS_API_KEY').'&language='.config('app.locale')) }}"></script>
     <script src="{{ asset('js/public.gmaps.js') }}"></script>
-@endsection
+@endpush
 
 @section('content')
 
