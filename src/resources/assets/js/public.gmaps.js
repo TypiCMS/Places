@@ -3,23 +3,22 @@
 function highlightAddress(markerId) {
     'use strict';
     // console.log('marker : '+markerId);
-    var item = jQuery('#item-' + markerId);
+    var item = $('#item-' + markerId);
     if (item.length && !item.hasClass('active')) {
-        jQuery('.list-agencies .active').removeClass('active');
+        $('.places-list .active').removeClass('active');
         item.addClass('active');
     }
 }
 
 var onMarkerClick = function () {
     'use strict';
-    // console.log(this);
     highlightAddress(this.id);
     infoWindow.setContent(this.html);
     infoWindow.open(map, this);
 };
 
 // Gmaps
-if (jQuery('#map').length) {
+if ($('#map').length) {
     var infoWindow = new google.maps.InfoWindow(),
         jsonData = [],
         markers = [],
@@ -45,11 +44,12 @@ if (jQuery('#map').length) {
         infoWindow.close();
     });
 
-    jQuery.getJSON(location.search, function (data) {
+    $.getJSON(location.search, function (data) {
         'use strict';
         var i = 0,
-            coords = [];
-        if (!jQuery.isArray(data)) {
+            coords = [],
+            locale = $('html').attr('lang');
+        if (!$.isArray(data)) {
             jsonData = [data];
         } else {
             jsonData = data;
@@ -61,7 +61,7 @@ if (jQuery('#map').length) {
                 coords = [];
                 markers[i].id = jsonData[i].id;
                 markers[i].shape = jsonData[i].shape;
-                markers[i].html = '<h4>' + jsonData[i].title + '</h4>';
+                markers[i].html = '<h4>' + jsonData[i].title[locale] + '</h4>';
                 markers[i].html += '<p>';
                 if (jsonData[i].address) { coords.push(jsonData[i].address); }
                 if (jsonData[i].phone) { coords.push('T ' + jsonData[i].phone); }
@@ -106,6 +106,20 @@ if (jQuery('#map').length) {
         return false;
     });
 
+    // Click on a marker in the list to open the info window on the map.
+    $('.places-item-btn-map').on('click', function(){
+        var id = $(this).closest('li').attr('id').replace(/item-/gi,'');
+        for (var i = markers.length - 1; i >= 0; i--){
+            if (markers[i].id == id) {
+                var latLng = new google.maps.LatLng(markersPos[i].lat(),markersPos[i].lng());
+                map.panTo( latLng );
+                map.setZoom(18);
+                google.maps.event.trigger(markersPoints[i], 'click');
+            };
+        };
+        return false;
+    })
+
     // Compute distance between two points
     var rad = function (x) {
         'use strict';
@@ -132,35 +146,13 @@ if (jQuery('#map').length) {
         for (i = 0; i < jsonData.length; i += 1) {
             if (jsonData[i].latitude > 0 && jsonData[i].longitude > 0) {
                 jsonData[i].distance = getDistance(lat, lng, jsonData[i].latitude, jsonData[i].longitude);
-                // var km = (jsonData[i].distance/1000).toFixed(1);
-                // var km = (jsonData[i].distance/1000).toFixed(0);
-                // $('#item-'+jsonData[i].id).data('data-distance', km);
-                // $('#item-'+jsonData[i].id+' .distance').html('(' + km + ' km)');
                 jsonData.sort(function (a, b) {
                     return parseFloat(a.distance) - parseFloat(b.distance);
                 });
-                // sortAgenciesList();
             }
         }
         openMarkerId(jsonData[0].id);
     }
-
-    // function sortAgenciesList() {
-    //     'use strict';
-    //     var items = $('#list-agencies li').get();
-    //     items.sort(function (a,b) {
-    //       var keyA = parseFloat($(a).data('data-distance'));
-    //       var keyB = parseFloat($(b).data('data-distance'));
-    //       if (keyA < keyB) return -1;
-    //       if (keyA > keyB) return 1;
-    //       return 0;
-    //     });
-
-    //     var ul = $('#list-agencies');
-    //     $.each(items, function (i, li) {
-    //         ul.append(li);
-    //     });
-    // }
 
 }
 
@@ -235,7 +227,7 @@ function AutoCenter() {
     'use strict';
     var bounds = new google.maps.LatLngBounds(),
         listener;
-    jQuery.each(markers, function (index) {
+    $.each(markers, function (index) {
         bounds.extend(markersPos[index]);
     });
     map.fitBounds(bounds);

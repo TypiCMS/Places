@@ -2,36 +2,24 @@
 
 namespace TypiCMS\Modules\Places\Models;
 
-use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Places\Presenters\ModulePresenter;
 
 class Place extends Base
 {
+    use HasTranslations;
     use Historable;
-    use Translatable;
     use PresentableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\Places\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
-    protected $fillable = [
-        'address',
-        'email',
-        'phone',
-        'fax',
-        'website',
-        'image',
-        'latitude',
-        'longitude',
-    ];
+    protected $guarded = ['id', 'exit'];
 
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
+    public $translatable = [
         'title',
         'slug',
         'summary',
@@ -39,26 +27,40 @@ class Place extends Base
         'status',
     ];
 
-    protected $appends = ['status', 'title', 'thumb'];
+    protected $appends = ['image', 'thumb', 'title_translated', 'status_translated'];
 
     /**
-     * Append status attribute from translation table.
+     * Append title_translated attribute.
      *
      * @return string
      */
-    public function getStatusAttribute($value)
+    public function getTitleTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('title', config('typicms.content_locale', $locale));
     }
 
     /**
-     * Append title attribute from translation table.
+     * Append status_translated attribute.
      *
-     * @return string title
+     * @return string
      */
-    public function getTitleAttribute($value)
+    public function getStatusTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('status', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * Append image attribute.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return $this->files->first();
     }
 
     /**
@@ -72,11 +74,13 @@ class Place extends Base
     }
 
     /**
-     * Columns that are file.
+     * A news can have many files.
      *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public $attachments = [
-        'image',
-    ];
+    public function files()
+    {
+        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
+            ->orderBy('model_has_files.position');
+    }
 }

@@ -8,7 +8,7 @@ class CreatePlacesTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return null
      */
     public function up()
     {
@@ -20,37 +20,25 @@ class CreatePlacesTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('website')->nullable();
-            $table->string('image')->nullable();
+            $table->integer('image_id')->unsigned()->nullable();
             $table->string('latitude', 30)->nullable();
             $table->string('longitude', 30)->nullable();
+            $table->json('status');
+            $table->json('title');
+            $table->json('slug');
+            $table->json('summary');
+            $table->json('body');
             $table->timestamps();
-        });
-
-        Schema::create('place_translations', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('place_id')->unsigned();
-            $table->string('locale')->index();
-            $table->boolean('status')->default(0);
-            $table->string('title');
-            $table->string('slug')->nullable();
-            $table->text('summary');
-            $table->text('body');
-            $table->timestamps();
-            $table->unique(['place_id', 'locale']);
-            $table->unique(['locale', 'slug']);
-            $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return null
      */
     public function down()
     {
-        Schema::drop('place_translations');
         Schema::drop('places');
     }
 }

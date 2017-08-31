@@ -2,13 +2,12 @@
 
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
-use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Places\Repositories\PlaceInterface;
+use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(PlaceInterface $place)
+    public function __construct(EloquentPlace $place)
     {
         parent::__construct($place);
     }
@@ -20,8 +19,8 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->all();
-        if (Request::ajax()) {
+        $models = $this->repository->published()->findAll();
+        if (request()->wantsJson()) {
             return $models;
         }
 
@@ -36,8 +35,8 @@ class PublicController extends BasePublicController
      */
     public function search()
     {
-        $models = $this->repository->all();
-        if (Request::ajax()) {
+        $models = $this->repository->published()->findAll();
+        if (request()->wantsJson()) {
             return $models;
         }
 
@@ -52,8 +51,8 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->bySlug($slug);
-        if (Request::ajax()) {
+        $model = $this->repository->published()->bySlug($slug);
+        if (request()->wantsJson()) {
             return $model;
         }
 

@@ -2,9 +2,9 @@
 
 namespace TypiCMS\Modules\Places\Facades;
 
-use Illuminate\Support\Facades\Facade as MainFacade;
+use Illuminate\Support\Facades\Facade;
 
-class Facade extends MainFacade
+class Places extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Facade extends MainFacade
      */
     protected static function getFacadeAccessor()
     {
-        return 'TypiCMS\Modules\Places\Repositories\PlaceInterface';
+        return 'Places';
     }
 }

@@ -1,21 +1,22 @@
-@section('js')
+@push('js')
     <script src="{{ asset('components/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('//maps.googleapis.com/maps/api/js?language='.config('app.locale')) }}"></script>
-    <script src="{{ asset('js/admin/gmaps.js') }}"></script>
-@endsection
+    <script src="{{ asset('//maps.googleapis.com/maps/api/js?key='.getenv('GMAPS_API_KEY').'&language='.config('app.locale')) }}"></script>
+    <script src="{{ asset('js/admin.gmaps.js') }}"></script>
+@endpush
 
-@include('core::admin._buttons-form')
+@component('core::admin._buttons-form', ['model' => $model])
+@endcomponent
 
 {!! BootForm::hidden('id') !!}
 
-@include('core::admin._image-fieldset', ['field' => 'image'])
+@include('files::admin._files-selector')
 
 <ul class="nav nav-tabs">
     <li class="active">
-        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">@lang('global.Content')</a>
+        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">{{ __('Content') }}</a>
     </li>
     <li>
-        <a href="#tab-info" data-target="#tab-info" data-toggle="tab">@lang('global.Info')</a>
+        <a href="#tab-info" data-target="#tab-info" data-toggle="tab">{{ __('Info') }}</a>
     </li>
 </ul>
 
@@ -26,41 +27,41 @@
 
         @include('core::form._title-and-slug')
         {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(trans('validation.attributes.online'), 'status') !!}
-        {!! TranslatableBootForm::textarea(trans('validation.attributes.summary'), 'summary')->rows(4) !!}
-        {!! TranslatableBootForm::textarea(trans('validation.attributes.body'), 'body')->addClass('ckeditor') !!}
+        {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+        {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
+        {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
 
     </div>
 
     {{-- Info tab --}}
     <div class="tab-pane fade in" id="tab-info">
 
-        {!! BootForm::text(trans('validation.attributes.address'), 'address') !!}
+        {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::email(trans('validation.attributes.email'), 'email') !!}
+                {!! BootForm::email(__('Email'), 'email') !!}
             </div>
             <div class="col-sm-6">
-                {!! BootForm::text(trans('validation.attributes.website'), 'website') !!}
+                {!! BootForm::text(__('Website'), 'website') !!}
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::text(trans('validation.attributes.phone'), 'phone') !!}
+                {!! BootForm::text(__('Phone'), 'phone') !!}
             </div>
             <div class="col-sm-6">
-                {!! BootForm::text(trans('validation.attributes.fax'), 'fax') !!}
+                {!! BootForm::text(__('Fax'), 'fax') !!}
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::text(trans('validation.attributes.latitude'), 'latitude') !!}
+                {!! BootForm::text(__('Latitude'), 'latitude') !!}
             </div>
             <div class="col-sm-6">
-                {!! BootForm::text(trans('validation.attributes.longitude'), 'longitude') !!}
+                {!! BootForm::text(__('Longitude'), 'longitude') !!}
             </div>
         </div>
 

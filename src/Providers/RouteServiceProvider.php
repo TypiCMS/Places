@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Places\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 
 class RouteServiceProvider extends ServiceProvider
@@ -20,23 +21,21 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
+     * @return null
      */
-    public function map(Router $router)
+    public function map()
     {
-        $router->group(['namespace' => $this->namespace], function (Router $router) {
+        Route::group(['namespace' => $this->namespace], function (Router $router) {
 
             /*
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('places')) {
                 $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (config('translatable.locales') as $lang) {
-                    if ($page->translate($lang)->status && $uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['as' => $lang.'.places', 'uses' => 'PublicController@index']);
-                        $router->get($uri.'/{slug}', $options + ['as' => $lang.'.places.slug', 'uses' => 'PublicController@show']);
+                foreach (locales() as $lang) {
+                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
+                        $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-places');
+                        $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::place');
                     }
                 }
             }
@@ -44,18 +43,16 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/places', 'AdminController@index')->name('admin::index-places');
-            $router->get('admin/places/create', 'AdminController@create')->name('admin::create-place');
-            $router->get('admin/places/{place}/edit', 'AdminController@edit')->name('admin::edit-place');
-            $router->post('admin/places', 'AdminController@store')->name('admin::store-place');
-            $router->put('admin/places/{place}', 'AdminController@update')->name('admin::update-place');
-
-            /*
-             * API routes
-             */
-            $router->get('api/places', 'ApiController@index')->name('api::index-places');
-            $router->put('api/places/{place}', 'ApiController@update')->name('api::update-place');
-            $router->delete('api/places/{place}', 'ApiController@destroy')->name('api::destroy-place');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
+                $router->get('places', 'AdminController@index')->name('admin::index-places')->middleware('can:see-all-places');
+                $router->get('places/create', 'AdminController@create')->name('admin::create-place')->middleware('can:create-place');
+                $router->get('places/{place}/edit', 'AdminController@edit')->name('admin::edit-place')->middleware('can:update-place');
+                $router->get('places/{place}/files', 'AdminController@files')->name('admin::edit-place-files')->middleware('can:update-place');
+                $router->post('places', 'AdminController@store')->name('admin::store-place')->middleware('can:create-place');
+                $router->put('places/{place}', 'AdminController@update')->name('admin::update-place')->middleware('can:update-place');
+                $router->patch('places/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-place-ajax')->middleware('can:update-place');
+                $router->delete('places/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-place')->middleware('can:delete-place');
+            });
         });
     }
 }

@@ -1,12 +1,12 @@
 @extends('core::admin.master')
 
-@section('title', trans('places::global.New'))
+@section('title', __('New place'))
 
-@section('main')
+@section('content')
 
     @include('core::admin._button-back', ['module' => 'places'])
     <h1>
-        @lang('places::global.New')
+        @lang('New place')
     </h1>
 
     {!! BootForm::open()->action(route('admin::index-places'))->multipart()->role('form') !!}
