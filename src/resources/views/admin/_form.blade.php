@@ -36,7 +36,7 @@
     {{-- Info tab --}}
     <div class="tab-pane fade in" id="tab-info">
 
-        {!! BootForm::text(__('Address'), 'address') !!}
+        {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
 
         <div class="row">
             <div class="col-sm-6">
