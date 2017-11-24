@@ -19,7 +19,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->published()->findAll();
+        $models = $this->repository->with('files')->published()->findAll();
         if (request()->wantsJson()) {
             return $models;
         }
@@ -51,7 +51,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->published()->bySlug($slug);
+        $model = $this->repository->with('files')->published()->bySlug($slug);
         if (request()->wantsJson()) {
             return $model;
         }
