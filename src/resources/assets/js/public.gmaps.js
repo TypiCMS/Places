@@ -67,7 +67,7 @@ if ($('#map').length) {
                 if (jsonData[i].phone) { coords.push('T ' + jsonData[i].phone); }
                 if (jsonData[i].fax) { coords.push('F ' + jsonData[i].fax); }
                 if (jsonData[i].email) { coords.push('<a href="mailto:' + jsonData[i].email + '">' + jsonData[i].email + '</a>'); }
-                if (jsonData[i].website) { coords.push('<a href="' + jsonData[i].website + '" target="_blank">' + data[i].website + '</a>'); }
+                if (jsonData[i].website) { coords.push('<a href="' + jsonData[i].website + '" target="_blank" rel="noopener noreferrer">' + data[i].website + '</a>'); }
                 markers[i].html += coords.join('<br>');
                 markers[i].html += '</p>';
             }
