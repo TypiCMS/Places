@@ -19,7 +19,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->published()->findAll();
+        $models = $this->repository->all();
         if (request()->wantsJson()) {
             return $models;
         }
@@ -35,7 +35,7 @@ class PublicController extends BasePublicController
      */
     public function search()
     {
-        $models = $this->repository->published()->findAll();
+        $models = $this->repository->all();
         if (request()->wantsJson()) {
             return $models;
         }
@@ -51,7 +51,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->published()->bySlug($slug);
+        $model = $this->repository->bySlug($slug);
         if (request()->wantsJson()) {
             return $model;
         }
