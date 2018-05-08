@@ -18,7 +18,7 @@
 
     <div class="table-responsive">
 
-        <table st-persist="placesTable" st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main">
+        <table st-persist="placesTable" st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-main">
             <thead>
                 <tr>
                     <th class="delete"></th>
@@ -32,13 +32,13 @@
                 <tr>
                     <td colspan="4"></td>
                     <td>
-                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="title_translated" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="address" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="address" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="website" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="website" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                 </tr>
             </thead>

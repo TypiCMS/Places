@@ -21,8 +21,8 @@
             <form method="get" role="form">
                 <label for="string" class="sr-only">@lang('Search')</label>
                 <div class="input-group input-group-lg">
-                    <input id="string" type="text" name="string" value="{{ request('string') }}" class="form-control input-sm">
-                    <span class="input-group-btn">
+                    <input id="string" type="text" name="string" value="{{ request('string') }}" class="form-control form-control-sm">
+                    <span class="input-group-append">
                         <button type="submit" class="btn btn-sm btn-primary">@lang('Search')</button>
                     </span>
                 </div>
@@ -46,7 +46,7 @@
                 <label for="address" class="sr-only">@lang('address')</label>
                 <div class="input-group input-group-lg">
                     <input class="form-control" id="address" type="text" placeholder="{{ __('Address') }}" name="address" value="">
-                    <span class="input-group-btn">
+                    <span class="input-group-append">
                         <button type="submit" class="btn btn-sm btn-primary">@lang('Search')</button>
                     </span>
                 </div>

@@ -12,29 +12,31 @@
 @include('files::admin._files-selector')
 
 <ul class="nav nav-tabs">
-    <li class="active">
-        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">{{ __('Content') }}</a>
+    <li class="nav-item">
+        <a class="nav-link active" href="#tab-main" data-target="#tab-main" data-toggle="tab">{{ __('Content') }}</a>
     </li>
-    <li>
-        <a href="#tab-info" data-target="#tab-info" data-toggle="tab">{{ __('Info') }}</a>
+    <li class="nav-item">
+        <a class="nav-link" href="#tab-info" data-target="#tab-info" data-toggle="tab">{{ __('Info') }}</a>
     </li>
 </ul>
 
 <div class="tab-content">
 
     {{-- Main tab --}}
-    <div class="tab-pane fade in active" id="tab-main">
+    <div class="tab-pane fade show active" id="tab-main">
 
         @include('core::form._title-and-slug')
-        {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+        <div class="form-group">
+            {!! TranslatableBootForm::hidden('status')->value(0) !!}
+            {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+        </div>
         {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
         {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
 
     </div>
 
     {{-- Info tab --}}
-    <div class="tab-pane fade in" id="tab-info">
+    <div class="tab-pane fade" id="tab-info">
 
         {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
 
