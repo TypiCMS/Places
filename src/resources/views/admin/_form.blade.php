@@ -1,6 +1,5 @@
 @push('js')
     <script src="{{ asset('components/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('//maps.googleapis.com/maps/api/js?key='.getenv('GMAPS_API_KEY').'&language='.config('app.locale')) }}"></script>
     <script src="{{ asset('js/admin.gmaps.js') }}"></script>
 @endpush
 
