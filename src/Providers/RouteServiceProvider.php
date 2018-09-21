@@ -58,10 +58,13 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('places', 'ApiController@index')->name('api::index-places')->middleware('can:see-all-places');
-                    $router->get('places/{place}/files', 'ApiController@files')->name('api::edit-place-files')->middleware('can:update-place');
-                    $router->patch('places/{place}', 'ApiController@updatePartial')->name('api::update-place')->middleware('can:update-place');
-                    $router->delete('places/{place}', 'ApiController@destroy')->name('api::destroy-place')->middleware('can:delete-place');
+                    $router->get('places', 'ApiController@index')->middleware('can:see-all-places');
+                    $router->patch('places/{place}', 'ApiController@updatePartial')->middleware('can:update-place');
+                    $router->delete('places/{place}', 'ApiController@destroy')->middleware('can:delete-place');
+
+                    $router->get('places/{place}/files', 'ApiController@files')->middleware('can:update-place');
+                    $router->post('places/{place}/files', 'ApiController@attachFiles')->middleware('can:update-place');
+                    $router->delete('places/{place}/files/{file}', 'ApiController@detachFile')->middleware('can:update-place');
                 });
             });
         });

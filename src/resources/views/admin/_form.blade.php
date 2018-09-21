@@ -8,7 +8,8 @@
 
 {!! BootForm::hidden('id') !!}
 
-@include('files::admin._files-selector')
+<filepicker related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></filepicker>
+<files related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></files>
 
 <ul class="nav nav-tabs">
     <li class="nav-item">
