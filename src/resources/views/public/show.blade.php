@@ -40,6 +40,8 @@
         </p>
         <p class="place-summary">{{ nl2br($model->summary) }}</p>
         <div class="place-body">{!! $model->present()->body !!}</div>
+        @include('files::public._documents')
+        @include('files::public._images')
     </div>
 
 @endsection
