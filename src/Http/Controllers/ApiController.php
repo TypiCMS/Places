@@ -19,12 +19,12 @@ class ApiController extends BaseApiController
 
     public function index(Request $request)
     {
-        $models = QueryBuilder::for(Place::class)
+        $data = QueryBuilder::for(Place::class)
             ->translated($request->input('translatable_fields'))
             ->with('files')
             ->paginate($request->input('per_page'));
 
-        return $models;
+        return $data;
     }
 
     protected function updatePartial(Place $place, Request $request)
