@@ -11,7 +11,8 @@
     translatable-fields="status,title"
     table="places"
     title="places"
-    :searchable="['id']"
+    include="images"
+    :searchable="['title']"
     :sorting="['-id']">
 
     <template slot="add-button">
