@@ -36,6 +36,8 @@ class RouteServiceProvider extends ServiceProvider
                     foreach (locales() as $lang) {
                         if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
                             $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-places');
+                            $router->get($lang.'/places-json', $options + ['uses' => 'PublicController@json']);
+                            $router->get($lang.'/places-json/{id}', $options + ['uses' => 'PublicController@jsonItem']);
                             $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::place');
                         }
                     }

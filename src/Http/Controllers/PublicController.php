@@ -20,12 +20,23 @@ class PublicController extends BasePublicController
     public function index()
     {
         $models = $this->repository->all();
-        if (request()->wantsJson()) {
-            return $models;
-        }
 
         return view('places::public.index')
             ->with(compact('models'));
+    }
+
+    public function json()
+    {
+        return $this->repository->all()->map(function($item){
+            $item->url = $item->uri();
+
+            return $item;
+        });
+    }
+
+    public function jsonItem($id)
+    {
+        return $this->repository->find($id);
     }
 
     /**
