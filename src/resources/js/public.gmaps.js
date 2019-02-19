@@ -33,10 +33,6 @@ if ($('#map').length) {
             streetViewControl: false,
             zoom: 12
         },
-        markerShape = {
-            coord: [0, 0, 27, 0, 27, 37, 0, 37],
-            type: 'poly'
-        },
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     google.maps.event.addListener(map, 'click', function () {
@@ -156,17 +152,6 @@ if ($('#map').length) {
 
 }
 
-function getMarkerIcon(shape) {
-    'use strict';
-    if (!shape) {
-        shape = '/img/marker.png';
-    }
-    return new google.maps.MarkerImage(shape,
-        new google.maps.Size(34, 44),
-        new google.maps.Point(0, 0),
-        new google.maps.Point(14, 36));
-}
-
 function addMarker(animation) {
     'use strict';
 
@@ -190,8 +175,13 @@ function addMarker(animation) {
     }
 
     markersPoints[iterator] = new google.maps.Marker({
-        // icon: getMarkerIcon('/img/marker.png'),
-        shape: markerShape,
+        // icon: {
+        //     url: '/img/marker.png',
+        //     size: new google.maps.Size(36, 52),
+        //     origin: new google.maps.Point(0, 0),
+        //     anchor: new google.maps.Point(18, 48),
+        //     scaledSize: new google.maps.Size(36, 52)
+        // },
         position: latLng,
         map: map,
         draggable: false,
