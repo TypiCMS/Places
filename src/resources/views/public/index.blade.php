@@ -18,17 +18,6 @@
 
         <div class="col-sm-4">
 
-            <h2>@lang('Filter')</h2>
-            <form method="get" role="form">
-                <label for="string" class="sr-only">@lang('Search')</label>
-                <div class="input-group input-group-lg">
-                    <input id="string" type="text" name="string" value="{{ request('string') }}" class="form-control form-control-sm">
-                    <span class="input-group-append">
-                        <button type="submit" class="btn btn-sm btn-primary">@lang('Search')</button>
-                    </span>
-                </div>
-            </form>
-
             <h3>
             {{ $models->count() }} @lang('Places')
             @if (request('string')) @lang('for')

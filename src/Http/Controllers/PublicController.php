@@ -25,6 +25,19 @@ class PublicController extends BasePublicController
             ->with(compact('models'));
     }
 
+    /**
+     * Show place.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show($slug)
+    {
+        $model = $this->repository->bySlug($slug);
+
+        return view('places::public.show')
+            ->with(compact('model'));
+    }
+
     public function json()
     {
         return $this->repository->all()->map(function($item){
@@ -37,37 +50,5 @@ class PublicController extends BasePublicController
     public function jsonItem($id)
     {
         return $this->repository->find($id);
-    }
-
-    /**
-     * Search models.
-     *
-     * @return \Illuminate\Support\Facades\Response
-     */
-    public function search()
-    {
-        $models = $this->repository->all();
-        if (request()->wantsJson()) {
-            return $models;
-        }
-
-        return view('places::public.results')
-            ->with(compact('models'));
-    }
-
-    /**
-     * Show place.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show($slug)
-    {
-        $model = $this->repository->bySlug($slug);
-        if (request()->wantsJson()) {
-            return $model;
-        }
-
-        return view('places::public.show')
-            ->with(compact('model'));
     }
 }
