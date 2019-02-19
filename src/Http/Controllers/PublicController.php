@@ -40,7 +40,7 @@ class PublicController extends BasePublicController
 
     public function json()
     {
-        return $this->repository->all()->map(function($item){
+        return $this->repository->all()->map(function ($item) {
             $item->url = $item->uri();
 
             return $item;
