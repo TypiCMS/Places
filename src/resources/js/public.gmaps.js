@@ -100,7 +100,6 @@ if ($('#map').length) {
                         lng = p.lng();
                     setDistancesForMarkers(lat, lng);
                 }
-                console.log(status);
             }
         );
 
@@ -238,9 +237,7 @@ function openMarkerId(id) {
     'use strict';
     var i = 0,
         latLng;
-    // console.log('click : '+id );
     for (i = markers.length - 1; i >= 0; i -= 1) {
-        // console.log(markers[i].id );
         if (markers[i].id === id) {
             latLng = new google.maps.LatLng(markersPos[i].lat(), markersPos[i].lng());
             map.panTo(latLng);
