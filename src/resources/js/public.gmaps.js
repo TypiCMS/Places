@@ -59,8 +59,9 @@ if ($('#map').length) {
                 coords = [];
                 markers[i].id = jsonData[i].id;
                 markers[i].shape = jsonData[i].shape;
-                markers[i].html = '<h4>' + jsonData[i].title[locale] + '</h4>';
-                markers[i].html += '<p>';
+                markers[i].html = '<div class="info-window-content">';
+                markers[i].html += '<h4 class="info-window-title">' + jsonData[i].title[locale] + '</h4>';
+                markers[i].html += '<p class="info-window-detail">';
                 if (jsonData[i].address) { coords.push(jsonData[i].address); }
                 if (jsonData[i].phone) { coords.push('T ' + jsonData[i].phone); }
                 if (jsonData[i].fax) { coords.push('F ' + jsonData[i].fax); }
@@ -68,6 +69,7 @@ if ($('#map').length) {
                 if (jsonData[i].website) { coords.push('<a href="' + jsonData[i].website + '" target="_blank" rel="noopener noreferrer">' + data[i].website + '</a>'); }
                 markers[i].html += coords.join('<br>');
                 markers[i].html += '</p>';
+                markers[i].html += '</div>';
             }
         }
         // console.log(markers);
