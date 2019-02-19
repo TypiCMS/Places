@@ -40,12 +40,14 @@ if ($('#map').length) {
         infoWindow.close();
     });
 
-    $.getJSON(location.search, function (data) {
+    var locale = $('html').attr('lang'),
+        apiUrl = $('#map').data('url');
+
+    jQuery.getJSON(apiUrl + location.search, function (data) {
         'use strict';
         var i = 0,
-            coords = [],
-            locale = $('html').attr('lang');
-        if (!$.isArray(data)) {
+            coords = [];
+        if (!jQuery.isArray(data)) {
             jsonData = [data];
         } else {
             jsonData = data;
@@ -91,11 +93,14 @@ if ($('#map').length) {
             {
                 address: address
             },
-            function (results_array) {
-                var p = results_array[0].geometry.location,
-                    lat = p.lat(),
-                    lng = p.lng();
-                setDistancesForMarkers(lat, lng);
+            function (results) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var p = results[0].geometry.location,
+                        lat = p.lat(),
+                        lng = p.lng();
+                    setDistancesForMarkers(lat, lng);
+                }
+                console.log(status);
             }
         );
 

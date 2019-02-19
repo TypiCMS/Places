@@ -16,7 +16,7 @@
     <div class="place">
         <h1 class="place-title">{{ $model->title }}</h1>
         @if ($model->latitude && $model->longitude)
-            <div class="place-map" id="map" style="height: 500px"></div>
+        <div class="place-map" id="map" data-url="/{{ $lang }}/places-json/{{ $model->id }}" style="height: 500px"></div>
         @endif
         {!! $model->present()->thumb(540, 400) !!}
         <p class="place-contact" id="place" data-id="{{ $model->id }}">

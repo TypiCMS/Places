@@ -53,7 +53,7 @@
                 </div>
             </form>
 
-            <div id="map" class="map"></div>
+            <div id="map" class="map" data-url="/{{ $lang }}/places-json"></div>
         </div>
 
     </div>
