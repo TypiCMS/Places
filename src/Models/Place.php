@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\Places\Models;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Traits\HasFiles;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Modules\Places\Presenters\ModulePresenter;
@@ -20,6 +21,8 @@ class Place extends Base
 
     protected $guarded = ['id', 'exit'];
 
+    protected $appends = ['thumb'];
+
     public $translatable = [
         'title',
         'slug',
@@ -28,18 +31,6 @@ class Place extends Base
         'status',
     ];
 
-    protected $appends = ['image', 'thumb'];
-
-    /**
-     * Append image attribute.
-     *
-     * @return string
-     */
-    public function getImageAttribute()
-    {
-        return $this->images->first();
-    }
-
     /**
      * Append thumb attribute.
      *
@@ -47,6 +38,16 @@ class Place extends Base
      */
     public function getThumbAttribute()
     {
-        return $this->present()->thumbSrc(null, 22);
+        return $this->present()->thumbSrc(null, 44);
+    }
+
+    /**
+     * This model belongs to one image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_id');
     }
 }
