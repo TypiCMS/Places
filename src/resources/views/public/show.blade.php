@@ -3,7 +3,7 @@
 @section('title', $model->title.' – '.__('Places').' – '.$websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('image', $model->present()->thumbUrl())
+@section('image', $model->present()->image())
 @section('bodyClass', 'body-places body-place-'.$model->id.' body-page body-page-'.$page->id)
 
 @push('js')
@@ -18,7 +18,7 @@
         @if ($model->latitude && $model->longitude)
         <div class="place-map" id="map" data-url="/{{ $lang }}/places-json/{{ $model->id }}" style="height: 500px"></div>
         @endif
-        {!! $model->present()->thumb(540, 400) !!}
+        <img src="{!! $model->present()->image(540, 400) !!}" alt="">
         <p class="place-contact" id="place" data-id="{{ $model->id }}">
             @if ($model->address)
                 {{ $model->address }}<br>
