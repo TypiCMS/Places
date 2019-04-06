@@ -13,6 +13,8 @@
 
 @section('content')
 
+    @include('places::public._json-ld', ['place' => $model])
+
     <div class="place">
         <h1 class="place-title">{{ $model->title }}</h1>
         @if ($model->latitude && $model->longitude)
