@@ -14,6 +14,8 @@
     @include('files::public._documents', ['model' => $page])
     @include('files::public._images', ['model' => $page])
 
+    @include('places::public._itemlist-json-ld', ['items' => $models])
+
     <div class="row">
 
         <div class="col-sm-4">
