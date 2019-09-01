@@ -3,15 +3,9 @@
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(EloquentPlace $place)
-    {
-        parent::__construct($place);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +13,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->all();
+        $models = $this->model->all();
 
         return view('places::public.index')
             ->with(compact('models'));
@@ -32,7 +26,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->bySlug($slug);
+        $model = $this->model->bySlug($slug);
 
         return view('places::public.show')
             ->with(compact('model'));
@@ -40,7 +34,7 @@ class PublicController extends BasePublicController
 
     public function json()
     {
-        return $this->repository->all()->map(function ($item) {
+        return $this->model->all()->map(function ($item) {
             $item->url = $item->uri();
 
             return $item;
@@ -49,6 +43,6 @@ class PublicController extends BasePublicController
 
     public function jsonItem($id)
     {
-        return $this->repository->find($id);
+        return $this->model->find($id);
     }
 }

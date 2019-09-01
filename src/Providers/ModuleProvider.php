@@ -9,7 +9,6 @@ use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Places\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Places\Facades\Places;
 use TypiCMS\Modules\Places\Models\Place;
-use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -67,6 +66,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        $app->bind('Places', EloquentPlace::class);
+        $app->bind('Places', Place::class);
     }
 }

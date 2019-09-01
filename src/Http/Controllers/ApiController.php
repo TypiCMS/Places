@@ -9,15 +9,9 @@ use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Places\Models\Place;
-use TypiCMS\Modules\Places\Repositories\EloquentPlace;
 
 class ApiController extends BaseApiController
 {
-    public function __construct(EloquentPlace $place)
-    {
-        parent::__construct($place);
-    }
-
     public function index(Request $request)
     {
         $data = QueryBuilder::for(Place::class)
@@ -49,7 +43,7 @@ class ApiController extends BaseApiController
         }
         $saved = $place->save();
 
-        $this->repository->forgetCache();
+        $this->model->forgetCache();
 
         return response()->json([
             'error' => !$saved,
@@ -58,7 +52,7 @@ class ApiController extends BaseApiController
 
     public function destroy(Place $place)
     {
-        $deleted = $this->repository->delete($place);
+        $deleted = $place->delete();
 
         return response()->json([
             'error' => !$deleted,
@@ -72,11 +66,11 @@ class ApiController extends BaseApiController
 
     public function attachFiles(Place $place, Request $request)
     {
-        return $this->repository->attachFiles($place, $request);
+        return $this->model->attachFiles($place, $request);
     }
 
     public function detachFile(Place $place, File $file)
     {
-        return $this->repository->detachFile($place, $file);
+        return $this->model->detachFile($place, $file);
     }
 }
