@@ -2,83 +2,49 @@
 
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Places\Http\Requests\FormRequest;
 use TypiCMS\Modules\Places\Models\Place;
 
 class AdminController extends BaseAdminController
 {
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
         return view('places::admin.index');
     }
 
-    /**
-     * Create form for a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(): View
     {
-        $model = new;
+        $model = new Place;
 
         return view('places::admin.create')
             ->with(compact('model'));
     }
 
-    /**
-     * Edit form for the specified resource.
-     *
-     * @param \TypiCMS\Modules\Places\Models\Place $place
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(Place $place)
+    public function edit(Place $place): View
     {
         return view('places::admin.edit')
             ->with(['model' => $place]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \TypiCMS\Modules\Places\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(FormRequest $request)
+    public function store(FormRequest $request): RedirectResponse
     {
-        $model = ::create($request->all());
+        $model = Place::create($request->all());
 
         return $this->redirect($request, $model);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \TypiCMS\Modules\Places\Models\Place              $place
-     * @param \TypiCMS\Modules\Places\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Place $place, FormRequest $request)
+    public function update(Place $place, FormRequest $request): RedirectResponse
     {
-        ::update($request->id, $request->all());
+        $place->update($request->all());
 
         return $this->redirect($request, $place);
     }
 
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function files(Place $place)
+    public function files(Place $place): JsonResponse
     {
         $data = [
             'models' => $place->files,

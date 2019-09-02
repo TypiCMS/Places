@@ -2,7 +2,9 @@
 
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
@@ -12,7 +14,7 @@ use TypiCMS\Modules\Places\Models\Place;
 
 class ApiController extends BaseApiController
 {
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         $data = QueryBuilder::for(Place::class)
             ->allowedFilters([
@@ -25,7 +27,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Place $place, Request $request)
+    protected function updatePartial(Place $place, Request $request): JsonResponse
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -43,14 +45,12 @@ class ApiController extends BaseApiController
         }
         $saved = $place->save();
 
-        $this->model->forgetCache();
-
         return response()->json([
             'error' => !$saved,
         ]);
     }
 
-    public function destroy(Place $place)
+    public function destroy(Place $place): JsonResponse
     {
         $deleted = $place->delete();
 
@@ -59,18 +59,18 @@ class ApiController extends BaseApiController
         ]);
     }
 
-    public function files(Place $place)
+    public function files(Place $place): JsonResponse
     {
         return $place->files;
     }
 
-    public function attachFiles(Place $place, Request $request)
+    public function attachFiles(Place $place, Request $request): JsonResponse
     {
-        return $this->model->attachFiles($place, $request);
+        return $place->attachFiles($request);
     }
 
-    public function detachFile(Place $place, File $file)
+    public function detachFile(Place $place, File $file): array
     {
-        return $this->model->detachFile($place, $file);
+        return $place->detachFile($file);
     }
 }
