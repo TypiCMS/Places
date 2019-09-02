@@ -2,16 +2,14 @@
 
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\Places\Models\Place;
 
 class PublicController extends BasePublicController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
         $models = $this->model->all();
 
@@ -19,30 +17,25 @@ class PublicController extends BasePublicController
             ->with(compact('models'));
     }
 
-    /**
-     * Show place.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show($slug)
+    public function show($slug): View
     {
-        $model = $this->model->bySlug($slug);
+        $model = Place::where(column('slug'), $slug)->firstOrFails();
 
         return view('places::public.show')
             ->with(compact('model'));
     }
 
-    public function json()
+    public function json(): JsonResponse
     {
-        return $this->model->all()->map(function ($item) {
+        return Place::get()->map(function ($item) {
             $item->url = $item->uri();
 
             return $item;
         });
     }
 
-    public function jsonItem($id)
+    public function jsonItem($id): JsonResponse
     {
-        return $this->model->find($id);
+        return Place::find($id);
     }
 }
