@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -59,7 +60,7 @@ class ApiController extends BaseApiController
         ]);
     }
 
-    public function files(Place $place): JsonResponse
+    public function files(Place $place): Collection
     {
         return $place->files;
     }
