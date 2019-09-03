@@ -11,7 +11,7 @@ class PublicController extends BasePublicController
 {
     public function index(): View
     {
-        $models = $this->model->all();
+        $models = Place::published()->get();
 
         return view('places::public.index')
             ->with(compact('models'));
@@ -19,7 +19,7 @@ class PublicController extends BasePublicController
 
     public function show($slug): View
     {
-        $model = Place::where(column('slug'), $slug)->firstOrFails();
+        $model = Place::published()->bySlug($slug)->firstOrFail();
 
         return view('places::public.show')
             ->with(compact('model'));
@@ -27,7 +27,7 @@ class PublicController extends BasePublicController
 
     public function json(): JsonResponse
     {
-        return Place::get()->map(function ($item) {
+        return Place::published()->get()->map(function ($item) {
             $item->url = $item->uri();
 
             return $item;
@@ -36,6 +36,6 @@ class PublicController extends BasePublicController
 
     public function jsonItem($id): JsonResponse
     {
-        return Place::find($id);
+        return Place::published()->find($id);
     }
 }
