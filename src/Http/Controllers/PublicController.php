@@ -19,7 +19,7 @@ class PublicController extends BasePublicController
 
     public function show($slug): View
     {
-        $model = Place::published()->bySlug($slug)->firstOrFail();
+        $model = Place::published()->whereSlugIs($slug)->firstOrFail();
 
         return view('places::public.show')
             ->with(compact('model'));
