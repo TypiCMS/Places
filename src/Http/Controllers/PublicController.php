@@ -27,15 +27,20 @@ class PublicController extends BasePublicController
 
     public function json(): JsonResponse
     {
-        return Place::published()->get()->map(function ($item) {
+        $places = Place::published()->get()->map(function ($item) {
             $item->url = $item->uri();
 
             return $item;
         });
+
+        return response()->json($places);
+
     }
 
     public function jsonItem($id): JsonResponse
     {
-        return Place::published()->find($id);
+        $place = Place::published()->find($id);
+
+        return response()->json($place);
     }
 }
