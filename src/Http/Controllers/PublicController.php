@@ -34,7 +34,6 @@ class PublicController extends BasePublicController
         });
 
         return response()->json($places);
-
     }
 
     public function jsonItem($id): JsonResponse
