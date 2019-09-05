@@ -11,6 +11,7 @@
     table="places"
     title="places"
     include="image"
+    appends="thumb"
     :searchable="['title']"
     :sorting="['-id']">
 
