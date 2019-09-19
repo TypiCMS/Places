@@ -11,7 +11,6 @@ var map = {
         center: { lat: 50.85, lng: 4.36 },
         mapTypeControl: false,
         streetViewControl: false,
-        maxZoom: 8,
         styles: [
             {
                 stylers: [{ visibility: 'simplified' }, { saturation: -50 }, { weight: 3 }],
