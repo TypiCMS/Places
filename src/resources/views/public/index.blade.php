@@ -17,37 +17,8 @@
 
     @include('places::public._itemlist-json-ld', ['items' => $models])
 
-    <div class="row">
+    <div id="map" class="map" data-url="/{{ $lang }}/places-json" data-button-label="@lang('Read more')"></div>
 
-        <div class="col-sm-4">
-
-            <h3>
-            {{ $models->count() }} @lang('Places')
-            @if (request('string')) @lang('for')
-                “{{ request('string') }}”
-            @endif
-            </h3>
-
-            @includeWhen($models->count() > 0, 'places::public._list', ['items' => $models])
-
-        </div>
-
-        <div class="col-sm-8">
-
-            <h2>@lang('Find nearest')</h2>
-            <form id="search-nearest" class="hides" method="get" role="form">
-                <label for="address" class="sr-only">@lang('address')</label>
-                <div class="input-group input-group-lg">
-                    <input class="form-control" id="address" type="text" placeholder="{{ __('Address') }}" name="address" value="">
-                    <span class="input-group-append">
-                        <button type="submit" class="btn btn-sm btn-primary">@lang('Search')</button>
-                    </span>
-                </div>
-            </form>
-
-            <div id="map" class="map" data-url="/{{ $lang }}/places-json"></div>
-        </div>
-
-    </div>
+    @includeWhen($models->count() > 0, 'places::public._list', ['items' => $models])
 
 @endsection
