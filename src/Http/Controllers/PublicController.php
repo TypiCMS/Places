@@ -11,7 +11,9 @@ class PublicController extends BasePublicController
 {
     public function index(): View
     {
-        $models = Place::published()->get();
+        $models = Place::published()
+            ->order()
+            ->get();
 
         return view('places::public.index')
             ->with(compact('models'));
