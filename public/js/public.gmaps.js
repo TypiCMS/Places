@@ -65,14 +65,13 @@ var map = {
                 }
                 if (self.places.length > 0) {
                     self.setMarkers();
-                    self.autoCenter();
                 }
             }
         };
         request.send();
     },
     setMarkers: function() {
-        var self = this;
+        var bounds = new google.maps.LatLngBounds();
         for (var i = this.places.length - 1; i >= 0; i--) {
             if (this.places[i].longitude) {
                 this.places[i].marker = new google.maps.Marker({
@@ -85,12 +84,15 @@ var map = {
                     title: this.places[i]['title'][this.locale],
                     content: this.buildContent(this.places[i]),
                 });
+                bounds.extend(this.places[i].marker.position);
+                var self = this;
                 this.places[i].marker.addListener('spider_click', function() {
                     self.onMarkerClick(this);
                 });
                 this.oms.trackMarker(this.places[i].marker);
             }
         }
+        this.map.fitBounds(bounds);
     },
     onMarkerClick: function(marker) {
         this.infoWindow.setContent(marker.content);
@@ -119,13 +121,6 @@ var map = {
         data += '</div>';
 
         return data;
-    },
-    autoCenter: function() {
-        var bounds = new google.maps.LatLngBounds();
-        for (var i = this.places.length - 1; i >= 0; i--) {
-            bounds.extend(this.places[i].marker.position);
-        }
-        this.map.fitBounds(bounds);
     },
 };
 if (document.getElementById('map') !== null) {
