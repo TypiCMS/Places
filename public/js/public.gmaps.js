@@ -49,6 +49,11 @@ var map = {
         this.infoWindow = new google.maps.InfoWindow({
             maxWidth: 260,
         });
+        google.maps.event.addListenerOnce(this.map, 'bounds_changed', function(event) {
+            if (this.getZoom() > 9) {
+                this.setZoom(9);
+            }
+        });
         this.fetchData();
     },
     fetchData: function() {
