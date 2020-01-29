@@ -50,7 +50,7 @@ var map = {
         this.infoWindow = new google.maps.InfoWindow({
             maxWidth: 260,
         });
-        google.maps.event.addListenerOnce(this.map, 'bounds_changed', function() {
+        google.maps.event.addListenerOnce(this.map, 'idle', function() {
             if (self.map.getZoom() > 5) {
                 self.map.setZoom(5);
             }
