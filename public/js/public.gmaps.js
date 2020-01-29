@@ -9,6 +9,7 @@ var map = {
     options: {
         mapTypeId: 'roadmap',
         center: { lat: 50.85, lng: 4.36 },
+        zoom: 5,
         mapTypeControl: false,
         streetViewControl: false,
         styles: [
@@ -40,7 +41,6 @@ var map = {
         ],
     },
     init: function() {
-        var self = this;
         this.map = new google.maps.Map(document.getElementById('map'), this.options);
         this.oms = new OverlappingMarkerSpiderfier(this.map, {
             markersWontMove: true,
@@ -50,9 +50,9 @@ var map = {
         this.infoWindow = new google.maps.InfoWindow({
             maxWidth: 260,
         });
-        google.maps.event.addListenerOnce(this.map, 'idle', function() {
-            if (self.map.getZoom() > 5) {
-                self.map.setZoom(5);
+        google.maps.event.addListenerOnce(this.map, 'bounds_changed', function() {
+            if (this.getZoom() > 5) {
+                this.setZoom(5);
             }
         });
         this.fetchData();
@@ -98,7 +98,11 @@ var map = {
                 this.oms.trackMarker(this.places[i].marker);
             }
         }
-        this.map.fitBounds(bounds);
+        if (this.places.length > 1) {
+            this.map.fitBounds(bounds);
+        } else if (this.places.length === 1) {
+            this.map.setCenter(new google.maps.LatLng(this.places[0].latitude, this.places[0].longitude));
+        }
     },
     onMarkerClick: function(marker) {
         this.infoWindow.setContent(marker.content);
