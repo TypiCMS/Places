@@ -40,6 +40,7 @@ var map = {
         ],
     },
     init: function() {
+        var self = this;
         this.map = new google.maps.Map(document.getElementById('map'), this.options);
         this.oms = new OverlappingMarkerSpiderfier(this.map, {
             markersWontMove: true,
@@ -49,9 +50,9 @@ var map = {
         this.infoWindow = new google.maps.InfoWindow({
             maxWidth: 260,
         });
-        google.maps.event.addListenerOnce(this.map, 'bounds_changed', function(event) {
-            if (this.getZoom() > 9) {
-                this.setZoom(9);
+        google.maps.event.addListenerOnce(this.map, 'bounds_changed', function() {
+            if (self.map.getZoom() > 5) {
+                self.map.setZoom(5);
             }
         });
         this.fetchData();
