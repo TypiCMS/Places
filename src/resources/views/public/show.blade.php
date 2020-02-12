@@ -21,7 +21,9 @@
         @if ($model->latitude && $model->longitude)
         <div class="place-map" id="map" data-url="/{{ $lang }}/places-json/{{ $model->id }}" style="height: 500px"></div>
         @endif
-        <img class="place-image" src="{!! $model->present()->image(540, 400) !!}" alt="">
+        @isset($model->image)
+        <img class="place-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
+        @endisset
         <p class="place-contact" id="place" data-id="{{ $model->id }}">
             @if ($model->address)
                 {{ $model->address }}<br>
