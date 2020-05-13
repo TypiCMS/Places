@@ -101,8 +101,13 @@ var map = {
         if (this.places.length > 1) {
             this.map.fitBounds(bounds);
         } else if (this.places.length === 1) {
-            this.map.setCenter(new google.maps.LatLng(this.places[0].latitude, this.places[0].longitude));
+            this.openMarker(this.places[0].marker);
         }
+    },
+    openMarker: function(marker) {
+        this.map.panTo(marker.position);
+        this.map.setZoom(13);
+        google.maps.event.trigger(marker, 'click');
     },
     onMarkerClick: function(marker) {
         this.infoWindow.setContent(marker.content);
