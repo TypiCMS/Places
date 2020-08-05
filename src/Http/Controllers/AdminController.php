@@ -32,14 +32,16 @@ class AdminController extends BaseAdminController
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $model = Place::create($request->all());
+        $data = $request->except('file_ids');
+        $model = Place::create($data);
 
         return $this->redirect($request, $model);
     }
 
     public function update(Place $place, FormRequest $request): RedirectResponse
     {
-        $place->update($request->all());
+        $data = $request->except('file_ids');
+        $place->update($data);
 
         return $this->redirect($request, $place);
     }

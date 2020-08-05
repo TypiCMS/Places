@@ -11,7 +11,7 @@
 
 <file-manager related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></file-manager>
 <file-field type="image" field="image_id" data="{{ $model->image }}"></file-field>
-<files-field related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></files-field>
+<files-field :init-files="{{ $model->files }}"></files-field>
 
 <ul class="nav nav-tabs">
     <li class="nav-item">
