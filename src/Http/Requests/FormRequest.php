@@ -16,7 +16,7 @@ class FormRequest extends AbstractFormRequest
             'summary.*' => 'nullable',
             'body.*' => 'nullable',
             'address' => 'nullable',
-            'email' => 'nullable|email|max:255',
+            'email' => 'nullable|email:rfc,dns|max:255',
             'website' => 'nullable|url|max:255',
             'phone' => 'nullable|max:255',
             'fax' => 'nullable|max:255',
