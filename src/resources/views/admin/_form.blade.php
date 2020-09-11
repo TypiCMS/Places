@@ -47,7 +47,7 @@
                 {!! BootForm::email(__('Email'), 'email') !!}
             </div>
             <div class="col-sm-6">
-                {!! BootForm::text(__('Website'), 'website') !!}
+                {!! BootForm::text(__('Website'), 'website')->placeholder('https://') !!}
             </div>
         </div>
 
