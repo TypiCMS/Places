@@ -32,16 +32,14 @@ class AdminController extends BaseAdminController
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $model = Place::create($data);
+        $place = Place::create($request->validated());
 
-        return $this->redirect($request, $model);
+        return $this->redirect($request, $place);
     }
 
     public function update(Place $place, FormRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $place->update($data);
+        $place->update($request->validated());
 
         return $this->redirect($request, $place);
     }
