@@ -14,10 +14,17 @@
 
 @section('content')
 
-    @include('places::public._json-ld', ['place' => $model])
-
-    <div class="place">
-        <h1 class="place-title">{{ $model->title }}</h1>
+<article class="place">
+    <header class="place-header">
+        <div class="place-header-container">
+            <div class="place-header-navigator">
+                @include('core::public._btn-prev-next', ['module' => 'Places', 'model' => $model])
+            </div>
+            <h1 class="place-title">{{ $model->title }}</h1>
+        </div>
+    </header>
+    <div class="place-body">
+        @include('places::public._json-ld', ['place' => $model])
         @empty(!$model->latitude, $model->longitude)
         <div class="place-map" id="map" data-url="/{{ $lang }}/places-json/{{ $model->id }}" style="height: 500px"></div>
         @endempty
@@ -50,10 +57,11 @@
         <p class="place-summary">{!! nl2br($model->summary) !!}</p>
         @endempty
         @empty(!$model->body)
-        <div class="place-body">{!! $model->present()->body !!}</div>
+        <div class="rich-content">{!! $model->present()->body !!}</div>
         @endempty
         @include('files::public._documents')
         @include('files::public._images')
     </div>
+</article>
 
 @endsection
