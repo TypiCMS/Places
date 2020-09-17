@@ -11,7 +11,7 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        if (Gate::denies('see-all-places')) {
+        if (Gate::denies('read places')) {
             return;
         }
         $view->sidebar->group(__('Content'), function (SidebarGroup $group) {

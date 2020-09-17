@@ -2,9 +2,9 @@
 
 return [
     'places' => [
-        'see-all-places' => 'View list',
-        'create-place' => 'Create',
-        'update-place' => 'Edit',
-        'delete-place' => 'Delete',
+        'read places' => 'Read',
+        'create places' => 'Create',
+        'update places' => 'Edit',
+        'delete places' => 'Delete',
     ],
 ];
