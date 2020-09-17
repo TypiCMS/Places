@@ -18,7 +18,7 @@
     <header class="place-header">
         <div class="place-header-container">
             <div class="place-header-navigator">
-                @include('core::public._btn-prev-next', ['module' => 'Places', 'model' => $model])
+                @include('core::public._items-navigator', ['module' => 'Places', 'model' => $model])
             </div>
             <h1 class="place-title">{{ $model->title }}</h1>
         </div>
