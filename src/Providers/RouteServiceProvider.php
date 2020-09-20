@@ -17,45 +17,41 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        Route::namespace($this->namespace)->group(function (Router $router) {
-            /*
-             * Front office routes
-             */
-            if ($page = TypiCMS::getPageLinkedToModule('places')) {
-                $middleware = $page->private ? ['public', 'auth'] : ['public'];
-                $router->middleware($middleware)->group(function (Router $router) use ($page) {
-                    foreach (locales() as $lang) {
-                        if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                            $router->get($uri, [PublicController::class, 'index'])->name($lang.'::index-places');
-                            $router->get($lang.'/places-json', [PublicController::class, 'json']);
-                            $router->get($lang.'/places-json/{id}', [PublicController::class, 'jsonItem']);
-                            $router->get($uri.'/{slug}', [PublicController::class, 'show'])->name($lang.'::place');
-                        }
-                    }
-                });
+        /*
+         * Front office routes
+         */
+        if ($page = TypiCMS::getPageLinkedToModule('places')) {
+            $middleware = $page->private ? ['public', 'auth'] : ['public'];
+            foreach (locales() as $lang) {
+                if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
+                    Route::middleware($middleware)->prefix($uri)->name($lang.'::')->group(function (Router $router) {
+                        $router->get('/', [PublicController::class, 'index'])->name('index-places');
+                        $router->get('places-json', [PublicController::class, 'json']);
+                        $router->get('places-json/{id}', [PublicController::class, 'jsonItem']);
+                        $router->get('{slug}', [PublicController::class, 'show'])->name('place');
+                    });
+                }
             }
+        }
 
-            /*
-             * Admin routes
-             */
-            $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
-                $router->get('places', [AdminController::class, 'index'])->name('admin::index-places')->middleware('can:read places');
-                $router->get('places/create', [AdminController::class, 'create'])->name('admin::create-place')->middleware('can:create places');
-                $router->get('places/{place}/edit', [AdminController::class, 'edit'])->name('admin::edit-place')->middleware('can:read places');
-                $router->post('places', [AdminController::class, 'store'])->name('admin::store-place')->middleware('can:create places');
-                $router->put('places/{place}', [AdminController::class, 'update'])->name('admin::update-place')->middleware('can:update places');
-            });
+        /*
+         * Admin routes
+         */
+        Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
+            $router->get('places', [AdminController::class, 'index'])->name('index-places')->middleware('can:read places');
+            $router->get('places/create', [AdminController::class, 'create'])->name('create-place')->middleware('can:create places');
+            $router->get('places/{place}/edit', [AdminController::class, 'edit'])->name('edit-place')->middleware('can:read places');
+            $router->post('places', [AdminController::class, 'store'])->name('store-place')->middleware('can:create places');
+            $router->put('places/{place}', [AdminController::class, 'update'])->name('update-place')->middleware('can:update places');
+        });
 
-            /*
-             * API routes
-             */
-            $router->middleware('api')->prefix('api')->group(function (Router $router) {
-                $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('places', [ApiController::class, 'index'])->middleware('can:read places');
-                    $router->patch('places/{place}', [ApiController::class, 'updatePartial'])->middleware('can:update places');
-                    $router->delete('places/{place}', [ApiController::class, 'destroy'])->middleware('can:delete places');
-                });
-            });
+        /*
+         * API routes
+         */
+        Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
+            $router->get('places', [ApiController::class, 'index'])->middleware('can:read places');
+            $router->patch('places/{place}', [ApiController::class, 'updatePartial'])->middleware('can:update places');
+            $router->delete('places/{place}', [ApiController::class, 'destroy'])->middleware('can:delete places');
         });
     }
 }
