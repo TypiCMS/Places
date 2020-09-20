@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
                 $router->get('places', [AdminController::class, 'index'])->name('admin::index-places')->middleware('can:read places');
                 $router->get('places/create', [AdminController::class, 'create'])->name('admin::create-place')->middleware('can:create places');
-                $router->get('places/{place}/edit', [AdminController::class, 'edit'])->name('admin::edit-place')->middleware('can:update places');
+                $router->get('places/{place}/edit', [AdminController::class, 'edit'])->name('admin::edit-place')->middleware('can:read places');
                 $router->post('places', [AdminController::class, 'store'])->name('admin::store-place')->middleware('can:create places');
                 $router->put('places/{place}', [AdminController::class, 'update'])->name('admin::update-place')->middleware('can:update places');
             });
