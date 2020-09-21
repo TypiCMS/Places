@@ -42,7 +42,7 @@
 
         {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
 
-        <div class="row">
+        <div class="form-row">
             <div class="col-sm-6">
                 {!! BootForm::email(__('Email'), 'email') !!}
             </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="form-row">
             <div class="col-sm-6">
                 {!! BootForm::text(__('Phone'), 'phone') !!}
             </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="form-row">
             <div class="col-sm-6">
                 {!! BootForm::text(__('Latitude'), 'latitude') !!}
             </div>

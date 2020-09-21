@@ -12,6 +12,7 @@
     title="places"
     include="image"
     appends="thumb"
+    :exportable="true"
     :searchable="['title']"
     :sorting="['-id']">
 

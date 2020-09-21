@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
          */
         Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
             $router->get('places', [AdminController::class, 'index'])->name('index-places')->middleware('can:read places');
+            $router->get('places/export', [AdminController::class, 'export'])->name('admin::export-places')->middleware('can:read places');
             $router->get('places/create', [AdminController::class, 'create'])->name('create-place')->middleware('can:create places');
             $router->get('places/{place}/edit', [AdminController::class, 'edit'])->name('edit-place')->middleware('can:read places');
             $router->post('places', [AdminController::class, 'store'])->name('store-place')->middleware('can:create places');
