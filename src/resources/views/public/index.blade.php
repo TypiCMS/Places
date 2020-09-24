@@ -8,17 +8,29 @@
     <script src="{{ asset('js/public.gmaps.js') }}"></script>
 @endpush
 
-@section('content')
+@section('page')
 
-    <div class="rich-content">{!! $page->present()->body !!}</div>
+<div class="page-body">
 
-    @include('files::public._documents', ['model' => $page])
-    @include('files::public._images', ['model' => $page])
+    <div class="page-body-container">
 
-    @include('places::public._itemlist-json-ld', ['items' => $models])
+        <div class="rich-content">{!! $page->present()->body !!}</div>
+
+        @include('files::public._documents', ['model' => $page])
+        @include('files::public._images', ['model' => $page])
+
+        @include('places::public._itemlist-json-ld', ['items' => $models])
+
+    </div>
 
     <div id="map" class="map" data-url="/{{ $lang }}/places-json" data-button-label="@lang('Read more')"></div>
 
-    @includeWhen($models->count() > 0, 'places::public._list', ['items' => $models])
+    <div class="page-body-container">
+
+        @includeWhen($models->count() > 0, 'places::public._list', ['items' => $models])
+
+    </div>
+
+</div>
 
 @endsection
