@@ -14,13 +14,14 @@ use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Places\Models\Place;
 
-class PlacesExport implements WithColumnFormatting, ShouldAutoSize, FromCollection, WithHeadings, WithMapping
+class Export implements WithColumnFormatting, ShouldAutoSize, FromCollection, WithHeadings, WithMapping
 {
     protected $collection;
 
     public function __construct($request)
     {
         $this->collection = QueryBuilder::for(Place::class)
+            ->selectFields('created_at,updated_at,status,address,email,website,phone,latitude,longitude,title,summary,body')
             ->allowedSorts(['id', 'status_translated', 'title_translated'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
@@ -33,17 +34,16 @@ class PlacesExport implements WithColumnFormatting, ShouldAutoSize, FromCollecti
         return [
             Date::dateTimeToExcel($model->created_at),
             Date::dateTimeToExcel($model->updated_at),
-            $model->status,
+            $model->status_translated,
             $model->address,
             $model->email,
             $model->website,
             $model->phone,
-            $model->fax,
             $model->latitude,
             $model->longitude,
-            $model->title,
-            $model->summary,
-            $model->body,
+            $model->title_translated,
+            $model->summary_translated,
+            $model->body_translated,
         ];
     }
 
@@ -57,7 +57,6 @@ class PlacesExport implements WithColumnFormatting, ShouldAutoSize, FromCollecti
             'email',
             'website',
             'phone',
-            'fax',
             'latitude',
             'longitude',
             'title',
