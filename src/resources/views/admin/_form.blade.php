@@ -55,9 +55,6 @@
             <div class="col-sm-6">
                 {!! BootForm::text(__('Phone'), 'phone') !!}
             </div>
-            <div class="col-sm-6">
-                {!! BootForm::text(__('Fax'), 'fax') !!}
-            </div>
         </div>
 
         <div class="form-row">

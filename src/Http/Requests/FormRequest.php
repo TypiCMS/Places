@@ -19,7 +19,6 @@ class FormRequest extends AbstractFormRequest
             'email' => 'nullable|email:rfc,dns|max:255',
             'website' => 'nullable|url|max:255',
             'phone' => 'nullable|max:255',
-            'fax' => 'nullable|max:255',
             'latitude' => 'nullable|max:255',
             'longitude' => 'nullable|max:255',
         ];
