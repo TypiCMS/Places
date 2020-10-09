@@ -21,7 +21,6 @@ class Export implements WithColumnFormatting, ShouldAutoSize, FromCollection, Wi
     public function __construct($request)
     {
         $this->collection = QueryBuilder::for(Place::class)
-            ->selectFields('created_at,updated_at,status,address,email,website,phone,latitude,longitude,title,summary,body')
             ->allowedSorts(['id', 'status_translated', 'title_translated'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
@@ -50,18 +49,18 @@ class Export implements WithColumnFormatting, ShouldAutoSize, FromCollection, Wi
     public function headings(): array
     {
         return [
-            'created_at',
-            'updated_at',
-            'published',
-            'address',
-            'email',
-            'website',
-            'phone',
-            'latitude',
-            'longitude',
-            'title',
-            'summary',
-            'body',
+            'Created at',
+            'Updated at',
+            'Published',
+            'Address',
+            'Email',
+            'Website',
+            'Phone',
+            'Latitude',
+            'Longitude',
+            'Title',
+            'Summary',
+            'Body',
         ];
     }
 
