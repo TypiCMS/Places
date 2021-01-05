@@ -15,10 +15,10 @@
 
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" href="#tab-main" data-target="#tab-main" data-toggle="tab">{{ __('Content') }}</a>
+        <a class="nav-link active" href="#tab-main" data-bs-toggle="tab">{{ __('Content') }}</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#tab-info" data-target="#tab-info" data-toggle="tab">{{ __('Info') }}</a>
+        <a class="nav-link" href="#tab-info" data-bs-toggle="tab">{{ __('Info') }}</a>
     </li>
 </ul>
 
@@ -28,7 +28,7 @@
     <div class="tab-pane fade show active" id="tab-main">
 
         @include('core::form._title-and-slug')
-        <div class="form-group">
+        <div class="mb-3">
             {!! TranslatableBootForm::hidden('status')->value(0) !!}
             {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
         </div>
@@ -42,7 +42,7 @@
 
         {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
 
-        <div class="form-row">
+        <div class="row gx-3">
             <div class="col-sm-6">
                 {!! BootForm::email(__('Email'), 'email') !!}
             </div>
@@ -51,13 +51,13 @@
             </div>
         </div>
 
-        <div class="form-row">
+        <div class="row gx-3">
             <div class="col-sm-6">
                 {!! BootForm::text(__('Phone'), 'phone') !!}
             </div>
         </div>
 
-        <div class="form-row">
+        <div class="row gx-3">
             <div class="col-sm-6">
                 {!! BootForm::text(__('Latitude'), 'latitude') !!}
             </div>
