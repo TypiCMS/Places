@@ -20,18 +20,18 @@ class ModuleServiceProvider extends ServiceProvider
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['places' => ['linkable_to_page']], $modules));
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'places');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'places');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_places_table.php.stub' => getMigrationFileName('create_places_table'),
+            __DIR__.'/../../database/migrations/create_places_table.php.stub' => getMigrationFileName('create_places_table'),
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/places'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/places'),
         ], 'views');
 
         $this->publishes([
-            __DIR__.'/../resources/scss' => resource_path('scss'),
+            __DIR__.'/../../resources/scss' => resource_path('scss'),
         ], 'resources');
 
         $this->publishes([
