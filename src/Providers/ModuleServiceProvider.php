@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Places\Providers;
 
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
@@ -12,13 +13,12 @@ use TypiCMS\Modules\Places\Models\Place;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.places');
         $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
 
-        $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['places' => ['linkable_to_page']], $modules));
+        config(['typicms.modules.places' => ['linkable_to_page']]);
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'places');
 
@@ -43,28 +43,20 @@ class ModuleServiceProvider extends ServiceProvider
         // Observers
         Place::observe(new SlugObserver());
 
-        /*
-         * Sidebar view composer
-         */
-        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
+        View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
         /*
          * Add the page in the view.
          */
-        $this->app->view->composer('places::public.*', function ($view) {
+        View::composer('places::public.*', function ($view) {
             $view->page = TypiCMS::getPageLinkedToModule('places');
         });
     }
 
-    public function register()
+    public function register(): void
     {
-        $app = $this->app;
+        $this->app->register(RouteServiceProvider::class);
 
-        /*
-         * Register route service provider
-         */
-        $app->register(RouteServiceProvider::class);
-
-        $app->bind('Places', Place::class);
+        $this->app->bind('Places', Place::class);
     }
 }
