@@ -19,8 +19,8 @@ class SidebarViewComposer
             $group->weight = 30;
             $group->addItem(__('Places'), function (SidebarItem $item) {
                 $item->id = 'places';
-                $item->icon = config('typicms.places.sidebar.icon');
-                $item->weight = config('typicms.places.sidebar.weight');
+                $item->icon = config('typicms.modules.places.sidebar.icon');
+                $item->weight = config('typicms.modules.places.sidebar.weight');
                 $item->route('admin::index-places');
                 $item->append('admin::create-place');
             });

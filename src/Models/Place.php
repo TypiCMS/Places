@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Traits\HasFiles;
-use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Core\Traits\Historable;
+use TypiCMS\Modules\Core\Models\File;
+use TypiCMS\Modules\Core\Traits\HasFiles;
 use TypiCMS\Modules\Places\Presenters\ModulePresenter;
 
 class Place extends Base

@@ -15,28 +15,14 @@ class ModuleServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.places');
-        $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
-
-        config(['typicms.modules.places' => ['linkable_to_page']]);
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.modules.places');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'places');
 
-        $this->publishes([
-            __DIR__.'/../../database/migrations/create_places_table.php.stub' => getMigrationFileName('create_places_table'),
-        ], 'migrations');
-
-        $this->publishes([
-            __DIR__.'/../../resources/views' => resource_path('views/vendor/places'),
-        ], 'views');
-
-        $this->publishes([
-            __DIR__.'/../../resources/scss' => resource_path('scss'),
-        ], 'resources');
-
-        $this->publishes([
-            __DIR__.'/../../public/js' => public_path('js'),
-        ], 'public');
+        $this->publishes([__DIR__.'/../../database/migrations/create_places_table.php.stub' => getMigrationFileName('create_places_table')], 'typicms-migrations');
+        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/vendor/places')], 'typicms-views');
+        $this->publishes([__DIR__.'/../../resources/scss' => resource_path('scss')], 'typicms-resources');
+        $this->publishes([__DIR__.'/../../public/js' => public_path('js')], 'typicms-public');
 
         AliasLoader::getInstance()->alias('Places', Places::class);
 
