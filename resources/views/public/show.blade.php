@@ -30,7 +30,7 @@
         @endempty
         @empty(!$model->image)
         <picture class="place-picture">
-            <img class="place-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
+            <img class="place-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
             @empty(!$model->image->description)
             <legend class="place-picture-legend">{{ $model->image->description }}</legend>
             @endempty
