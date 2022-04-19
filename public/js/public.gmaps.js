@@ -129,7 +129,7 @@ var map = {
         data += '</div>';
         if (this.buttonLabel !== null) {
             data += '<a href="' + place.url + '"';
-            data += 'class="btn btn-sm btn-outline-secondary">';
+            data += 'class="btn btn-sm btn-outline-dark">';
             data += this.buttonLabel;
             data += '</a>';
         }
