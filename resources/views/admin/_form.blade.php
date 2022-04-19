@@ -4,66 +4,74 @@
     <script src="{{ asset('js/admin.gmaps.js') }}"></script>
 @endpush
 
-@component('core::admin._buttons-form', ['model' => $model])
-@endcomponent
+<div class="header">
+    @include('core::admin._button-back', ['url' => $model->indexUrl(), 'title' => __('Places')])
+    @include('core::admin._title', ['default' => __('New place')])
+    @component('core::admin._buttons-form', ['model' => $model])
+    @endcomponent
+</div>
 
-{!! BootForm::hidden('id') !!}
+<div class="content">
 
-<file-manager related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></file-manager>
-<file-field type="image" field="image_id" :init-file="{{ $model->image ?? 'null' }}"></file-field>
-<files-field :init-files="{{ $model->files }}"></files-field>
+    {!! BootForm::hidden('id') !!}
 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" href="#tab-main" data-bs-toggle="tab">{{ __('Content') }}</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#tab-info" data-bs-toggle="tab">{{ __('Info') }}</a>
-    </li>
-</ul>
+    <file-manager related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></file-manager>
+    <file-field type="image" field="image_id" :init-file="{{ $model->image ?? 'null' }}"></file-field>
+    <files-field :init-files="{{ $model->files }}"></files-field>
 
-<div class="tab-content">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#tab-main" data-bs-toggle="tab">{{ __('Content') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab-info" data-bs-toggle="tab">{{ __('Info') }}</a>
+        </li>
+    </ul>
 
-    {{-- Main tab --}}
-    <div class="tab-pane fade show active" id="tab-main">
+    <div class="tab-content">
 
-        @include('core::form._title-and-slug')
-        <div class="mb-3">
-            {!! TranslatableBootForm::hidden('status')->value(0) !!}
-            {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
-        </div>
-        {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
-        {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
+        {{-- Main tab --}}
+        <div class="tab-pane fade show active" id="tab-main">
 
-    </div>
-
-    {{-- Info tab --}}
-    <div class="tab-pane fade" id="tab-info">
-
-        {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
-
-        <div class="row gx-3">
-            <div class="col-sm-6">
-                {!! BootForm::email(__('Email'), 'email') !!}
+            @include('core::form._title-and-slug')
+            <div class="mb-3">
+                {!! TranslatableBootForm::hidden('status')->value(0) !!}
+                {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
             </div>
-            <div class="col-sm-6">
-                {!! BootForm::text(__('Website'), 'website')->placeholder('https://') !!}
-            </div>
+            {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
+            {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
+
         </div>
 
-        <div class="row gx-3">
-            <div class="col-sm-6">
-                {!! BootForm::text(__('Phone'), 'phone') !!}
-            </div>
-        </div>
+        {{-- Info tab --}}
+        <div class="tab-pane fade" id="tab-info">
 
-        <div class="row gx-3">
-            <div class="col-sm-6">
-                {!! BootForm::text(__('Latitude'), 'latitude') !!}
+            {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
+
+            <div class="row gx-3">
+                <div class="col-sm-6">
+                    {!! BootForm::email(__('Email'), 'email') !!}
+                </div>
+                <div class="col-sm-6">
+                    {!! BootForm::text(__('Website'), 'website')->placeholder('https://') !!}
+                </div>
             </div>
-            <div class="col-sm-6">
-                {!! BootForm::text(__('Longitude'), 'longitude') !!}
+
+            <div class="row gx-3">
+                <div class="col-sm-6">
+                    {!! BootForm::text(__('Phone'), 'phone') !!}
+                </div>
             </div>
+
+            <div class="row gx-3">
+                <div class="col-sm-6">
+                    {!! BootForm::text(__('Latitude'), 'latitude') !!}
+                </div>
+                <div class="col-sm-6">
+                    {!! BootForm::text(__('Longitude'), 'longitude') !!}
+                </div>
+            </div>
+
         </div>
 
     </div>
