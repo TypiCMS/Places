@@ -40,7 +40,7 @@ var map = {
             },
         ],
     },
-    init: function() {
+    init: function () {
         this.map = new google.maps.Map(document.getElementById('map'), this.options);
         this.oms = new OverlappingMarkerSpiderfier(this.map, {
             markersWontMove: true,
@@ -50,18 +50,18 @@ var map = {
         this.infoWindow = new google.maps.InfoWindow({
             maxWidth: 260,
         });
-        google.maps.event.addListenerOnce(this.map, 'bounds_changed', function() {
+        google.maps.event.addListenerOnce(this.map, 'bounds_changed', function () {
             if (this.getZoom() > 5) {
                 this.setZoom(5);
             }
         });
         this.fetchData();
     },
-    fetchData: function() {
+    fetchData: function () {
         var self = this;
         var request = new XMLHttpRequest();
         request.open('GET', this.apiUrl, true);
-        request.onload = function() {
+        request.onload = function () {
             if (this.status >= 200 && this.status < 400) {
                 var data = JSON.parse(this.response);
                 if (!Array.isArray(data)) {
@@ -76,7 +76,7 @@ var map = {
         };
         request.send();
     },
-    setMarkers: function() {
+    setMarkers: function () {
         var bounds = new google.maps.LatLngBounds();
         for (var i = this.places.length - 1; i >= 0; i--) {
             if (this.places[i].longitude) {
@@ -92,7 +92,7 @@ var map = {
                 });
                 bounds.extend(this.places[i].marker.position);
                 var self = this;
-                this.places[i].marker.addListener('spider_click', function() {
+                this.places[i].marker.addListener('spider_click', function () {
                     self.onMarkerClick(this);
                 });
                 this.oms.trackMarker(this.places[i].marker);
@@ -104,16 +104,16 @@ var map = {
             this.openMarker(this.places[0].marker);
         }
     },
-    openMarker: function(marker) {
+    openMarker: function (marker) {
         this.map.panTo(marker.position);
         this.map.setZoom(13);
         google.maps.event.trigger(marker, 'click');
     },
-    onMarkerClick: function(marker) {
+    onMarkerClick: function (marker) {
         this.infoWindow.setContent(marker.content);
         this.infoWindow.open(this.map, marker);
     },
-    buildContent: function(place) {
+    buildContent: function (place) {
         var coords = [];
         var data = place.image
             ? '<img width="150" src="/storage/' + place.image.path + '" class="map-item-image">'
