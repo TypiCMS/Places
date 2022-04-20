@@ -44,14 +44,16 @@ class AdminController extends BaseAdminController
     {
         $place = Place::create($request->validated());
 
-        return $this->redirect($request, $place);
+        return $this->redirect($request, $place)
+            ->withMessage(__('Item successfully created.'));
     }
 
     public function update(Place $place, FormRequest $request): RedirectResponse
     {
         $place->update($request->validated());
 
-        return $this->redirect($request, $place);
+        return $this->redirect($request, $place)
+            ->withMessage(__('Item successfully updated.'));
     }
 
     public function files(Place $place): JsonResponse
