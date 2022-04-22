@@ -12,13 +12,12 @@ class CreatePlacesTable extends Migration
     public function up()
     {
         Schema::create('places', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id();
             $table->text('address')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('website')->nullable();
-            $table->integer('image_id')->unsigned()->nullable();
+            $table->foreignId('image_id')->nullable();
             $table->string('latitude', 30)->nullable();
             $table->string('longitude', 30)->nullable();
             $table->json('status');
