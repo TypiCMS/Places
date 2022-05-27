@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -20,11 +21,11 @@ class CreatePlacesTable extends Migration
             $table->foreignId('image_id')->nullable();
             $table->string('latitude', 30)->nullable();
             $table->string('longitude', 30)->nullable();
-            $table->json('status');
-            $table->json('title');
-            $table->json('slug');
-            $table->json('summary');
-            $table->json('body');
+            $table->json('status')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('title')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('summary')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('body')->default(new Expression('(JSON_OBJECT())'));
             $table->timestamps();
         });
     }
