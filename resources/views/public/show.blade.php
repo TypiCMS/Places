@@ -25,9 +25,9 @@
     </header>
     <div class="place-body">
         @include('places::public._json-ld', ['place' => $model])
-        @empty(!$model->latitude && $model->longitude)
-        <div class="place-map" id="map" data-url="/{{ $page->uri($lang) }}/places-json/{{ $model->id }}" style="height: 500px"></div>
-        @endempty
+        @if(!empty($model->latitude) && !empty($model->longitude))
+        <div class="place-map" id="map" data-url="{{ url($page->uri().'/places-json/'.$model->id) }}" style="height: 500px"></div>
+        @endif
         @empty(!$model->image)
         <picture class="place-picture">
             <img class="place-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">

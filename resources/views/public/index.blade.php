@@ -23,7 +23,7 @@
 
     </div>
 
-    <div id="map" class="map" data-url="/{{ $page->uri($lang) }}/places-json" data-button-label="@lang('Read more')"></div>
+    <div id="map" class="map" data-url="{{ url($page->uri().'/places-json') }}" data-button-label="@lang('Read more')"></div>
 
     <div class="page-body-container">
 
