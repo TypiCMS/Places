@@ -23,8 +23,8 @@ class RouteServiceProvider extends ServiceProvider
                 if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
                     Route::middleware($middleware)->prefix($uri)->name($lang.'::')->group(function (Router $router) {
                         $router->get('/', [PublicController::class, 'index'])->name('index-places');
-                        $router->get('places-json', [PublicController::class, 'json']);
-                        $router->get('places-json/{id}', [PublicController::class, 'jsonItem']);
+                        $router->get('places-json', [PublicController::class, 'json'])->name('places-json');
+                        $router->get('places-json/{id}', [PublicController::class, 'jsonItem'])->name('places-json-item');
                         $router->get('{slug}', [PublicController::class, 'show'])->name('place');
                     });
                 }
