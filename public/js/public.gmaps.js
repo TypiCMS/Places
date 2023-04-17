@@ -115,9 +115,7 @@ var map = {
     },
     buildContent: function (place) {
         var coords = [];
-        var data = place.image
-            ? '<img width="150" src="/storage/' + place.image.path + '" class="map-item-image">'
-            : '';
+        var data = place.image ? '<img width="150" src="/storage/' + place.image.path + '" class="map-item-image">' : '';
         data += '<div class="map-item-info"><h3 class="map-item-title">';
         data += place.title[this.locale];
         data += '</h3>';
