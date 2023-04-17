@@ -6,7 +6,7 @@
 
     {!! BootForm::open()->put()->action(route('admin::update-place', $model->id))->multipart()->role('form') !!}
     {!! BootForm::bind($model) !!}
-        @include('places::admin._form')
+    @include('places::admin._form')
     {!! BootForm::close() !!}
 
 @endsection

@@ -66,37 +66,37 @@
 </div>
 
 @push('js')
-<script>
-window.addEventListener("DOMContentLoaded", (event) => {
-    document.getElementById('geocode-button').addEventListener('click', () => {
-        const addressInput = document.getElementById('address');
-        const address = addressInput.value;
-        if (address !== '') {
-            getLonLatFromAddress(address);
-        } else {
-            document.getElementById('latitude').value = '';
-            document.getElementById('longitude').value = '';
-        }
-
-        async function getLonLatFromAddress(address) {
-            const url = `https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=${address}&limit=1`;
-            try {
-                const response = await fetch(url);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.length > 0) {
-                        const info = data[0];
-                        document.getElementById('latitude').value = info.lat;
-                        document.getElementById('longitude').value = info.lon;
-                    }
+    <script>
+        window.addEventListener("DOMContentLoaded", (event) => {
+            document.getElementById('geocode-button').addEventListener('click', () => {
+                const addressInput = document.getElementById('address');
+                const address = addressInput.value;
+                if (address !== '') {
+                    getLonLatFromAddress(address);
                 } else {
-                    throw new Error('Network response was not ok.');
+                    document.getElementById('latitude').value = '';
+                    document.getElementById('longitude').value = '';
                 }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-    });
-});
-</script>
+
+                async function getLonLatFromAddress(address) {
+                    const url = `https://nominatim.openstreetmap.org/?format=json&addressdetails=1&q=${address}&limit=1`;
+                    try {
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.length > 0) {
+                                const info = data[0];
+                                document.getElementById('latitude').value = info.lat;
+                                document.getElementById('longitude').value = info.lon;
+                            }
+                        } else {
+                            throw new Error('Network response was not ok.');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                }
+            });
+        });
+    </script>
 @endpush
