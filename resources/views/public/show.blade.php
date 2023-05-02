@@ -29,12 +29,12 @@
                 <div class="place-map" id="map" data-url="{{ url($page->uri().'/places-json/'.$model->id) }}" style="height: 500px"></div>
             @endif
             @empty(!$model->image)
-                <picture class="place-picture">
+                <figure class="place-picture">
                     <img class="place-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
                     @empty(!$model->image->description)
-                        <legend class="place-picture-legend">{{ $model->image->description }}</legend>
+                        <figcaption class="place-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
-                </picture>
+                </figure>
             @endempty
             <div class="place-contact">
                 @empty(!$model->address)
