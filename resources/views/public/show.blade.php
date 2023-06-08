@@ -7,9 +7,7 @@
 @section('bodyClass', 'body-places body-place-'.$model->id.' body-page body-page-'.$page->id)
 
 @push('js')
-    <script src="{{ asset('//maps.googleapis.com/maps/api/js?key='.config('services.gmaps.key').'&language='.config('app.locale')) }}"></script>
-    <script src="{{ asset('js/oms.min.js') }}"></script>
-    <script src="{{ asset('js/public.gmaps.js') }}"></script>
+    <script src="{{ asset('//maps.googleapis.com/maps/api/js?key='.config('services.gmaps.key').'&callback=initMap&language='.config('app.locale')) }}" defer></script>
 @endpush
 
 @section('content')
@@ -26,7 +24,7 @@
         <div class="place-body">
             @include('places::public._json-ld', ['place' => $model])
             @if (!empty($model->latitude) && !empty($model->longitude))
-                <div class="place-map" id="map" data-url="{{ url($page->uri().'/places-json/'.$model->id) }}" style="height: 500px"></div>
+                <div class="map" id="map" data-url="{{ route($lang.'::place-json', $model->slug) }}" data-no-button="false"></div>
             @endif
             @empty(!$model->image)
                 <figure class="place-picture">

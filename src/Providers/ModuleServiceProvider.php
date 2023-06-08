@@ -17,12 +17,14 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/places.php', 'typicms.modules.places');
 
+        $this->loadRoutesFrom(__DIR__ . '/../routes/places.php');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'places');
 
         $this->publishes([__DIR__ . '/../../database/migrations/create_places_table.php.stub' => getMigrationFileName('create_places_table')], 'typicms-migrations');
         $this->publishes([__DIR__ . '/../../resources/views' => resource_path('views/vendor/places')], 'typicms-views');
-        $this->publishes([__DIR__ . '/../../resources/scss' => resource_path('scss')], 'typicms-resources');
-        $this->publishes([__DIR__ . '/../../public/js' => public_path('js')], 'typicms-public');
+        $this->publishes([__DIR__ . '/../../resources' => resource_path()], 'typicms-resources');
+        $this->publishes([__DIR__ . '/../../public' => public_path()], 'typicms-public');
 
         AliasLoader::getInstance()->alias('Places', Places::class);
 
@@ -41,8 +43,6 @@ class ModuleServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->register(RouteServiceProvider::class);
-
         $this->app->bind('Places', Place::class);
     }
 }
