@@ -17,7 +17,7 @@ composer require typicms/places
     /*
      * TypiCMS Modules Service Providers.
      */
-    TypiCMS\Modules\Places\Providers\ModuleProvider::class,
+    TypiCMS\Modules\Places\Providers\ModuleServiceProvider::class,
 ];
 ```
 
@@ -27,16 +27,22 @@ composer require typicms/places
 php artisan vendor:publish --provider="TypiCMS\Modules\Places\Providers\ModuleServiceProvider"
 ```
 
-4. Set a Google Maps API key in your .env file.
+4. Run the migration:
+
+```bash
+php artisan migrate
+```
+
+5. Set a Google Maps API key in your .env file.
    See [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
-5. Install @googlemaps/markerclusterer:
+6. Install @googlemaps/markerclusterer:
 
 ```bash
 yarn add @googlemaps/markerclusterer --dev
 ```
 
-6. Uncomment the following lines in `/resources/js/public.js`:
+7. Uncomment the following lines in `/resources/js/public.js`:
 
 ```js
 import initMap from './public/map';
@@ -44,13 +50,16 @@ import initMap from './public/map';
 window.initMap = initMap;
 ```
 
-7. Import the scss file in `/resources/scss/public.scss`:
+8. Add this line to the `/resources/scss/public.scss` file:
 
 ```scss
 @import 'public/map';
 ```
 
-8. Run `yarn dev` to compile the assets.
+9. Run `yarn dev` to compile the assets.
+
+10. Connect to the admin panel, add some places, create a page linked to the module Places and visit this page to see
+    the places on a map.
 
 This module is part of [TypiCMS](https://github.com/TypiCMS/Base), a multilingual CMS based on
 the [Laravel framework](https://github.com/laravel/framework).
