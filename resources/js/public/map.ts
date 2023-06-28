@@ -38,9 +38,7 @@ export default async (): Promise<void> => {
     const buildContent = ({ place }: { place: any }): string => {
         let coords = [];
         let htmlString = '<div class="popup-bubble-content">';
-        htmlString += place.image
-            ? '<img class="popup-bubble-content-image" src="/storage/' + place.image.path + '" height="40" alt="">'
-            : '';
+        htmlString += place.image ? '<img class="popup-bubble-content-image" src="/storage/' + place.image.path + '" height="40" alt="">' : '';
         htmlString += '<h3 class="popup-bubble-content-title">';
         htmlString += place.title[locale];
         htmlString += '</h3>';

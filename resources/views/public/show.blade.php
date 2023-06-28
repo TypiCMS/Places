@@ -7,10 +7,7 @@
 @section('bodyClass', 'body-places body-place-'.$model->id.' body-page body-page-'.$page->id)
 
 @push('js')
-    <script
-        src="{{ asset('//maps.googleapis.com/maps/api/js?key=' . config('services.gmaps.key') . '&callback=initMap&language=' . config('app.locale')) }}"
-        defer
-    ></script>
+    <script src="{{ asset('//maps.googleapis.com/maps/api/js?key=' . config('services.gmaps.key') . '&callback=initMap&language=' . config('app.locale')) }}" defer></script>
 @endpush
 
 @section('content')
@@ -26,23 +23,12 @@
         <div class="place-body">
             @include('places::public._json-ld', ['place' => $model])
             @if (! empty($model->latitude) && ! empty($model->longitude))
-                <div
-                    class="map"
-                    id="map"
-                    data-url="{{ route($lang . '::place-json', $model->slug) }}"
-                    data-no-button="false"
-                ></div>
+                <div class="map" id="map" data-url="{{ route($lang . '::place-json', $model->slug) }}" data-no-button="false"></div>
             @endif
 
             @empty(! $model->image)
                 <figure class="place-picture">
-                    <img
-                        class="place-picture-image"
-                        src="{{ $model->present()->image(2000) }}"
-                        width="{{ $model->image->width }}"
-                        height="{{ $model->image->height }}"
-                        alt=""
-                    />
+                    <img class="place-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @empty(! $model->image->description)
                         <figcaption class="place-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
