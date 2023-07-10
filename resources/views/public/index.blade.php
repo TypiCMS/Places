@@ -1,6 +1,6 @@
 @extends('pages::public.master')
 
-@section('bodyClass', 'body-places body-places-index body-page body-page-'.$page->id)
+@section('bodyClass', 'body-places body-places-index body-page body-page-' . $page->id)
 
 @push('js')
     <script src="{{ asset('//maps.googleapis.com/maps/api/js?key=' . config('services.gmaps.key') . '&callback=initMap&language=' . config('app.locale')) }}" defer></script>

@@ -40,7 +40,6 @@
     @include('core::admin._button-back', ['url' => $model->indexUrl(), 'title' => __('Places')])
     @include('core::admin._title', ['default' => __('New place')])
     @component('core::admin._buttons-form', ['model' => $model])
-        
     @endcomponent
 </div>
 
