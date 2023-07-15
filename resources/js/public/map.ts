@@ -1,7 +1,10 @@
 declare var google: any;
 import styles from './map-styles';
 import getMarkerPopup from './map-popup';
-import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer';
+import {
+    MarkerClusterer,
+    SuperClusterAlgorithm,
+} from '@googlemaps/markerclusterer';
 
 export default async (): Promise<void> => {
     const mapElement = document.getElementById('map') as HTMLElement,
@@ -15,13 +18,16 @@ export default async (): Promise<void> => {
         places: any[] = [],
         markers: google.maps.marker = [];
     const infoWindow = new google.maps.InfoWindow();
-    const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
-        mapTypeId: 'roadmap',
-        zoom: 12,
-        mapTypeControl: false,
-        streetViewControl: false,
-        styles,
-    });
+    const map = new google.maps.Map(
+        document.getElementById('map') as HTMLElement,
+        {
+            mapTypeId: 'roadmap',
+            zoom: 12,
+            mapTypeControl: false,
+            streetViewControl: false,
+            styles,
+        },
+    );
 
     try {
         const response = await fetch(apiUrl, {
@@ -38,7 +44,11 @@ export default async (): Promise<void> => {
     const buildContent = ({ place }: { place: any }): string => {
         let coords = [];
         let htmlString = '<div class="popup-bubble-content">';
-        htmlString += place.image ? '<img class="popup-bubble-content-image" src="/storage/' + place.image.path + '" height="40" alt="">' : '';
+        htmlString += place.image
+            ? '<img class="popup-bubble-content-image" src="/storage/' +
+              place.image.path +
+              '" height="40" alt="">'
+            : '';
         htmlString += '<h3 class="popup-bubble-content-title">';
         htmlString += place.title[locale];
         htmlString += '</h3>';
@@ -49,7 +59,10 @@ export default async (): Promise<void> => {
         htmlString += coords.join('<br>');
         htmlString += '</div>';
         if (!noButton) {
-            htmlString += '<a class="popup-bubble-content-button" href="' + place.url + '">';
+            htmlString +=
+                '<a class="popup-bubble-content-button" href="' +
+                place.url +
+                '">';
             htmlString += buttonLabel ?? 'More info';
             htmlString += '</a>';
         }
