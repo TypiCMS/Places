@@ -58,7 +58,7 @@
 
     <div class="row gx-3">
         <div class="col-sm-6">
-            {!! BootForm::email(__('Email'), 'email') !!}
+            {!! BootForm::email(__('Email'), 'email')->autocomplete('off') !!}
         </div>
         <div class="col-sm-6">
             {!! BootForm::text(__('Website'), 'website')->placeholder('https://') !!}
@@ -67,11 +67,11 @@
 
     <div class="row gx-3">
         <div class="col-sm-6">
-            {!! BootForm::text(__('Phone'), 'phone') !!}
+            {!! BootForm::text(__('Phone'), 'phone')->autocomplete('off') !!}
         </div>
     </div>
 
-    {!! BootForm::textarea(__('Address'), 'address')->rows(4) !!}
+    {!! BootForm::textarea(__('Address'), 'address')->rows(4)->autocomplete('off') !!}
 
     <div class="row gx-3">
         <div class="col-md-5">
