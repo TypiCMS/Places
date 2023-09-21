@@ -34,16 +34,13 @@ export default () => {
             // Optionally stop clicks, etc., from bubbling up to the map.
             Popup.preventMapHitsAndGesturesFrom(this.containerDiv);
             // This handler allows right click events on anchor tags within the popup
-            var allowAnchorRightClicksHandler = function (event) {
+            const allowAnchorRightClicksHandler = function (event: any): void {
                 event.cancelBubble = true;
                 if (event.stopPropagation) {
                     event.stopPropagation();
                 }
             };
-            this.containerDiv.addEventListener(
-                'contextmenu',
-                allowAnchorRightClicksHandler,
-            );
+            this.containerDiv.addEventListener('contextmenu', allowAnchorRightClicksHandler);
         }
 
         /** Called when the popup is added to the map. */
@@ -60,15 +57,10 @@ export default () => {
 
         /** Called each frame when the popup needs to draw itself. */
         draw() {
-            const divPosition = this.getProjection().fromLatLngToDivPixel(
-                this.position,
-            )!;
+            const divPosition = this.getProjection().fromLatLngToDivPixel(this.position)!;
 
             // Hide the popup when it is far out of view.
-            const display =
-                Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
-                    ? 'block'
-                    : 'none';
+            const display = Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000 ? 'block' : 'none';
 
             if (display === 'block') {
                 this.containerDiv.style.left = divPosition.x + 'px';
