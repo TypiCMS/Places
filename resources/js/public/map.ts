@@ -1,33 +1,48 @@
-declare var google: any;
 import styles from './map-styles';
 import getMarkerPopup from './map-popup';
-import {
-    MarkerClusterer,
-    SuperClusterAlgorithm,
-} from '@googlemaps/markerclusterer';
+import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer';
 
 export default async (): Promise<void> => {
-    const mapElement = document.getElementById('map') as HTMLElement,
-        apiUrl: any = mapElement.dataset.url,
-        noButton: any = mapElement.dataset.noButton,
-        locale: any = document.documentElement.getAttribute('lang'),
-        buttonLabel: any = mapElement.dataset.buttonLabel,
-        popupContent = document.createElement('div'),
-        shouldUseCustomPopup: boolean = true;
-    let bounds = new google.maps.LatLngBounds(),
-        places: any[] = [],
-        markers: google.maps.marker = [];
-    const infoWindow = new google.maps.InfoWindow();
-    const map = new google.maps.Map(
-        document.getElementById('map') as HTMLElement,
-        {
+    const mapElement: HTMLDivElement = document.getElementById('map') as HTMLDivElement,
+        apiUrl: string = mapElement.dataset.url as string,
+        noButton: string = mapElement.dataset.noButton as string,
+        locale: string = document.documentElement.getAttribute('lang') as string,
+        buttonLabel: string = mapElement.dataset.buttonLabel as string,
+        popupContent: HTMLDivElement = document.createElement('div') as HTMLDivElement,
+        useCustomPopup: boolean = true,
+        infoWindow: google.maps.InfoWindow = new google.maps.InfoWindow(),
+        map: google.maps.Map = new google.maps.Map(mapElement, {
             mapTypeId: 'roadmap',
             zoom: 12,
             mapTypeControl: false,
             streetViewControl: false,
             styles,
-        },
-    );
+        });
+    let bounds: google.maps.LatLngBounds = new google.maps.LatLngBounds(),
+        places: object[] = [],
+        markers: google.maps.Marker[] = [],
+        markerClusterer: MarkerClusterer = new MarkerClusterer({
+            map,
+            algorithm: new SuperClusterAlgorithm({ radius: 30 }),
+            renderer: {
+                render: ({ count, position }) => {
+                    return new google.maps.Marker({
+                        position,
+                        icon: {
+                            anchor: new google.maps.Point(15, 15),
+                            url: '/img/marker-cluster.svg',
+                        },
+                        label: {
+                            text: String(count),
+                            color: 'rgba(255,255,255,1)',
+                            fontSize: '12px',
+                            fontWeight: '700',
+                        },
+                        zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+                    });
+                },
+            },
+        });
 
     try {
         const response = await fetch(apiUrl, {
@@ -42,13 +57,9 @@ export default async (): Promise<void> => {
     }
 
     const buildContent = ({ place }: { place: any }): string => {
-        let coords = [];
-        let htmlString = '<div class="popup-bubble-content">';
-        htmlString += place.image
-            ? '<img class="popup-bubble-content-image" src="/storage/' +
-              place.image.path +
-              '" height="40" alt="">'
-            : '';
+        let coords: string[] = [];
+        let htmlString: string = '<div class="popup-bubble-content">';
+        htmlString += place.image ? '<img class="popup-bubble-content-image" src="/storage/' + place.image.path + '" height="40" alt="">' : '';
         htmlString += '<h3 class="popup-bubble-content-title">';
         htmlString += place.title[locale];
         htmlString += '</h3>';
@@ -59,10 +70,7 @@ export default async (): Promise<void> => {
         htmlString += coords.join('<br>');
         htmlString += '</div>';
         if (!noButton) {
-            htmlString +=
-                '<a class="popup-bubble-content-button" href="' +
-                place.url +
-                '">';
+            htmlString += '<a class="popup-bubble-content-button" href="' + place.url + '">';
             htmlString += buttonLabel ?? 'More info';
             htmlString += '</a>';
         }
@@ -72,23 +80,23 @@ export default async (): Promise<void> => {
     };
 
     places.forEach((place: any) => {
-        const marker = new google.maps.Marker({
-            position: new google.maps.LatLng(place.latitude, place.longitude),
-            map: map,
-            icon: place.id === 1 ? '/img/marker-1.svg' : '/img/marker-2.svg',
-            title: place['title'][locale],
-            optimized: false,
-        });
-        bounds.extend(marker.position);
-        marker.addListener('click', () => {
+        const position: google.maps.LatLng = new google.maps.LatLng(place.latitude, place.longitude),
+            marker: google.maps.Marker = new google.maps.Marker({
+                position,
+                icon: place.id === 1 ? '/img/marker-1.svg' : '/img/marker-2.svg',
+                title: place['title'][locale],
+                optimized: false,
+            });
+        bounds.extend(position);
+        marker.addListener('click', (): void => {
             popupContent.innerHTML = buildContent({ place });
-            if (shouldUseCustomPopup) {
+            if (useCustomPopup) {
                 // Custom Popup
                 const MarkerPopup = getMarkerPopup();
-                const popup = new MarkerPopup(marker.position, popupContent);
+                const popup = new MarkerPopup(position, popupContent);
                 popup.setMap(map);
                 setTimeout(() => {
-                    map.panTo(marker.position);
+                    map.panTo(position);
                     map.panBy(0, -50);
                 }, 300);
             } else {
@@ -99,31 +107,9 @@ export default async (): Promise<void> => {
             }
         });
         markers.push(marker);
+        markerClusterer.addMarker(marker);
     });
 
-    new MarkerClusterer({
-        map,
-        markers,
-        algorithm: new SuperClusterAlgorithm({ radius: 30 }),
-        renderer: {
-            render: ({ count, position }) => {
-                return new google.maps.Marker({
-                    position,
-                    icon: {
-                        anchor: new google.maps.Point(15, 15),
-                        url: '/img/marker-cluster.svg',
-                    },
-                    label: {
-                        text: String(count),
-                        color: 'rgba(255,255,255,1)',
-                        fontSize: '12px',
-                        fontWeight: '700',
-                    },
-                    zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
-                });
-            },
-        },
-    });
     if (markers.length === 1) {
         google.maps.event.trigger(markers[0], 'click');
     } else {
