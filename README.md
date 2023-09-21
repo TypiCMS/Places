@@ -36,10 +36,11 @@ php artisan migrate
 5. Set a Google Maps API key in your .env file.
    See [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
-6. Install @googlemaps/markerclusterer:
+6. Install @googlemaps/markerclusterer and :
 
 ```bash
-yarn add @googlemaps/markerclusterer --dev
+bun add @googlemaps/markerclusterer --dev
+bun add @types/google.maps --dev
 ```
 
 7. Uncomment the following lines in `/resources/js/public.js`:
@@ -56,7 +57,7 @@ window.initMap = initMap;
 @import 'public/map';
 ```
 
-9. Run `yarn dev` to compile the assets.
+9. Run `bun run dev` to compile the assets.
 
 10. Connect to the admin panel, add some places, create a page linked to the module Places and visit this page to see
     the places on a map.
