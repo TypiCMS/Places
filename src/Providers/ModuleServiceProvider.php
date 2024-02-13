@@ -6,7 +6,6 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Places\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Places\Facades\Places;
 use TypiCMS\Modules\Places\Models\Place;
@@ -27,9 +26,6 @@ class ModuleServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../../public' => public_path()], 'typicms-public');
 
         AliasLoader::getInstance()->alias('Places', Places::class);
-
-        // Observers
-        Place::observe(new SlugObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
