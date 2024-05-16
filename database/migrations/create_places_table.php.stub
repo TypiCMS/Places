@@ -18,6 +18,7 @@ return new class() extends Migration {
             $table->string('phone')->nullable();
             $table->string('website')->nullable();
             $table->foreignId('image_id')->nullable()->constrained('files')->nullOnDelete();
+            $table->foreignId('og_image_id')->nullable()->constrained('files')->nullOnDelete();
             $table->string('latitude', 30)->nullable();
             $table->string('longitude', 30)->nullable();
             $table->json('status')->default(new Expression('(JSON_OBJECT())'));
