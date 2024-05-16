@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\Places\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Places\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Places\Facades\Places;
@@ -37,7 +36,7 @@ class ModuleServiceProvider extends ServiceProvider
          * Add the page in the view.
          */
         View::composer('places::public.*', function ($view) {
-            $view->page = TypiCMS::getPageLinkedToModule('places');
+            $view->page = getPageLinkedToModule('places');
         });
     }
 
