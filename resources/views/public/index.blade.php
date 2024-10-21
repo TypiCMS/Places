@@ -7,14 +7,12 @@
 @endpush
 
 @section('page')
+    @include('places::public._itemlist-json-ld', ['items' => $models])
     <div class="page-body">
         <div class="page-body-container">
-            <div class="rich-content">{!! $page->present()->body !!}</div>
-
+            @include('pages::public._main-content', ['page' => $page])
             @include('files::public._document-list', ['model' => $page])
             @include('files::public._image-list', ['model' => $page])
-
-            @include('places::public._itemlist-json-ld', ['items' => $models])
         </div>
 
         <div class="map" id="map" data-url="{{ route($lang . '::places-json') }}" data-button-label="@lang('Read more')"></div>
