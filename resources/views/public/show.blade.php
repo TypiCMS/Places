@@ -26,45 +26,45 @@
                 <div class="map" id="map" data-url="{{ route($lang . '::place-json', $model->slug) }}" data-no-button="false"></div>
             @endif
 
-            @empty(!$model->image)
+            @if(!empty($model->image))
                 <figure class="place-picture">
                     <img class="place-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
-                    @empty(!$model->image->description)
+                    @if(!empty($model->image->description))
                         <figcaption class="place-picture-legend">{{ $model->image->description }}</figcaption>
-                    @endempty
+                    @endif
                 </figure>
-            @endempty
+            @endif
 
             <div class="place-contact">
-                @empty(!$model->address)
+                @if(!empty($model->address))
                     <address>{{ $model->address }}</address>
-                @endempty
+                @endif
 
-                @empty(!$model->phone)
+                @if(!empty($model->phone))
                     <p class="place-phone">{{ $model->phone }}</p>
-                @endempty
+                @endif
 
-                @empty(!$model->email)
+                @if(!empty($model->email))
                     <p class="place-email"><a href="mailto:{{ $model->email }}">{{ $model->email }}</a></p>
-                @endempty
+                @endif
 
-                @empty(!$model->website)
+                @if(!empty($model->website))
                     <p class="place-website">
                         <a href="{{ $model->website }}">{{ parse_url($model->website, PHP_URL_HOST) }}</a>
                     </p>
-                @endempty
+                @endif
             </div>
-            @empty(!$model->info)
+            @if(!empty($model->info))
                 <p class="place-info">{!! nl2br($model->info) !!}</p>
-            @endempty
+            @endif
 
-            @empty(!$model->summary)
+            @if(!empty($model->summary))
                 <p class="place-summary">{!! nl2br($model->summary) !!}</p>
-            @endempty
+            @endif
 
-            @empty(!$model->body)
+            @if(!empty($model->body))
                 <div class="rich-content">{!! $model->present()->body !!}</div>
-            @endempty
+            @endif
 
             @include('files::public._document-list')
             @include('files::public._image-list')
