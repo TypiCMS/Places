@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Places\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
@@ -32,6 +33,15 @@ class Place extends Base
         'body',
         'status',
     ];
+
+    public function url($locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+        $route = $locale . '::place';
+        $slug = $this->translate('slug', $locale) ?: null;
+
+        return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
+    }
 
     protected function thumb(): Attribute
     {

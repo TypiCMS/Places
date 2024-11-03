@@ -13,7 +13,7 @@
         "image": ["{{ $place->present()->image() }}"],
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "{{ $place->uri() }}"
+            "@id": "{{ $place->url() }}"
         }
     }
 </script>

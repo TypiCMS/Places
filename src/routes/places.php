@@ -13,8 +13,8 @@ use TypiCMS\Modules\Places\Http\Controllers\PublicController;
 if ($page = getPageLinkedToModule('places')) {
     $middleware = $page->private ? ['public', 'auth'] : ['public'];
     foreach (locales() as $lang) {
-        if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
-            Route::middleware($middleware)->prefix($uri)->name($lang . '::')->group(function (Router $router) {
+        if ($page->isPublished($lang) && $path = $page->path($lang)) {
+            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router) {
                 $router->get('/', [PublicController::class, 'index'])->name('index-places');
                 $router->get('places-json', [JsonController::class, 'index'])->name('places-json');
                 $router->get('{place}', [PublicController::class, 'show'])->name('place');

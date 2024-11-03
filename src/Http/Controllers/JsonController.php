@@ -11,7 +11,7 @@ class JsonController extends BasePublicController
     public function index(): JsonResponse
     {
         $institutions = Place::published()->get()->map(function ($item) {
-            $item->url = url($item->uri());
+            $item->url = $item->url();
 
             return $item;
         });
