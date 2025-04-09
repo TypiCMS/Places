@@ -10,7 +10,7 @@ class JsonController extends BasePublicController
 {
     public function index(): JsonResponse
     {
-        $institutions = Place::published()->get()->map(function ($item) {
+        $institutions = Place::query()->published()->get()->map(function ($item) {
             $item->url = $item->url();
 
             return $item;
@@ -21,7 +21,7 @@ class JsonController extends BasePublicController
 
     public function show(string $slug): JsonResponse
     {
-        $institution = Place::published()->whereSlugIs($slug)->firstOrFail();
+        $institution = Place::query()->published()->whereSlugIs($slug)->firstOrFail();
 
         return response()->json($institution);
     }
