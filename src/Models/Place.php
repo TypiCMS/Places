@@ -45,7 +45,7 @@ class Place extends Base
 
     protected function thumb(): Attribute
     {
-        return new Attribute(
+        return Attribute::make(
             get: fn () => $this->present()->image(null, 54),
         );
     }
