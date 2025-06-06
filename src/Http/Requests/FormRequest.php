@@ -6,7 +6,7 @@ use TypiCMS\Modules\Core\Http\Requests\AbstractFormRequest;
 
 class FormRequest extends AbstractFormRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             'image_id' => 'nullable|integer',
