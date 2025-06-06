@@ -10,18 +10,24 @@ class JsonController extends BasePublicController
 {
     public function index(): JsonResponse
     {
-        $institutions = Place::query()->published()->get()->map(function ($item) {
-            $item->url = $item->url();
+        $institutions = Place::query()
+            ->published()
+            ->get()
+            ->map(function ($item) {
+                $item->url = $item->url();
 
-            return $item;
-        });
+                return $item;
+            });
 
         return response()->json($institutions);
     }
 
     public function show(string $slug): JsonResponse
     {
-        $institution = Place::query()->published()->whereSlugIs($slug)->firstOrFail();
+        $institution = Place::query()
+            ->published()
+            ->whereSlugIs($slug)
+            ->firstOrFail();
 
         return response()->json($institution);
     }
