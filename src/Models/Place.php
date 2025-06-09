@@ -26,11 +26,12 @@ use TypiCMS\Modules\Places\Presenters\ModulePresenter;
  * @property int|null $image_id
  * @property string|null $latitude
  * @property string|null $longitude
- * @property array<array-key, mixed> $status
- * @property array<array-key, mixed> $title
- * @property array<array-key, mixed> $slug
- * @property array<array-key, mixed> $summary
- * @property array<array-key, mixed> $body
+ * @property string $status
+ * @property string $title
+ * @property string $slug
+ * @property string $summary
+ * @property string $body
+ * @property string $url
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection<int, File> $audios
