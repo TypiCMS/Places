@@ -14,7 +14,7 @@ class SidebarViewComposer
         if (Gate::denies('read places')) {
             return;
         }
-        $view->sidebar->group(__('Content'), function (SidebarGroup $group) {
+        $view->offsetGet('sidebar')->group(__('Content'), function (SidebarGroup $group) {
             $group->id = 'content';
             $group->weight = 30;
             $group->addItem(__('Places'), function (SidebarItem $item) {

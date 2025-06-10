@@ -81,6 +81,9 @@ class Place extends Base
         return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
     }
 
+    /**
+     * @return Attribute<string, null>
+     */
     protected function thumb(): Attribute
     {
         return Attribute::make(

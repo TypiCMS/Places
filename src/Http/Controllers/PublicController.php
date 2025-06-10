@@ -22,7 +22,10 @@ class PublicController extends BasePublicController
 
     public function show(string $slug): View
     {
-        $model = Place::query()->published()->whereSlugIs($slug)->firstOrFail();
+        $model = Place::query()
+            ->published()
+            ->whereSlugIs($slug)
+            ->firstOrFail();
 
         return view('places::public.show')
             ->with(compact('model'));
