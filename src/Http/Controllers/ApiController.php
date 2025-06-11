@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -26,7 +27,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Place $place, Request $request)
+    protected function updatePartial(Place $place, Request $request): void
     {
         foreach ($request->only('status') as $key => $content) {
             if ($place->isTranslatableAttribute($key)) {
@@ -41,8 +42,10 @@ class ApiController extends BaseApiController
         $place->save();
     }
 
-    public function destroy(Place $place)
+    public function destroy(Place $place): JsonResponse
     {
         $place->delete();
+
+        return response()->json(status: 204);
     }
 }

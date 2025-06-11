@@ -64,6 +64,7 @@ class Place extends Base
 
     protected $appends = ['thumb'];
 
+    /** @var array<string> */
     public array $translatable = [
         'title',
         'slug',
@@ -72,7 +73,7 @@ class Place extends Base
         'status',
     ];
 
-    public function url($locale = null): string
+    public function url(?string $locale = null): string
     {
         $locale = $locale ?: app()->getLocale();
         $route = $locale . '::place';
@@ -81,9 +82,7 @@ class Place extends Base
         return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
     }
 
-    /**
-     * @return Attribute<string, null>
-     */
+    /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
         return Attribute::make(
