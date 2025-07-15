@@ -92,5 +92,5 @@
     </div>
 
     {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
-    {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
+    <x-core::tiptap-editors :model="$model" name="body" :label="__('Body')" />
 </div>

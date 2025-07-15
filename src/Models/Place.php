@@ -73,6 +73,11 @@ class Place extends Base
         'status',
     ];
 
+    /** @var array<string> */
+    public array $tipTapContent = [
+        'body',
+    ];
+
     public function url(?string $locale = null): string
     {
         $locale = $locale ?: app()->getLocale();

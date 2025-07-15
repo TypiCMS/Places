@@ -6,6 +6,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Places\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Places\Facades\Places;
 use TypiCMS\Modules\Places\Models\Place;
@@ -29,6 +30,7 @@ class ModuleServiceProvider extends ServiceProvider
 
         // Observers
         Place::observe(new SlugObserver());
+        Place::observe(new TipTapHTMLObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
