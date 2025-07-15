@@ -92,5 +92,7 @@
     </div>
 
     {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
-    {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
+    @foreach(locales() as $locale)
+        <tiptap-editor name="body[{{ $locale }}]" locale="{{ $locale }}" init-content="{{ $model->getTranslation('body', $locale) }}"></tiptap-editor>
+    @endforeach
 </div>
