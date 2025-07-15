@@ -7,7 +7,7 @@ return [
         'title' => 'asc',
     ],
     'sidebar' => [
-        'icon' => '<i class="bi bi-geo-alt"></i>',
+        'icon' => '<i class="icon-map-pin"></i>',
         'weight' => 40,
     ],
     'permissions' => [
