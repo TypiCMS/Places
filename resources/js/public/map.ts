@@ -1,6 +1,7 @@
-import styles from './map-styles';
-import getMarkerPopup from './map-popup';
 import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer';
+
+import getMarkerPopup from './map-popup';
+import styles from './map-styles';
 
 export default async (): Promise<void> => {
     const mapElement: HTMLDivElement = document.getElementById('map') as HTMLDivElement,
