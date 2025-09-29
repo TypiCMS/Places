@@ -1,5 +1,6 @@
 <?php
 
+use TypiCMS\Modules\Core\Models\Page;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Places\Http\Controllers\AdminController;
@@ -10,11 +11,11 @@ use TypiCMS\Modules\Places\Http\Controllers\PublicController;
 /*
  * Front office routes
  */
-if ($page = getPageLinkedToModule('places')) {
+if (($page = getPageLinkedToModule('places')) instanceof Page) {
     $middleware = $page->private ? ['public', 'auth'] : ['public'];
     foreach (locales() as $lang) {
         if ($page->isPublished($lang) && $path = $page->path($lang)) {
-            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router) {
+            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router): void {
                 $router->get('/', [PublicController::class, 'index'])->name('index-places');
                 $router->get('places-json', [JsonController::class, 'index'])->name('places-json');
                 $router->get('{place}', [PublicController::class, 'show'])->name('place');
@@ -27,7 +28,7 @@ if ($page = getPageLinkedToModule('places')) {
 /*
  * Admin routes
  */
-Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
+Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router): void {
     $router->get('places', [AdminController::class, 'index'])->name('index-places')->middleware('can:read places');
     $router->get('places/export', [AdminController::class, 'export'])->name('export-places')->middleware('can:read places');
     $router->get('places/create', [AdminController::class, 'create'])->name('create-place')->middleware('can:create places');
@@ -39,7 +40,7 @@ Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Ro
 /*
  * API routes
  */
-Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
+Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router): void {
     $router->get('places', [ApiController::class, 'index'])->middleware('can:read places');
     $router->patch('places/{place}', [ApiController::class, 'updatePartial'])->middleware('can:update places');
     $router->delete('places/{place}', [ApiController::class, 'destroy'])->middleware('can:delete places');

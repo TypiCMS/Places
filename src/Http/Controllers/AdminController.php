@@ -32,7 +32,7 @@ class AdminController extends BaseAdminController
         $model = new Place();
 
         return view('places::admin.create')
-            ->with(compact('model'));
+            ->with(['model' => $model]);
     }
 
     public function edit(Place $place): View

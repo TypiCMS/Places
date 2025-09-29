@@ -80,7 +80,7 @@ class Place extends Base
 
     public function url(?string $locale = null): string
     {
-        $locale = $locale ?: app()->getLocale();
+        $locale ??= app()->getLocale();
         $route = $locale . '::place';
         $slug = $this->translate('slug', $locale) ?: null;
 
