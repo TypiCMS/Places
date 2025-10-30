@@ -1,6 +1,6 @@
 <script type="application/ld+json">
     {
-        "@context": "http://schema.org",
+        "@@context": "http://schema.org",
         "@type": "Place",
         "address": "{{ $place->address }}",
         "name": "{{ $place->title }}",
