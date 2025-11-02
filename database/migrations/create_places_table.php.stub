@@ -11,7 +11,7 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('places', function (Blueprint $table) {
+        Schema::create('places', function (Blueprint $table): void {
             $table->id();
             $table->text('address')->nullable();
             $table->string('email')->nullable();
