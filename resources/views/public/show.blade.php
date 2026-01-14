@@ -22,7 +22,7 @@
         </header>
         <div class="place-body">
             @include('places::public._json-ld', ['place' => $model])
-            @if (!empty($model->latitude) && !empty($model->longitude))
+            @if ($model->latitude && $model->longitude)
                 <div class="map" id="map" data-url="{{ route($lang . '::place-json', $model->slug) }}" data-no-button="false"></div>
             @endif
 
@@ -48,21 +48,21 @@
                     <p class="place-email"><a href="mailto:{{ $model->email }}">{{ $model->email }}</a></p>
                 @endif
 
-                @if(!empty($model->website))
+                @if($model->website)
                     <p class="place-website">
                         <a href="{{ $model->website }}">{{ parse_url($model->website, PHP_URL_HOST) }}</a>
                     </p>
                 @endif
             </div>
-            @if(!empty($model->info))
+            @if($model->info)
                 <p class="place-info">{!! nl2br($model->info) !!}</p>
             @endif
 
-            @if(!empty($model->summary))
+            @if($model->summary)
                 <p class="place-summary">{!! nl2br($model->summary) !!}</p>
             @endif
 
-            @if(!empty($model->body))
+            @if($model->body)
                 <div class="rich-content">{!! $model->present()->body !!}</div>
             @endif
 

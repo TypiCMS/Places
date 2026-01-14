@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Places\Models\Place;
 
-class JsonController extends BasePublicController
+final class JsonController extends BasePublicController
 {
     public function index(): JsonResponse
     {

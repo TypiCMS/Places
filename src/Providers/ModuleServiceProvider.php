@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Places\Providers;
 
 use Illuminate\Foundation\AliasLoader;
@@ -21,7 +23,11 @@ class ModuleServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'places');
 
-        $this->publishes([__DIR__ . '/../../database/migrations/create_places_table.php.stub' => getMigrationFileName('create_places_table')], 'typicms-migrations');
+        $this->publishes([
+            __DIR__ . '/../../database/migrations/create_places_table.php.stub' => getMigrationFileName(
+                'create_places_table',
+            ),
+        ], 'typicms-migrations');
         $this->publishes([__DIR__ . '/../../resources/views' => resource_path('views/vendor/places')], 'typicms-views');
         $this->publishes([__DIR__ . '/../../resources' => resource_path()], 'typicms-resources');
         $this->publishes([__DIR__ . '/../../public' => public_path()], 'typicms-public');

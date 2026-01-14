@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Places\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -13,7 +15,7 @@ use TypiCMS\Modules\Places\Exports\Export;
 use TypiCMS\Modules\Places\Http\Requests\FormRequest;
 use TypiCMS\Modules\Places\Models\Place;
 
-class AdminController extends BaseAdminController
+final class AdminController extends BaseAdminController
 {
     public function index(): View
     {
@@ -31,30 +33,26 @@ class AdminController extends BaseAdminController
     {
         $model = new Place();
 
-        return view('places::admin.create')
-            ->with(['model' => $model]);
+        return view('places::admin.create', ['model' => $model]);
     }
 
     public function edit(Place $place): View
     {
-        return view('places::admin.edit')
-            ->with(['model' => $place]);
+        return view('places::admin.edit', ['model' => $place]);
     }
 
     public function store(FormRequest $request): RedirectResponse
     {
         $place = Place::query()->create($request->validated());
 
-        return $this->redirect($request, $place)
-            ->withMessage(__('Item successfully created.'));
+        return $this->redirect($request, $place)->withMessage(__('Item successfully created.'));
     }
 
     public function update(Place $place, FormRequest $request): RedirectResponse
     {
         $place->update($request->validated());
 
-        return $this->redirect($request, $place)
-            ->withMessage(__('Item successfully updated.'));
+        return $this->redirect($request, $place)->withMessage(__('Item successfully updated.'));
     }
 
     public function files(Place $place): JsonResponse
