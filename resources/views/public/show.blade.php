@@ -15,7 +15,7 @@
         <header class="place-header">
             <div class="place-header-container">
                 <div class="place-header-navigator">
-                    @include('core::public._items-navigator', ['module' => 'Places', 'model' => $model])
+                    <x-core::items-navigator module="Places" :$model :$page />
                 </div>
                 <h1 class="place-title">{{ $model->title }}</h1>
             </div>
