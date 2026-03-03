@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Places\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Places\Composers\SidebarViewComposer;
-use TypiCMS\Modules\Places\Facades\Places;
 use TypiCMS\Modules\Places\Models\Place;
 
 class ModuleServiceProvider extends ServiceProvider
@@ -32,8 +30,6 @@ class ModuleServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../../resources' => resource_path()], 'typicms-resources');
         $this->publishes([__DIR__ . '/../../public' => public_path()], 'typicms-public');
 
-        AliasLoader::getInstance()->alias('Places', Places::class);
-
         // Observers
         Place::observe(new SlugObserver());
         Place::observe(new TipTapHTMLObserver());
@@ -46,10 +42,5 @@ class ModuleServiceProvider extends ServiceProvider
         View::composer('places::public.*', function ($view): void {
             $view->page = getPageLinkedToModule('places');
         });
-    }
-
-    public function register(): void
-    {
-        $this->app->bind('Places', Place::class);
     }
 }

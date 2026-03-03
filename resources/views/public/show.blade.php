@@ -15,7 +15,7 @@
         <header class="place-header">
             <div class="place-header-container">
                 <div class="place-header-navigator">
-                    <x-core::items-navigator module="Places" :$model :$page />
+                    <x-core::items-navigator :$model :$page />
                 </div>
                 <h1 class="place-title">{{ $model->title }}</h1>
             </div>
