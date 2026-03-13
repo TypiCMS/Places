@@ -3,7 +3,7 @@
 @section('title', $model->title . ' – ' . __('Places') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('ogImage', $model->present()->ogImage())
+@section('ogImage', $model->ogImageUrl())
 @section('bodyClass', 'body-places body-place-' . $model->id . ' body-page body-page-' . $page->id)
 
 @push('js')
@@ -32,7 +32,7 @@
                     'latitude' => $model->latitude,
                     'longitude' => $model->longitude,
                 ],
-                'image' => [$model->present()->image()],
+                'image' => [$model->imageUrl()],
                 'mainEntityOfPage' => [
                     '@type' => 'WebPage',
                     '@id' => $model->url(),
@@ -44,7 +44,7 @@
 
             @if(!empty($model->image))
                 <figure class="place-picture">
-                    <img class="place-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
+                    <img class="place-picture-image" src="{{ $model->imageUrl(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @if(!empty($model->image->description))
                         <figcaption class="place-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif
@@ -79,7 +79,7 @@
             @endif
 
             @if($model->body)
-                <div class="rich-content">{!! $model->present()->body !!}</div>
+                <div class="rich-content">{!! $model->formattedBody() !!}</div>
             @endif
 
             @include('files::public._document-list')

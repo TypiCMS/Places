@@ -10,7 +10,7 @@
             "latitude": "{{ $place->latitude }}",
             "longitude": "{{ $place->longitude }}"
         },
-        "image": ["{{ $place->present()->image() }}"],
+        "image": ["{{ $place->imageUrl() }}"],
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "{{ $place->url() }}"
