@@ -21,11 +21,11 @@ final class ApiController extends BaseApiController
         $query = Place::query()->selectFields();
 
         return QueryBuilder::for($query)
-            ->allowedSorts(['id', 'status_translated', 'title_translated'])
-            ->allowedFilters([
+            ->allowedSorts('id', 'status_translated', 'title_translated')
+            ->allowedFilters(
                 AllowedFilter::custom('title', new FilterOr()),
-            ])
-            ->allowedIncludes(['image'])
+            )
+            ->allowedIncludes('image')
             ->paginate($request->integer('per_page'));
     }
 
