@@ -16,7 +16,7 @@ final class JsonController extends BasePublicController
             ->published()
             ->get()
             ->map(function ($item) {
-                $item->url = $item->url();
+                $item->url = $item->url() ?? '';
 
                 return $item;
             });
