@@ -32,7 +32,7 @@
                     'latitude' => $model->latitude,
                     'longitude' => $model->longitude,
                 ],
-                'image' => [$model->imageUrl()],
+                'image' => [$model->image?->render()],
                 'mainEntityOfPage' => [
                     '@type' => 'WebPage',
                     '@id' => $model->url(),
@@ -42,43 +42,43 @@
                 <div class="map" id="map" data-url="{{ route($lang . '::place-json', $model->slug) }}" data-no-button="false"></div>
             @endif
 
-            @if(!empty($model->image))
+            @if ($model->image)
                 <figure class="place-picture">
-                    <img class="place-picture-image" src="{{ $model->imageUrl(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
-                    @if(!empty($model->image->description))
+                    <img class="place-picture-image" src="{{ $model->image->render(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
+                    @if ($model->image->description)
                         <figcaption class="place-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif
                 </figure>
             @endif
 
             <div class="place-contact">
-                @if(!empty($model->address))
+                @if ($model->address)
                     <address>{{ $model->address }}</address>
                 @endif
 
-                @if(!empty($model->phone))
+                @if ($model->phone)
                     <p class="place-phone">{{ $model->phone }}</p>
                 @endif
 
-                @if(!empty($model->email))
+                @if ($model->email)
                     <p class="place-email"><a href="mailto:{{ $model->email }}">{{ $model->email }}</a></p>
                 @endif
 
-                @if($model->website)
+                @if ($model->website)
                     <p class="place-website">
                         <a href="{{ $model->website }}">{{ parse_url($model->website, PHP_URL_HOST) }}</a>
                     </p>
                 @endif
             </div>
-            @if($model->info)
+            @if ($model->info)
                 <p class="place-info">{!! nl2br($model->info) !!}</p>
             @endif
 
-            @if($model->summary)
+            @if ($model->summary)
                 <p class="place-summary">{!! nl2br($model->summary) !!}</p>
             @endif
 
-            @if($model->body)
+            @if ($model->body)
                 <div class="rich-content">{!! $model->formattedBody() !!}</div>
             @endif
 
