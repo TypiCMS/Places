@@ -25,7 +25,7 @@
                 '@context' => 'https://schema.org',
                 '@type' => 'Place',
                 'name' => $model->title,
-                'description' => $model->summary !== '' ? $model->summary : strip_tags($model->body),
+                'description' => $model->summary ? $model->summary : Str::limit(strip_tags($model->body), 200),
                 'address' => $model->address,
                 'geo' => [
                     '@type' => 'GeoCoordinates',
