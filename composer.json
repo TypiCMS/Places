@@ -1,6 +1,6 @@
 {
     "name": "typicms/places",
-    "description": "",
+    "description": "A module to manage and display multilingual places and locations with Google Maps scaffold in TypiCMS applications.",
     "license": "MIT",
     "authors": [
         {
