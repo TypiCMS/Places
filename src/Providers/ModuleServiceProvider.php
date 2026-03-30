@@ -6,10 +6,7 @@ namespace TypiCMS\Modules\Places\Providers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Places\Composers\SidebarViewComposer;
-use TypiCMS\Modules\Places\Models\Place;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -29,10 +26,6 @@ class ModuleServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../../resources/views' => resource_path('views/vendor/places')], 'typicms-views');
         $this->publishes([__DIR__ . '/../../resources' => resource_path()], 'typicms-resources');
         $this->publishes([__DIR__ . '/../../public' => public_path()], 'typicms-public');
-
-        // Observers
-        Place::observe(new SlugObserver());
-        Place::observe(new TipTapHTMLObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Places\Models;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Uri;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Core\Traits\HasAdminUrls;
 use TypiCMS\Modules\Core\Traits\HasBodyPresenter;
 use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
@@ -61,6 +65,8 @@ use TypiCMS\Translatable\HasTranslations;
  * @property-read Collection<int, File> $videos
  * @property-read int|null $videos_count
  */
+#[ObservedBy([SlugObserver::class, TipTapHTMLObserver::class])]
+#[Unguarded]
 class Place extends Model
 {
     use HasAdminUrls;
@@ -75,8 +81,6 @@ class Place extends Model
     use Historable;
     use Navigable;
     use Publishable;
-
-    protected $guarded = [];
 
     protected $appends = ['thumb'];
 
