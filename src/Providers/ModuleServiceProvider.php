@@ -12,20 +12,20 @@ class ModuleServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/places.php', 'typicms.modules.places');
+        $this->mergeConfigFrom(__DIR__.'/../config/places.php', 'typicms.modules.places');
 
-        $this->loadRoutesFrom(__DIR__ . '/../routes/places.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/places.php');
 
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'places');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'places');
 
         $this->publishes([
-            __DIR__ . '/../../database/migrations/create_places_table.php.stub' => getMigrationFileName(
+            __DIR__.'/../../database/migrations/create_places_table.php.stub' => getMigrationFileName(
                 'create_places_table',
             ),
         ], 'typicms-migrations');
-        $this->publishes([__DIR__ . '/../../resources/views' => resource_path('views/vendor/places')], 'typicms-views');
-        $this->publishes([__DIR__ . '/../../resources' => resource_path()], 'typicms-resources');
-        $this->publishes([__DIR__ . '/../../public' => public_path()], 'typicms-public');
+        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/vendor/places')], 'typicms-views');
+        $this->publishes([__DIR__.'/../../resources' => resource_path()], 'typicms-resources');
+        $this->publishes([__DIR__.'/../../public' => public_path()], 'typicms-public');
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 

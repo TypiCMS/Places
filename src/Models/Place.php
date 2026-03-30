@@ -115,7 +115,7 @@ class Place extends Model
     {
         $url = $this->url($locale);
 
-        if (!$url) {
+        if (! $url) {
             return null;
         }
 
